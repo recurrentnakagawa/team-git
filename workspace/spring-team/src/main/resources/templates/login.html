@@ -9,7 +9,7 @@
 	<form action="/login" method="post" th:object="${bean}">
 		<input type="text" name="email" th:value="*{email}" placeholder="メールアドレス"><br>
 		<span th:text="${message_email}" style="color: red"></span><br>
-		<input type="password" name="password" th:value="*{password}" placeholder="パスワード"><br>
+		<input type="password" name="password" placeholder="パスワード"><br>
 		<span th:text="${message_password}" style="color: red"></span><br>
 		<a href="/emailChecker">パスワードを忘れてしまった時</a><br> 
 		<input type="submit" value="ログイン">

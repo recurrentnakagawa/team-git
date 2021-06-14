@@ -123,13 +123,13 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/emailChecker", method = RequestMethod.POST)
-	public ModelAndView emailCheckers(@RequestParam("email") String email, ModelAndView mv) {
-		if (email.length() == 0) {
+	public ModelAndView emailCheckers(@ModelAttribute("bean") LoginForm bean, ModelAndView mv) {
+		if (bean.getEmail().length() == 0) {
 			mv.addObject("message_email", "メールアドレスが未入力です");
 			mv.setViewName("conUser");
 			return mv;
 		}
-		Client user = clientRepository.findByClientEmail(email);
+		Client user = clientRepository.findByClientEmail(bean.getEmail());
 		if (user == null) {
 			mv.addObject("message_email", "存在しないメールアドレスです");
 			mv.setViewName("conUser");

@@ -25,6 +25,7 @@ public class FrameController {
 	
 	@RequestMapping("/")
 	public String login() {
+		//これ消して
 		// セッション情報はクリアする
 		session.invalidate();
 		return "innFrame";

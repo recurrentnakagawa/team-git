@@ -31,7 +31,7 @@ public class AccountController {
 
 	@RequestMapping("/login")
 	public ModelAndView logins(ModelAndView mv) {
-		// セッション情報はクリアする
+		// セッション情報はクリアする1
 		session.invalidate();
 		//初期Formの作成
 		LoginForm bean = new LoginForm();

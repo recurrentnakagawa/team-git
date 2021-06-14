@@ -6,7 +6,7 @@
 <link th:href="@{login.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
-	<h1>ログイン</h1>
+	<h1>ログイン1</h1>
 	<form action="/login" method="post" th:object="${bean}">
 		<input type="text" name="email" th:value="*{email}"placeholder="メールアドレス"><br>
 		<span th:text="${message_email}" style="color: red"></span><br>

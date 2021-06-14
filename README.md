@@ -1,2 +1,2 @@
 "# team-git" 
-ごみ
+kuzu

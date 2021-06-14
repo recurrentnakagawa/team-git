@@ -45,29 +45,26 @@ public class AccountController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView doLogin(
-			@RequestParam("email") String email,
-			@RequestParam("password") String password,
 			@ModelAttribute("bean") LoginForm bean,
 			ModelAndView mv) {
-		if (email.length() == 0 && password.length() == 0) {
+		if (bean.getEmail().length() == 0 && bean.getPassword().length() == 0) {
 			mv.addObject("message_email", "メールアドレスが未入力です");
 			mv.addObject("message_password", "パスワードが未入力です");
 			mv.setViewName("login");
 			return mv;
 		}
-		if (email.length() == 0) {
+		if (bean.getEmail().length() == 0) {
 			mv.addObject("message_email", "メールアドレスが未入力です");
 			mv.setViewName("login");
 			return mv;
 		}
-		bean.setEmail(email);
-		if (password.length() == 0) {
+		if (bean.getPassword().length() == 0) {
 			mv.addObject("message_password", "パスワードが未入力です");
 			mv.setViewName("login");
 			return mv;
 		}
 
-		Client user = clientRepository.findByClientEmailAndClientPassword(email, password);
+		Client user = clientRepository.findByClientEmailAndClientPassword(bean.getEmail(), bean.getPassword());
 		if (user == null) {
 			mv.addObject("message_email", "メールアドレスとパスワードが一致しません");
 			mv.setViewName("login");

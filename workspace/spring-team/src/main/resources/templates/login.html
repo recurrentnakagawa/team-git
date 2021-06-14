@@ -5,6 +5,16 @@
 <title>ログイン</title>
 </head>
 <body>
+<<<<<<< HEAD
+	<h1>ログイン1</h1>
+	<form action="/login" method="post" th:object="${bean}">
+		<input type="text" name="email" th:value="*{email}"placeholder="メールアドレス"><br>
+		<span th:text="${message_email}" style="color: red"></span><br>
+		<input type="password" name="password" placeholder="パスワード"><br>
+		<span th:text="${message_password}" style="color: red"></span><br>
+		<a href="/emailChecker">パスワードを忘れてしまった時</a><br> 
+		<input type="submit" value="ログイン">
+=======
 <h1>ログイン</h1>
 <form action="/login" method="post">
 	<input type="text" name="email" placeholder="メールアドレス"><br>
@@ -15,6 +25,7 @@
 	<a href="/emailChecker">パスワードを忘れてしまった時</a>
 	<br>
 	<input type="submit" value="ログイン">
+>>>>>>> 85135ecbe65e58b92bdcc4c0f20b66f0a7463c5b
 	</form>
 </body>
 </html>

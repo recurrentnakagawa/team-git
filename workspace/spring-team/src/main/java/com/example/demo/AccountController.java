@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,17 +30,24 @@ public class AccountController {
 	 */
 
 	@RequestMapping("/login")
-	public String logins() {
+	public ModelAndView logins(ModelAndView mv) {
 		// セッション情報はクリアする
 		session.invalidate();
-		return "login";
+		//初期Formの作成
+		LoginForm bean = new LoginForm();
+		mv.addObject("bean", bean);
+		mv.setViewName("login");
+		return mv;
 	}
 
 	/**
 	 * ログインを実行
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView doLogin(@RequestParam("email") String email, @RequestParam("password") String password,
+	public ModelAndView doLogin(
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@ModelAttribute("bean") LoginForm bean,
 			ModelAndView mv) {
 		if (email.length() == 0 && password.length() == 0) {
 			mv.addObject("message_email", "メールアドレスが未入力です");
@@ -52,11 +60,13 @@ public class AccountController {
 			mv.setViewName("login");
 			return mv;
 		}
+		bean.setEmail(email);
 		if (password.length() == 0) {
 			mv.addObject("message_password", "パスワードが未入力です");
 			mv.setViewName("login");
 			return mv;
 		}
+
 		Client user = clientRepository.findByClientEmailAndClientPassword(email, password);
 		if (user == null) {
 			mv.addObject("message_email", "メールアドレスとパスワードが一致しません");

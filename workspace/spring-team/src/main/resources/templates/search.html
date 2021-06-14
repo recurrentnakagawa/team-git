@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>検索フォーム</h1>
+<h1>検索フォーム</h1><hr>
+<form>
+	チェックイン日
+	<input type="date" name="checkinDate"><br>
+	チェックアウト日
+	<input type="date" name="checkoutDate"><br>
+	都道府県選択
+	<select name="selPrefectures">
+		<option th:each="pl:${prefecturesList}"
+				th:text="${pl.name}"
+				th:value="${pl.code}"
+				th:selected="${pl.code}==25"></option>
+	</select><br>
+	料金
+	<select name="selLowPrice">
+		<option></option>
+	</select>から<br>
+	<select name="selHighPrice">
+		<option></option>
+	</select>まで<br>
+	一部屋当たりの人数
+	<select name="selPeople">
+		<option></option>
+	</select><br>
+	部屋数
+	<select name="selRooms">
+		<option></option>
+	</select><br>
+	<input type="submit" value="検索">
+</form>
 </body>
 </html>

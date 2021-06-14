@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ログイン</title>
+</head>
+<body>
+<h1>メールアドレス</h1>
+<form action="/emailChecker" method="post">
+	<input type="text" name="email" placeholder="メールアドレス"><br>
+	<span th:text="${message_email}" style="color:red"></span><br>
+	<input type="submit" value="次へ">
+	</form>
+	<br>
+	<span>　</span>
+</body>
+</html>

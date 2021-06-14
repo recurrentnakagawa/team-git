@@ -6,8 +6,8 @@
 </head>
 <body>
 <h1>メールアドレス</h1>
-<form action="/emailChecker" method="post">
-	<input type="text" name="email" placeholder="メールアドレス"><br>
+<form action="/emailChecker" method="post" th:object="${bean}">
+	<input type="text" name="email" th:value="*{email}" placeholder="メールアドレス"><br>
 	<span th:text="${message_email}" style="color:red"></span><br>
 	<input type="submit" value="次へ">
 	</form>

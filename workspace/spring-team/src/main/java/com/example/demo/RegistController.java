@@ -171,7 +171,48 @@ public class RegistController {
 		buildTel.append("-");
 		buildTel.append(bean.getTel3());
 		String tel = buildTel.toString();
-		
+		// 住所を結合する
+		StringBuilder buildAddress = new StringBuilder();
+		buildAddress.append(bean.getPrefectures());
+		buildAddress.append(bean.getCities());
+		buildAddress.append(bean.getHouse_number());
+		String address = buildAddress.toString();
+		//メールアドレスの文字数チェック
+		if(bean.getEmail().length()>=50) {
+			mv.addObject("message_email", "メールアドレスの文字数が多すぎます(50文字まで)");
+			mv.setViewName("addUser");
+			return mv;
+		}
+		//名前の文字数チェック
+		if(bean.getName().length()>=30) {
+			mv.addObject("message_name", "名前の文字数が多すぎます(30文字まで)");
+			mv.setViewName("addUser");
+			return mv;
+		}
+		//カタカナの文字数チェック
+		if(bean.getKana().length()>=30) {
+			mv.addObject("message_kana", "名前(カタカナ)の文字数が多すぎます(30文字まで)");
+			mv.setViewName("addUser");
+			return mv;
+		}
+		//住所の文字数チェック
+		if(address.length()>=50) {
+			mv.addObject("message_prefectures", "住所の文字数が多すぎます（合計50文字まで）");
+			mv.setViewName("addUser");
+			return mv;
+		}
+		//電話番号の文字数チェック
+		if(tel.length()>=15) {
+			mv.addObject("message_tel", "電話番号の文字数が多すぎます（合計１３文字まで）");
+			mv.setViewName("addUser");
+			return mv;
+		}
+		//秘密の質問の答えの文字数チェック
+		if(bean.getAnswer().length()>=50) {
+			mv.addObject("message_answer", "秘密の質問の答えの文字数が多すぎます(50文字まで)");
+			mv.setViewName("addUser");
+			return mv;
+		}
 		mv.setViewName("conAddUserInfo");
 		mv.addObject("tel", tel);
 		return mv;

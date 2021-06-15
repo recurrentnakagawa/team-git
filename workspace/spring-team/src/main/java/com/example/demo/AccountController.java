@@ -61,14 +61,19 @@ public class AccountController {
 			mv.setViewName("login");
 			return mv;
 		}
-
+		//データベースにメールアドレスとパスワードが一致しているアカウントが存在するかを判断
 		Client user = clientRepository.findByClientEmailAndClientPassword(bean.getEmail(), bean.getPassword());
 		if (user == null) {
 			mv.addObject("message_email", "メールアドレスとパスワードが一致しません");
 			mv.setViewName("login");
 			return mv;
 		}
-		mv.setViewName("InnFrame");
+		//管理者判断
+		if(user.getRoleCode()==1) {
+			mv.setViewName("roleFrame");
+		}else {
+			mv.setViewName("InnFrame");
+		}
 		return mv;
 	}
 	

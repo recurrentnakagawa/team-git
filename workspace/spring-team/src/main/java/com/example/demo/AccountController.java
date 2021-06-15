@@ -33,7 +33,7 @@ public class AccountController {
 	public ModelAndView logins(ModelAndView mv) {
 		// セッション情報はクリアする
 		session.invalidate();
-		//初期Formの作成
+		// 初期Formの作成
 		LoginForm bean = new LoginForm();
 		mv.addObject("bean", bean);
 		mv.setViewName("login");
@@ -44,9 +44,7 @@ public class AccountController {
 	 * ログインを実行
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView doLogin(
-			@ModelAttribute("bean") LoginForm bean,
-			ModelAndView mv) {
+	public ModelAndView doLogin(@ModelAttribute("bean") LoginForm bean, ModelAndView mv) {
 		if (bean.getEmail().length() == 0 && bean.getPassword().length() == 0) {
 			mv.addObject("message_email", "メールアドレスが未入力です");
 			mv.addObject("message_password", "パスワードが未入力です");
@@ -79,110 +77,93 @@ public class AccountController {
 		mv.setViewName("regist");
 		return mv;
 	}
-
-//	@RequestMapping(value = "/registUser", method = RequestMethod.POST)
-//	public ModelAndView registUsers(@RequestParam("name") String name, @RequestParam("email") String email,
-//			@RequestParam("password") String password, @RequestParam("questionCode") String questionCode,
-//			@RequestParam("answer") String answer, ModelAndView mv) {
-//		if (name.length() == 0) {
-//			mv.addObject("message_name", "名前が入力されていません");
-//			mv.setViewName("regist");
-//		}
-//		if (email.length() == 0) {
-//			mv.addObject("message_email", "メールアドレスが入力されていません");
-//			mv.setViewName("regist");
-//		}
-//		if (password.length() == 0) {
-//			mv.addObject("message_password", "パスワードが入力されていません");
-//			mv.setViewName("regist");
-//		}
-//		if (answer.length() == 0) {
-//			mv.addObject("message_answer", "質問の答えが入力されていません");
-//			mv.setViewName("regist");
-//		}
-//		if (name.length() == 0 || email.length() == 0 || password.length() == 0 || answer.length() == 0) {
-//			return mv;
-//		}
-//		Client user = clientRepository.findByEmail(email);
-//		if (user != null) {
-//			mv.addObject("message_email", "すでに存在しているメールアドレスです");
-//			mv.setViewName("regist");
-//			return mv;
-//		}
-//		int questionCodes = Integer.parseInt(questionCode);
-//		Client users = new Client(name, email, password, questionCodes, answer);
-//		clientRepository.saveAndFlush(users);
-//		mv.setViewName("login");
-//		return mv;
-//	}
+	
 
 	@RequestMapping("/emailChecker")
 	public ModelAndView emailChecker(ModelAndView mv) {
 		mv.setViewName("conUser");
+		// 初期Formの作成
+		conUserForm conUserBean = new conUserForm();
+		mv.addObject("conUserBean", conUserBean);
 		return mv;
 	}
 
 	@RequestMapping(value = "/emailChecker", method = RequestMethod.POST)
-	public ModelAndView emailCheckers(@ModelAttribute("bean") LoginForm bean, ModelAndView mv) {
+	public ModelAndView emailCheckers(@ModelAttribute("bean") conUserForm bean, ModelAndView mv) {
+		conUserForm conUserBean = new conUserForm();
 		if (bean.getEmail().length() == 0) {
 			mv.addObject("message_email", "メールアドレスが未入力です");
 			mv.setViewName("conUser");
+			mv.addObject("conUserBean", conUserBean);
 			return mv;
 		}
 		Client user = clientRepository.findByClientEmail(bean.getEmail());
 		if (user == null) {
 			mv.addObject("message_email", "存在しないメールアドレスです");
 			mv.setViewName("conUser");
+			mv.addObject("conUserBean", conUserBean);
 			return mv;
 		}
 		int code = user.getQuestionCode();
 		Question question = questionRepository.findByQuestionCode(code);
 		mv.addObject("question", question);
+		mv.addObject("code", code);
+		session.setAttribute("clientCode", user.getClientCode());
 		mv.setViewName("ansSecret");
+		// 初期Formの作成
+		AnsSecretForm ansSecretBean = new AnsSecretForm();
+		mv.addObject("ansSecretBean", ansSecretBean);
 		return mv;
 	}
 
 	@RequestMapping(value = "/changePass", method = RequestMethod.POST)
-	public ModelAndView emailCheckers(@RequestParam("answer") String answer, @RequestParam("question") String question,
-			@RequestParam("password") String password, @RequestParam("rePassword") String rePassword,
-			@RequestParam("questioCode") String questioCode, @RequestParam("code") String code, ModelAndView mv) {
-		int questioCodes = Integer.parseInt(questioCode);
-		Question questions = questionRepository.findByQuestionCode(questioCodes);
+	public ModelAndView emailCheckers1(@ModelAttribute("bean") AnsSecretForm bean,
+			@RequestParam("question") String question, @RequestParam("code") String code, ModelAndView mv) {
+		AnsSecretForm ansSecretBean = new AnsSecretForm();
+		int codes = Integer.parseInt(code);
+		Question questions = questionRepository.findByQuestionCode(codes);
 		mv.addObject("question", questions);
-		if (answer.length() == 0) {
+		mv.addObject("code", code);
+		if (bean.getAnswer().length() == 0) {
 			mv.addObject("message_answer", "質問の答えが未入力です");
 			mv.setViewName("ansSecret");
 		}
-		if (password.length() == 0) {
+		if (bean.getPassword().length() == 0) {
 			mv.addObject("message_password", "パスワードが未入力です");
 			mv.setViewName("ansSecret");
 		}
-		if (rePassword.length() == 0) {
+		if (bean.getRePassword().length() == 0) {
 			mv.addObject("message_rePassword", "パスワード再入力が未入力です");
 			mv.setViewName("ansSecret");
 		}
-		if (answer.length() == 0 || password.length() == 0 || rePassword.length() == 0) {
+		if (bean.getAnswer().length() == 0 || bean.getPassword().length() == 0 || bean.getRePassword().length() == 0) {
+			mv.addObject("ansSecretBean", ansSecretBean);
 			return mv;
 		}
-		if (!rePassword.equals(password)) {
-			mv.addObject("message", "パスワードとパスワード再入力違います");
+		if (!bean.getRePassword().equals(bean.getPassword())) {
+			mv.addObject("message", "パスワードとパスワード再入力の値が違います");
 			mv.setViewName("ansSecret");
+			mv.addObject("ansSecretBean", ansSecretBean);
 			return mv;
 		}
-		int codes = Integer.parseInt(code);
-		Client user = clientRepository.findByClientCode(codes);
-		if (!user.getClientAnswer().equals(answer)) {
+		int clientCode=(int) session.getAttribute("clientCode");
+		Client user = clientRepository.findByClientCode(clientCode);
+		if (!user.getClientAnswer().equals(bean.getAnswer())) {
 			mv.addObject("message_answer", "質問の答えが違います");
 			mv.setViewName("ansSecret");
+			mv.addObject("ansSecretBean", ansSecretBean);
 			return mv;
 		}
-		if (passcheck(password) == false) {
-			mv.addObject("message", "半角の大文字小文字英字と半角数字を含む8文字以上20文字以下ののパスワードにしてください");
+		if (passcheck(bean.getPassword()) == false) {
+			mv.addObject("message", "半角の大文字小文字英数字を含む8文字以上20文字以下のパスワードにしてください");
 			mv.setViewName("ansSecret");
+			mv.addObject("ansSecretBean", ansSecretBean);
+			return mv;
 		}
-		user.setClientPassword(password);
+		user.setClientPassword(bean.getPassword());
 		clientRepository.saveAndFlush(user);
 		mv.setViewName("login");
+		mv.addObject("bean", bean);
 		return mv;
 	}
 

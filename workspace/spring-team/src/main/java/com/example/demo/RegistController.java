@@ -1,16 +1,20 @@
 package com.example.demo;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+@Controller
 public class RegistController {
 
 	@Autowired
@@ -18,19 +22,29 @@ public class RegistController {
 
 	@Autowired
 	ClientRepository clientRepository;
+
+	@Autowired
+	QuestionRepository questionRepository;
 	
-	@RequestMapping(value="/regist")
+	@Autowired
+	PointRepository pointRepository;
+
+	@RequestMapping("/regist")
 	public ModelAndView regist(ModelAndView mv) {
 		// 初期Formの作成
-		conUserForm bean = new conUserForm();
+		addUserForm bean = new addUserForm();
 		mv.addObject("addUserBean", bean);
+		List<Question> questionList = questionRepository.findAll();
+		mv.addObject("questionList", questionList);
 		mv.setViewName("addUser");
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/registUser", method = RequestMethod.POST)
 	public ModelAndView registUser(@ModelAttribute("addUserBean") addUserForm bean, ModelAndView mv) {
 		mv.addObject("addUserBean", bean);
+		List<Question> questionList = questionRepository.findAll();
+		mv.addObject("questionList", questionList);
 		// 未入力チェックフラグ
 		int flg = 0;
 		// 電話番号未入力チェックフラグ
@@ -89,7 +103,7 @@ public class RegistController {
 			mv.addObject("message_tel", "電話番号が入力されていません");
 			flg = 1;
 		}
-		// 未入力がいつでもあると新規会員登録画面へ遷移
+		// 未入力が１つでもあると新規会員登録画面へ遷移
 		if (flg == 1) {
 			mv.setViewName("addUser");
 			return mv;
@@ -102,13 +116,13 @@ public class RegistController {
 			return mv;
 		}
 		// メールアドレスフォーマットチェック
-		if (bean.getEmail().contains("@")) {
+		if (!bean.getEmail().contains("@")) {
 			mv.addObject("message_email", "メールアドレスのフォーマットが正しくありません");
 			mv.setViewName("addUser");
 			return mv;
 		}
 		// メールアドレスとメールアドレス再入力が一致しているかチェックする
-		if (bean.getEmail().equals(bean.getRe_email())) {
+		if (!bean.getEmail().equals(bean.getRe_email())) {
 			mv.addObject("message_email", "メールアドレスとメールアドレス再入力が一致しません");
 			mv.setViewName("addUser");
 			return mv;
@@ -120,7 +134,7 @@ public class RegistController {
 			return mv;
 		}
 		// パスワードとパスワード再入力が一致しているかチェックする
-		if (bean.getPassword().equals(bean.getRe_password())) {
+		if (!bean.getPassword().equals(bean.getRe_password())) {
 			mv.addObject("message_password", "パスワードとパスワード再入力が一致しません");
 			mv.setViewName("addUser");
 			return mv;
@@ -157,24 +171,52 @@ public class RegistController {
 		buildTel.append("-");
 		buildTel.append(bean.getTel3());
 		String tel = buildTel.toString();
+		
 		mv.setViewName("conAddUserInfo");
 		mv.addObject("tel", tel);
 		return mv;
 	}
-//		// 住所を結合する
-//		StringBuilder buildAddress = new StringBuilder();
-//		buildAddress.append(bean.getPrefectures());
-//		buildAddress.append(bean.getCities());
-//		buildAddress.append(bean.getHouse_number());
-//		String address = buildAddress.toString();
-//		
-//		Client addUser = new Client(bean.getName(), bean.getKana(), bean.getEmail(), tel, address, bean.getPassword(),
-//				bean.getSex(), pointCode, bean.getQuestionCode(), bean.getAnswer(), 0);
-//		clientRepository.saveAndFlush(addUser);
-//		mv.setViewName("login");
-//		return mv;
-//	}
 
+	@RequestMapping(value = "/regists", method = RequestMethod.POST)
+	public ModelAndView regists(@ModelAttribute("addUserBean") addUserForm bean, ModelAndView mv) {
+		// 同じメールアドレスが登録されていないかチェック
+		Client user = clientRepository.findByClientEmail(bean.getEmail());
+		if (user != null) {
+			mv.addObject("message_email", "すでに存在しているメールアドレスです");
+			mv.setViewName("addUser");
+			return mv;
+		}
+		// 住所を結合する
+		StringBuilder buildAddress = new StringBuilder();
+		buildAddress.append(bean.getPrefectures());
+		buildAddress.append(bean.getCities());
+		buildAddress.append(bean.getHouse_number());
+		String address = buildAddress.toString();
+		
+		// 電話番号を結合する
+		StringBuilder buildTel = new StringBuilder();
+		buildTel.append(bean.getTel1());
+		buildTel.append("-");
+		buildTel.append(bean.getTel2());
+		buildTel.append("-");
+		buildTel.append(bean.getTel3());
+		String tel = buildTel.toString();
+		//ユーザ数をカウントしてポイントテーブルを作成
+		List<Client> count = clientRepository.findAll();
+		int pointCode=(count.size())+1;
+		Point addPoint = new Point(0);
+		pointRepository.saveAndFlush(addPoint);
+		//新規会員をデータベース追加する
+		Client addUser = new Client(bean.getName(), bean.getKana(), bean.getEmail(), tel, address, bean.getPassword(),
+				bean.getSex(), pointCode, bean.getQuestionCode(), bean.getAnswer(), 2);
+		clientRepository.saveAndFlush(addUser);
+		mv.addObject("message", "新規アカウントを追加しました");
+		LoginForm loginBean = new LoginForm();
+		mv.addObject("bean", loginBean);
+		mv.setViewName("login");
+		return mv;
+	}
+	
 	// パスワードフォーマットチェック
 	public static boolean passcheck(String pass) {
 		boolean result = true;
@@ -192,9 +234,10 @@ public class RegistController {
 		result = pattern.matcher(kana).matches();
 		return result;
 	}
-	//数値チェック
+
+	// 数値チェック
 	public boolean telcheck(String suu) {
-		boolean isNumeric =  suu.matches("[+-]?\\d*(\\.\\d+)?");
+		boolean isNumeric = suu.matches("[+-]?\\d*(\\.\\d+)?");
 		return isNumeric;
 	}
 }

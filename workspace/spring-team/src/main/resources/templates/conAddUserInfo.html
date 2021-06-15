@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>新規会員登録</h1>
-<form action="/registUser" method="post" th:object="${addUserBean}">
+<form action="/regists" method="post" th:object="${addUserBean}">
 	<table border="1">
 		<tr>
 			<th>＊メールアドレス</th>
@@ -21,12 +21,8 @@
 			<th><span th:text="*{name}"></span></th>
 		</tr>
 		<tr>
-			<th>＊性別</th>
-			<th>
-			<input type="radio" name="sex" value="1" checked> 男性
-			<input type="radio" name="sex" value="2"> 女性
-			<input type="radio" name="sex" value="0"> 答えたくない
-			</th>
+			<th>＊フリガナ</th>
+			<th><span th:text="*{kana}"></span></th>
 		</tr>
 		<tr>
 			<th>＊都道府県</th>
@@ -49,6 +45,22 @@
 			<th>セキュリティ保護のため隠しています</th>
 		</tr>
 		</table>
+		<input type="submit" value="登録">
+		<input type="hidden" name="email" th:value="*{email}">
+		<input type="hidden" name="re_email" th:value="*{re_email}">
+		<input type="hidden" name="password" th:value="*{password}">
+		<input type="hidden" name="re_password" th:value="*{re_password}">
+		<input type="hidden" name="name" th:value="*{name}">
+		<input type="hidden" name="kana" th:value="*{kana}">
+		<input type="hidden" name="sex" th:value="*{sex}">
+		<input type="hidden" name="prefectures" th:value="*{prefectures}">
+		<input type="hidden" name="cities" th:value="*{cities}">
+		<input type="hidden" name="house_number" th:value="*{house_number}">
+		<input type="hidden" name="tel1" th:value="*{tel1}">
+		<input type="hidden" name="tel2" th:value="*{tel2}">
+		<input type="hidden" name="tel3" th:value="*{tel3}">
+		<input type="hidden" name="questionCode" th:value="*{questionCode}">
+		<input type="hidden" name="answer" th:value="*{answer}">
 	</form>
 </body>
 </html>

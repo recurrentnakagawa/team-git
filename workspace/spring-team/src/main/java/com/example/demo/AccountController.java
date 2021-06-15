@@ -34,8 +34,8 @@ public class AccountController {
 		// セッション情報はクリアする
 		session.invalidate();
 		// 初期Formの作成
-		LoginForm bean = new LoginForm();
-		mv.addObject("bean", bean);
+		LoginForm loginBean = new LoginForm();
+		mv.addObject("bean", loginBean);
 		mv.setViewName("login");
 		return mv;
 	}
@@ -69,12 +69,6 @@ public class AccountController {
 			return mv;
 		}
 		mv.setViewName("InnFrame");
-		return mv;
-	}
-
-	@RequestMapping("/registUser")
-	public ModelAndView registUser(ModelAndView mv) {
-		mv.setViewName("regist");
 		return mv;
 	}
 	

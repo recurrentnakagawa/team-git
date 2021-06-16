@@ -48,13 +48,6 @@ public class Client {
 	@Column(name = "role_code")
 	private Integer roleCode;
 
-	public Client(Integer clientCode, String clientName, String clientKana, String clientEmail, String clientTel,
-			String clientAddress, String clientPassword, String clientSex, Integer pointCode, Integer questionCode,
-			String clientAnswer, Integer roleCode) {
-		this(clientName, clientKana, clientEmail, clientTel, clientAddress, clientPassword, clientSex, pointCode,
-				questionCode, clientAnswer, roleCode);
-		this.clientCode = clientCode;
-	}
 
 	public Client(String clientName, String clientKana, String clientEmail, String clientTel, String clientAddress,
 			String clientPassword, String clientSex, Integer pointCode, Integer questionCode, String clientAnswer,

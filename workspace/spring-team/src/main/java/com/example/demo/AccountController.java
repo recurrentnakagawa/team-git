@@ -72,7 +72,7 @@ public class AccountController {
 		if(user.getRoleCode()==1) {
 			mv.setViewName("roleFrame");
 		}else {
-			mv.setViewName("InnFrame");
+			mv.setViewName("innFrame");
 		}
 		return mv;
 	}

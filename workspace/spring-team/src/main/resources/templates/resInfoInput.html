@@ -19,14 +19,15 @@
 	<tr><th>ご利用部屋数</th><td>
 			<select><option></option></select>
 		</td></tr>
-	<tr><th>アメニティ詳細</th><td th:text="${innBean.innAmenity}"></td></tr>
-	<tr><th colspan="2"><a th:href="'/roomList/' + ${innBean.innCode} + '/' + ${innBean.innName}">部屋一覧はこちら</a></th></tr>
+	<tr><th>一人当たりの<br>ご利用料金</th><td></td></tr>
+	<tr><th>利用者</th><td></td></tr>
+	<tr><th>電話番号</th><td></td></tr>
 </table>
 
-<table border="1">
-	<tr><th colspan="2">レビュー(口コミ)</th></tr>
-	<tr><th>投稿日</th><th>投稿内容</th></tr>
-	<tr th:each="rL:${reviewList}"><td th:text="${rL.reviewDatetime}"></td><td th:text=${rL.reviewDetail}></td></tr>
-</table>
+<form action="/">
+	<input type="submit" value="登録内容確認">
+	
+</form>
+
 </body>
 </html>

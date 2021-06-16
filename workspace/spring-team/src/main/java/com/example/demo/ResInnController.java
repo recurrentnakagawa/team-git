@@ -49,7 +49,7 @@ public class ResInnController {
 		ResInfoInputForm rbean = new ResInfoInputForm();
 		Inn innBean = innRepository.findByInnName(innName);
 		Room roomBean = roomRepository.findByRoomName(roomName);
-		Client clientBean = clientRepository.findByClientCode(session.getClientCode());
+		//Client clientBean = clientRepository.findByClientCode(session.getClientCode());
 		rbean.setInnName(innBean.getInnName());
 		rbean.setRoomName(roomBean.getRoomName());
 		//本日の日付の取得

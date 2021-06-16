@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1 th:text="${innName}"></h1>
+<table border="1">
+	<tr><th colspan="2" th:text="${roomBean.roomName}"></th></tr>
+	<tr><th>部屋の最大人数</th><td th:text="${roomBean.roomMax}"></td></tr>
+	<tr><th>一人当たりの料金</th><td th:text="${roomBean.roomPrice}"></td></tr>
+	<tr><th>部屋の詳細</th><td th:text="${roomBean.roomDetail}"></td></tr>
+</table>
+<form action="/login" target="_top">
+<th:block th:if="${session.login==0}">
+	<input type="submit" value="予約する">
+</th:block>
+</form>
+<form action="/reservation" method="post">
+<th:block th:if="${session.login==1}">
+	<input type="submit" value="予約する">
+	<input type="hidden" name="innName" value="${innName}">
+	<input type="hidden" name="roomName" value="${roomBean.roomName}">
+</th:block>
+</form>
+</body>
+</html>

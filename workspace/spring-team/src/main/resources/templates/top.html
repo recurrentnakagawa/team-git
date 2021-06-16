@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>トップ画面</h1>
+<h1><span th:text="${rural_msg}"></span>のおすすめ宿</h1>
+<table border="1">
+	<tr th:each="iL:${innList}">
+		<td><a th:href="'/innDetail/' + ${iL.innCode} + '/' + ${iL.innName}" th:text="${iL.innName}"></a></td>
+	</tr>
+</table>
 </body>
 </html>

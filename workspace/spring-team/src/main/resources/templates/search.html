@@ -5,94 +5,46 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>検索フォーム・・決して</h1><hr>
-<form>
+<h1>検索フォーム</h1><hr>
+<span th:text="${err_msg}" style="color:red"></span>
+<form action="/search" method="post" th:object="${bean}">
 	チェックイン日
-	<input type="date" name="checkinDate" th:value="${checkinDate}"><br>
+	<input type="date" name="checkinDate" th:value="*{checkinDate}"><br>
 	チェックアウト日
-	<input type="date" name="checkoutDate" th:value="${checkoutDate}"><br>
+	<input type="date" name="checkoutDate" th:value="*{checkoutDate}"><br>
 	都道府県選択<br>
 	<select name="selPrefectures">
 		<option th:each="pl:${prefecturesList}"
 				th:text="${pl.prefecturesName}"
 				th:value="${pl.prefecturesCode}"
-				th:selected="${pl.prefecturesCode}==13"></option>
+				th:selected="${pl.prefecturesCode}==*{prefecturesCode}"></option>
 	</select><br>
 	一人当たりの料金<br>
 	<select name="selLowPrice" >
-		<option value="1000">1000円</option>
-		<option value="2000">2000円</option>
-		<option value="3000">3000円</option>
-		<option value="4000">4000円</option>
-		<option value="5000">5000円</option>
-		<option value="6000">6000円</option>
-		<option value="7000">7000円</option>
-		<option value="8000">8000円</option>
-		<option value="9000">9000円</option>
-		<option value="10000">10000円</option>
-		<option value="10000">12000円</option>
-		<option value="10000">14000円</option>
-		<option value="10000">16000円</option>
-		<option value="10000">18000円</option>
-		<option value="20000">20000円</option>
-		<option value="25000">22000円</option>
-		<option value="25000">24000円</option>
-		<option value="25000">26000円</option>
-		<option value="25000">28000円</option>
-		<option value="30000">30000円</option>
-		<option value="40000">40000円</option>
-		<option value="50000">50000円</option>
-	</select>から<br>
+		<option th:each="pL:${priceList}"
+				th:text="${pL}"
+				th:value="${pL}"></option>
+	</select>円から<br>
 	<select name="selHighPrice">
-		<option value="1000">1000円</option>
-		<option value="2000">2000円</option>
-		<option value="3000">3000円</option>
-		<option value="4000">4000円</option>
-		<option value="5000">5000円</option>
-		<option value="6000">6000円</option>
-		<option value="7000">7000円</option>
-		<option value="8000">8000円</option>
-		<option value="9000">9000円</option>
-		<option value="10000">10000円</option>
-		<option value="10000">12000円</option>
-		<option value="10000">14000円</option>
-		<option value="10000">16000円</option>
-		<option value="10000">18000円</option>
-		<option value="20000">20000円</option>
-		<option value="25000">22000円</option>
-		<option value="25000">24000円</option>
-		<option value="25000">26000円</option>
-		<option value="25000">28000円</option>
-		<option value="30000">30000円</option>
-		<option value="40000">40000円</option>
-		<option value="50000">50000円</option>
-	</select>まで<br>
+		<option th:each="pL:${priceList}"
+				th:text="${pL}"
+				th:value="${pL}"
+				th:selected="${pL}==*{selPrice}"></option>
+	</select>円まで<br>
 	一部屋当たりの人数<br>
 	<select name="selPeople">
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		<option value="5">5</option>
-		<option value="6">6</option>
-		<option value="7">7</option>
-		<option value="8">8</option>
-		<option value="9">9</option>
-		<option value="10">10</option>
-	</select><br>
+		<option th:each="sL:${selectList}"
+				th:text="${sL}"
+				th:value="${sL}"
+				th:selected="${sL}==*{selPeople}"></option>
+	</select>人<br>
 	部屋数<br>
 	<select name="selRooms">
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		<option value="5">5</option>
-		<option value="6">6</option>
-		<option value="7">7</option>
-		<option value="8">8</option>
-		<option value="9">9</option>
-		<option value="10">10</option>
-	</select><br>
+		<option th:each="sL:${selectList}"
+				th:text="${sL}"
+				th:value="${sL}"
+				th:selected="${sL}==*{selRooms}"></option>
+	</select>部屋<br>
 	<input type="submit" value="検索">
 </form>
 </body>

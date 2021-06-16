@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>宿予約</h1>
+<h5>＊は必須項目</h5>
+<table border="1">
+	<tr><th>ホテル名</th><td th:text="${innName}"></td></tr>
+	<tr><th>部屋の名前</th><td th:text="${roomName}"></td></tr>
+	<tr><th>チェックイン日</th><td><input type="date"></td></tr>
+	<tr><th>チェックアウト日</th><td><input type="date"></td></tr>
+	<tr><th>一部屋当たりの<br>ご利用人数</th>
+		<td>
+			<select><option></option></select>
+		</td></tr>
+	<tr><th>ご利用部屋数</th><td>
+			<select><option></option></select>
+		</td></tr>
+	<tr><th>アメニティ詳細</th><td th:text="${innBean.innAmenity}"></td></tr>
+	<tr><th colspan="2"><a th:href="'/roomList/' + ${innBean.innCode} + '/' + ${innBean.innName}">部屋一覧はこちら</a></th></tr>
+</table>
+
+<table border="1">
+	<tr><th colspan="2">レビュー(口コミ)</th></tr>
+	<tr><th>投稿日</th><th>投稿内容</th></tr>
+	<tr th:each="rL:${reviewList}"><td th:text="${rL.reviewDatetime}"></td><td th:text=${rL.reviewDetail}></td></tr>
+</table>
+</body>
+</html>

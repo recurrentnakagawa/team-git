@@ -162,6 +162,7 @@ public class AccountController {
 		user.setClientPassword(bean.getPassword());
 		clientRepository.saveAndFlush(user);
 		mv.setViewName("userLoginFrame");
+		mv.addObject("message", "パスワードを変更しました");
 		mv.addObject("bean", bean);
 		return mv;
 	}

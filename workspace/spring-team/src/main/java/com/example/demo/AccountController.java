@@ -72,7 +72,7 @@ public class AccountController {
 		if(user.getRoleCode()==1) {
 			mv.setViewName("roleFrame");
 		}else {
-			mv.setViewName("InnFrame");
+			mv.setViewName("innFrame");
 		}
 		return mv;
 	}
@@ -161,7 +161,7 @@ public class AccountController {
 		}
 		user.setClientPassword(bean.getPassword());
 		clientRepository.saveAndFlush(user);
-		mv.setViewName("login");
+		mv.setViewName("userLoginFrame");
 		mv.addObject("bean", bean);
 		return mv;
 	}

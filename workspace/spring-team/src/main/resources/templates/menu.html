@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html xmlns:th="http://www.thymeleaf.org">
-=======
->>>>>>> bc82713e9cee1654fc0a43c7717667d19146da30
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -10,24 +7,11 @@
 <body>
 <a href="/top" target="_top">トップ</a>
 ようこそ<a href="/login" target="_top">ゲスト</a>さん
-<<<<<<< HEAD
-<a href="/login" target="_top">新規会員登録</a>
-<a href="/login" target="_top">ログイン</a><br>
-<a href="/top" target="tops">トップへ</a><br>
-<span th:each="rL:${ruralList}">
-<a th:text="${rL.ruralName}" +$nbsp; th:href="'/showRuralInn/' + ${rL.ruralCode} + '/' + ${rL.ruralName}" target="tops"></a>
-</span>
-=======
 <a href="/userRegistFrame" target="_top">新規会員登録</a>
 <a href="/userLoginFrame" target="_top">ログイン</a><br>
 <a href="/innFrame" target="_top">トップへ</a><br>
-<a href="/login" target="_top">北海道</a>
-<a href="/login" target="_top">東北</a>
-<a href="/login" target="_top">関東</a>
-<a href="/login" target="_top">中部</a>
-<a href="/login" target="_top">近畿</a>
-<a href="/login" target="_top">中国・四国</a>
-<a href="/login" target="_top">九州</a>
->>>>>>> bc82713e9cee1654fc0a43c7717667d19146da30
+<span th:each="rL:${ruralList}">
+<a th:text="${rL.ruralName}" +$nbsp; th:href="'/showRuralInn/' + ${rL.ruralCode} + '/' + ${rL.ruralName}" target="tops"></a>
+</span>
 </body>
 </html>

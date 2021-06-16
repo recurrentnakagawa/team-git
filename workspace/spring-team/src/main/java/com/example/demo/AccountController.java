@@ -24,6 +24,9 @@ public class AccountController {
 
 	@Autowired
 	QuestionRepository questionRepository;
+	
+	@Autowired
+	PointRepository pointRepository;
 
 	/**
 	 * ログイン画面を表示
@@ -68,8 +71,23 @@ public class AccountController {
 			mv.setViewName("login");
 			return mv;
 		}
-		//管理者判断
+		session.setAttribute("loginUser", user);
+		session.setAttribute("login", 1);
+//		PointRepository point = pointRepository.findByPointCode(user.getPointCode());
+//		session.setAttribute("point", point);
+		mv.addObject("reloadFlg", 1);
 		if(user.getRoleCode()==1) {
+			session.setAttribute("kanri", "1");
+		}else {
+			session.setAttribute("kanri", "0");
+		}
+		mv.setViewName("login");
+		return mv;
+	}
+	@RequestMapping("/loginFlg")
+	public ModelAndView loginflg(ModelAndView mv) {
+		//管理者判断
+		if(session.getAttribute("kanri").equals("1")) {
 			mv.setViewName("roleFrame");
 		}else {
 			mv.setViewName("innFrame");

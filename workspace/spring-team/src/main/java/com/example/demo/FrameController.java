@@ -117,4 +117,38 @@ public class FrameController {
 		}
 		return selectList;
 	}
+	
+	@RequestMapping("/myFrame")
+	public String myFrame() {
+		return "myFrame";
+	}
+	
+	@RequestMapping("/myMenu")
+	public String myMenu() {
+		return "myMenu";
+	}
+	
+	@RequestMapping("/myRes")
+	public String myRes() {
+		return "mypageRes";
+	}
+	
+	@RequestMapping("/mypageRes")
+	public ModelAndView mypageRes(ModelAndView mv) {
+		mv.setViewName("mypageRes");
+		return mv;
+	}
+	
+	@RequestMapping("/mypageView")
+	public ModelAndView mypageView(ModelAndView mv) {
+		mv.setViewName("mypageView");
+		return mv;
+	}
+	
+	@RequestMapping("/mypageEdit")
+	public ModelAndView mypageEdit(ModelAndView mv) {
+		mv.setViewName("mypageEdit");
+		return mv;
+	}
+	
 }

@@ -12,12 +12,12 @@
 	<tr><th>一人当たりの料金</th><td th:text="${roomBean.roomPrice}"></td></tr>
 	<tr><th>部屋の詳細</th><td th:text="${roomBean.roomDetail}"></td></tr>
 </table>
-<form action="/login" target="_top">
+<form action="/userLoginFrame" target="_top">
 <th:block th:if="${session.login==0}">
 	<input type="submit" value="予約する">
 </th:block>
 </form>
-<form action="/reservation" method="post">
+<form action="/reservation" method="post"　target="_top">
 <th:block th:if="${session.login==1}">
 	<input type="submit" value="予約する">
 	<input type="hidden" name="innName" value="${innName}">

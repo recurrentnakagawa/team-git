@@ -5,11 +5,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="/top" target="_top">トップ</a>
+<a href="/frame" target="_top">トップ</a>
 ようこそ<a href="/login" target="_top">ゲスト</a>さん
 <a href="/userRegistFrame" target="_top">新規会員登録</a>
 <a href="/userLoginFrame" target="_top">ログイン</a><br>
-<a href="/innFrame" target="_top">トップへ</a><br>
+<a href="/frame" target="_top">トップへ</a><br>
 <span th:each="rL:${ruralList}">
 <a th:text="${rL.ruralName}" +$nbsp; th:href="'/showRuralInn/' + ${rL.ruralCode} + '/' + ${rL.ruralName}" target="tops"></a>
 </span>

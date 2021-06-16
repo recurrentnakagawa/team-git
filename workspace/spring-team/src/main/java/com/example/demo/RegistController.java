@@ -254,7 +254,7 @@ public class RegistController {
 		mv.addObject("message", "新規アカウントを追加しました");
 		LoginForm loginBean = new LoginForm();
 		mv.addObject("bean", loginBean);
-		mv.setViewName("innFrame");
+		mv.setViewName("userLoginFrame");
 		return mv;
 	}
 	

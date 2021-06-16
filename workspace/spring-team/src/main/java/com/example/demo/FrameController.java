@@ -38,6 +38,11 @@ public class FrameController {
 		return "innFrame";
 	}
 	
+	@RequestMapping("/frame")
+	public String frame() {
+		return "innFrame";
+	}
+	
 	@RequestMapping("/menu")
 	public ModelAndView menu(ModelAndView mv) {
 		List<Rural> ruralList=ruralRepository.findAll();

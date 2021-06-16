@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>新規会員登録</title>
+</head>
+<body>
+<h1>新規会員登録</h1>
+<form action="/regists" method="post" th:object="${addUserBean}">
+	<table border="1">
+		<tr>
+			<th>＊メールアドレス</th>
+			<th><span th:text="*{email}"></span></th>
+		</tr>
+		<tr>
+			<th>＊パスワード</th>
+			<th>セキュリティ保護のため隠しています</th>
+		</tr>
+		<tr>
+			<th>＊名前</th>
+			<th><span th:text="*{name}"></span></th>
+		</tr>
+		<tr>
+			<th>＊フリガナ</th>
+			<th><span th:text="*{kana}"></span></th>
+		</tr>
+		<tr>
+			<th>＊都道府県</th>
+			<th><span th:text="*{prefectures}"></span></th>
+		</tr>
+		<tr>
+			<th>＊市町村</th>
+			<th><span th:text="*{cities}"></span></th>
+		</tr>
+		<tr>
+			<th>＊番地・部屋番号</th>
+			<th><span th:text="*{house_number}"></span></th>
+		</tr>
+		<tr>
+			<th>＊電話番号</th>
+			<th><span th:text="${tel}"></span></th>
+		</tr>
+		<tr>
+			<th>＊秘密の質問</th>
+			<th>セキュリティ保護のため隠しています</th>
+		</tr>
+		</table>
+		<input type="submit" value="登録">
+		<input type="hidden" name="email" th:value="*{email}">
+		<input type="hidden" name="re_email" th:value="*{re_email}">
+		<input type="hidden" name="password" th:value="*{password}">
+		<input type="hidden" name="re_password" th:value="*{re_password}">
+		<input type="hidden" name="name" th:value="*{name}">
+		<input type="hidden" name="kana" th:value="*{kana}">
+		<input type="hidden" name="sex" th:value="*{sex}">
+		<input type="hidden" name="prefectures" th:value="*{prefectures}">
+		<input type="hidden" name="cities" th:value="*{cities}">
+		<input type="hidden" name="house_number" th:value="*{house_number}">
+		<input type="hidden" name="tel1" th:value="*{tel1}">
+		<input type="hidden" name="tel2" th:value="*{tel2}">
+		<input type="hidden" name="tel3" th:value="*{tel3}">
+		<input type="hidden" name="questionCode" th:value="*{questionCode}">
+		<input type="hidden" name="answer" th:value="*{answer}">
+	</form>
+</body>
+</html>

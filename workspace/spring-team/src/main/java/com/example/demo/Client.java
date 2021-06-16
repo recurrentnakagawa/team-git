@@ -8,48 +8,67 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="client")
+@Table(name = "client")
 public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="client_code")
+	@Column(name = "client_code")
 	private Integer clientCode;
 
-	@Column(name="client_name")
+	@Column(name = "client_name")
 	private String clientName;
-	
-	@Column(name="client_kana")
+
+	@Column(name = "client_kana")
 	private String clientKana;
 
-	@Column(name="client_email")
+	@Column(name = "client_email")
 	private String clientEmail;
-	
-	@Column(name="client_tel")
+
+	@Column(name = "client_tel")
 	private String clientTel;
-	
-	@Column(name="client_address")
+
+	@Column(name = "client_address")
 	private String clientAddress;
 
-	@Column(name="client_password")
+	@Column(name = "client_password")
 	private String clientPassword;
-	
-	@Column(name="client_sex")
+
+	@Column(name = "client_sex")
 	private String clientSex;
 
-	@Column(name="point_code")
+	@Column(name = "point_code")
 	private Integer pointCode;
-	
-	@Column(name="question_code")
+
+	@Column(name = "question_code")
 	private Integer questionCode;
-	
-	@Column(name="client_answer")
+
+	@Column(name = "client_answer")
 	private String clientAnswer;
-	
-	@Column(name="role_code")
+
+	@Column(name = "role_code")
 	private Integer roleCode;
-	
+
+
+	public Client(String clientName, String clientKana, String clientEmail, String clientTel, String clientAddress,
+			String clientPassword, String clientSex, Integer pointCode, Integer questionCode, String clientAnswer,
+			Integer roleCode) {
+		super();
+		this.clientName = clientName;
+		this.clientKana = clientKana;
+		this.questionCode = questionCode;
+		this.clientEmail = clientEmail;
+		this.clientTel = clientTel;
+		this.clientAddress = clientAddress;
+		this.clientPassword = clientPassword;
+		this.clientSex = clientSex;
+		this.pointCode = pointCode;
+		this.questionCode = questionCode;
+		this.clientAnswer = clientAnswer;
+		this.roleCode = roleCode;
+	}
+
 	public Client() {
-		
+
 	}
 
 	public Integer getClientCode() {
@@ -147,6 +166,5 @@ public class Client {
 	public void setRoleCode(Integer roleCode) {
 		this.roleCode = roleCode;
 	}
-	
-	
+
 }

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>予約内容確認</h1>
+<form th:action="'/regReservation/' + ${innCode} + '/' + ${roomCode}" method="post">
+	<table border="1">
+		<tr><th>ホテル名</th><td th:text="${innBean.innName}"></td></tr>
+		<tr><th>部屋名</th><td th:text="${roomBean.roomName}"></td></tr>
+		<tr><th>チェックイン日</th><td th:text="${checkinDate}"></td></tr>
+		<tr><th>チェックアウト日</th><td th:text="${checkoutDate}"></td></tr>
+		<tr><th>一部屋当たりの<br>ご利用人数</th><td th:text="${selPeople}"></td></tr>
+		<tr><th>ご利用部屋数</th><td th:text="${selRooms}"></td></tr>
+		<tr><th>一人当たりの<br>ご利用料金</th><td th:text="${roomBean.roomPrice} + 円"></td></tr>
+		<tr><th>利用者</th><td th:text="${session.loginUser.clientName} + 様"></td></tr>
+		<tr><th>連絡先</th><td th:text="${session.loginUser.clientTel}"></td></tr>
+	</table>
+	<input type="submit" value="予約">
+	<input type="hidden" name="checkinDate" th:value="${checkinDate}">
+	<input type="hidden" name="checkoutDate" th:value="${checkoutDate}">
+	<input type="hidden" name="selPeople" th:value="${selPeople}">
+	<input type="hidden" name="selRooms" th:value="${selRooms}">
+	<input type="hidden" name="resPrice" th:value="${roomBean.roomPrice}">
+</form>
+</body>
+</html>

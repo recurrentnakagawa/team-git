@@ -62,13 +62,15 @@ public class SearchInnController {
 	}
 	
 	//部屋詳細表示
-	@RequestMapping(value="/roomDetail/{innName}/{roomCode}/{roomName}")
+	@RequestMapping(value="/roomDetail/{innCode}/{innName}/{roomCode}/{roomName}")
 	public ModelAndView showRoomDetail(
+			@PathVariable("innCode") int innCode,
 			@PathVariable("innName") String innName,
 			@PathVariable("roomCode") int roomCode,
 			@PathVariable("roomName") String roomName,
 			ModelAndView mv) {
-		Room roomBean=roomRepository.findByroomCode(roomCode);
+		Room roomBean=roomRepository.findByRoomCode(roomCode);
+		mv.addObject("innCode", innCode);
 		mv.addObject("innName", innName);
 		mv.addObject("roomBean", roomBean);
 		mv.setViewName("roomDetail");

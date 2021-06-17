@@ -17,7 +17,7 @@
 	<input type="submit" value="予約する">
 </th:block>
 </form>
-<form action="/reservation" method="post"　target="_top">
+<form th:action="'/reservation/' + ${innCode} + '/' + ${roomBean.roomCode}" method="post" target="_top">
 <th:block th:if="${session.login==1}">
 	<input type="submit" value="予約する">
 	<input type="hidden" name="innName" value="${innName}">

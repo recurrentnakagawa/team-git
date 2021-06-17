@@ -8,7 +8,7 @@
 <h1 th:text="${innName} + 部屋一覧"></h1>
 <table border="1">
 	<tr th:each="rL:${roomList}">
-		<td><a th:href="'/roomDetail/' + ${innName} + '/' + ${rL.roomCode} + '/' + ${rL.roomName}" th:text="${rL.roomName}"></a></td>
+		<td><a th:href="'/roomDetail/' + ${innCode} + '/' + ${innName} + '/' + ${rL.roomCode} + '/' + ${rL.roomName}" th:text="${rL.roomName}"></a></td>
 	</tr>
 </table>
 </body>

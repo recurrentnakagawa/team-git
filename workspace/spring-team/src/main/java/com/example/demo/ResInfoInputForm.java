@@ -5,8 +5,8 @@ public class ResInfoInputForm {
 	private String roomName;
 	private String checkinDate;
 	private String checkoutDate;
-	private int selPeople;
-	private int selRooms;
+	private String selPeople;
+	private String selRooms;
 	private int roomPrice;
 	private String clientName;
 	private String clientTel;
@@ -47,19 +47,19 @@ public class ResInfoInputForm {
 		this.checkoutDate = checkoutDate;
 	}
 
-	public int getSelPeople() {
+	public String getSelPeople() {
 		return selPeople;
 	}
 
-	public void setSelPeople(int selPeople) {
+	public void setSelPeople(String selPeople) {
 		this.selPeople = selPeople;
 	}
 
-	public int getSelRooms() {
+	public String getSelRooms() {
 		return selRooms;
 	}
 
-	public void setSelRooms(int selRooms) {
+	public void setSelRooms(String selRooms) {
 		this.selRooms = selRooms;
 	}
 

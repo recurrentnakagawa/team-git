@@ -7,26 +7,24 @@
 <body>
 <h1>宿予約</h1>
 <h5>＊は必須項目</h5>
-<table border="1">
-	<tr><th>ホテル名</th><td th:text="${innName}"></td></tr>
-	<tr><th>部屋の名前</th><td th:text="${roomName}"></td></tr>
-	<tr><th>チェックイン日</th><td><input type="date"></td></tr>
-	<tr><th>チェックアウト日</th><td><input type="date"></td></tr>
-	<tr><th>一部屋当たりの<br>ご利用人数</th>
-		<td>
-			<select><option></option></select>
-		</td></tr>
-	<tr><th>ご利用部屋数</th><td>
-			<select><option></option></select>
-		</td></tr>
-	<tr><th>一人当たりの<br>ご利用料金</th><td></td></tr>
-	<tr><th>利用者</th><td></td></tr>
-	<tr><th>電話番号</th><td></td></tr>
-</table>
-
-<form action="/">
+<form th:action="'/conReservation/' + ${innCode} + '/' + ${roomCode}" method="post">
+	<table border="1">
+		<tr><th>ホテル名</th><td th:text="${innBean.innName}"></td></tr>
+		<tr><th>部屋の名前</th><td th:text="${roomBean.roomName}"></td></tr>
+		<tr><th>＊チェックイン日</th><td><input type="date" name="checkinDate" th:value="${checkinDate}" required></td></tr>
+		<tr><th>＊チェックアウト日</th><td><input type="date" name="checkoutDate" th:value="${checkoutDate}" required></td></tr>
+		<tr><th>＊一部屋当たりの<br>ご利用人数</th>
+			<td>
+				<select name="selPeople"><option th:each="sP:${selPeople}" th:text="${sP}" th:value="${sP}"></option></select>
+			</td></tr>
+		<tr><th>＊ご利用部屋数</th><td>
+				<select name="selRooms"><option th:each="sR:${selRooms}" th:text="${sR}" th:value="${sR}"></option></select>
+			</td></tr>
+		<tr><th>一人当たりの<br>ご利用料金</th><td th:text="${roomBean.roomPrice} + 円"></td></tr>
+		<tr><th>利用者</th><td th:text="${session.loginUser.clientName}"></td></tr>
+		<tr><th>電話番号</th><td th:text="${session.loginUser.clientTel}"></td></tr>
+	</table>
 	<input type="submit" value="登録内容確認">
-	
 </form>
 
 </body>

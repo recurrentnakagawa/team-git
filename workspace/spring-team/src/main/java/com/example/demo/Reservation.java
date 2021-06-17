@@ -38,8 +38,19 @@ public class Reservation {
 	@Column(name="reservation_user_total")
 	private Integer reservationUserTotal;
 	
-	public Reservation() {
-		
+	@Column(name="reservation_invalid")
+	private String reservationInvalid;
+	
+	public Reservation(int clientCode, int roomCode, Date checkinDate, Date checkoutDate, int selRooms, int resPrice, int selPeople, String resFlag) {
+		super();
+		this.clientCode = clientCode;
+		this.roomCode = roomCode;
+		this.reservationCheckinDate = checkinDate;
+		this.reservationCheckoutDate = checkoutDate;
+		this.reservationRoomTotal = selRooms;
+		this.reservationPrice = resPrice;
+		this.reservationUserTotal = selPeople;
+		this.reservationInvalid = resFlag;
 	}
 
 	public Integer getReservationCode() {

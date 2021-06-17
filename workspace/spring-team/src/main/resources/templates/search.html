@@ -9,9 +9,9 @@
 <span th:text="${err_msg}" style="color:red"></span>
 <form action="/search" method="post" th:object="${bean}">
 	チェックイン日
-	<input type="date" name="checkinDate" th:value="*{checkinDate}"><br>
+	<input type="date" name="checkinDate" th:value="*{checkinDate}" required><br>
 	チェックアウト日
-	<input type="date" name="checkoutDate" th:value="*{checkoutDate}"><br>
+	<input type="date" name="checkoutDate" th:value="*{checkoutDate}" required><br>
 	都道府県選択<br>
 	<select name="selPrefectures">
 		<option th:each="pl:${prefecturesList}"

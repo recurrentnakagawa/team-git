@@ -42,6 +42,33 @@ public class Room {
 	}
 
 
+	public Room(String roomName, String roomDetail, Integer roomPrice, Integer roomTotal, Integer roomMax) {
+		this.roomName = roomName;
+		this.roomDetail = roomDetail;
+		this.roomPrice = roomPrice;
+		this.roomTotal = roomTotal;
+		this.roomMax = roomMax;
+	}
+	
+	public Room(int innCode, String roomName, String roomDetail, Integer roomPrice, Integer roomTotal, Integer roomMax) {
+		this.innCode = innCode;
+		this.roomName = roomName;
+		this.roomDetail = roomDetail;
+		this.roomPrice = roomPrice;
+		this.roomTotal = roomTotal;
+		this.roomMax = roomMax;
+	}
+	
+	public Room(int roomCode, int innCode, String roomName, String roomDetail, Integer roomPrice, Integer roomTotal, Integer roomMax) {
+		this.roomCode = roomCode;
+		this.innCode = innCode;
+		this.roomName = roomName;
+		this.roomDetail = roomDetail;
+		this.roomPrice = roomPrice;
+		this.roomTotal = roomTotal;
+		this.roomMax = roomMax;
+	}
+
 	public Integer getRoomCode() {
 		return roomCode;
 	}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<div th:if="${addFlg != null}">
+			<h1>部屋追加</h1>
+			<form method="post" action="/roomAdd" th:object="${bean}">
+				<table>
+					<tr>
+						<th>・部屋名</th>
+						<td><input type="text" name="roomName" th:value="*{roomName}"><br>
+						<span th:text="${roomNameMessage}" style="color:RED"></span></td>
+					</tr>
+					<tr>
+						<th>・部屋の詳細</th>
+						<td><input type="text" name="roomDetail" th:value="*{roomDetail}"><br>
+						<span th:text="${roomDetailMessage}" style="color:RED"></span></td>
+					</tr>
+					<tr>
+						<th>・部屋の料金</th>
+						<td><input type="text" name="roomPrice" th:value="*{roomPrice}"><br>
+						<span th:text="${roomPriceMessage}" style="color:RED"></span></td>
+					</tr>
+					<tr>
+						<th>・部屋の数</th>
+						<td><input type="text" name="roomTotal" th:value="*{roomTotal}"><br>
+						<span th:text="${roomTotalMessage}" style="color:RED"></span></td>
+					</tr>
+					<tr>
+						<th>・部屋の最大人数</th>
+						<td><input type="text" name="roomMax" th:value="*{roomMax}"><br>
+						<span th:text="${roomMaxMessage}" style="color:RED"></span></td>
+					</tr>
+				</table>
+				<input type="hidden" name="innCode" th:value="${innCode}">
+				<input type="submit" value="追加">
+			</form>
+		</div>
+		
+		<div th:if="${updFlg != null}">
+			<h1>部屋更新</h1>
+			<form method="post" action="/roomUpd" th:object="${bean}">
+				<table>
+					<tr>
+						<th>・部屋名</th>
+						<td><input type="text" name="roomName" th:value="*{roomName}"><br>
+						<span th:text="${roomNameMessage}" style="color:RED"></span></td>
+					</tr>
+					<tr>
+						<th>・部屋の詳細</th>
+						<td><input type="text" name="roomDetail" th:value="*{roomDetail}"><br>
+						<span th:text="${roomDetailMessage}" style="color:RED"></span></td>
+					</tr>
+					<tr>
+						<th>・部屋の料金</th>
+						<td><input type="text" name="roomPrice" th:value="*{roomPrice}"><br>
+						<span th:text="${roomPriceMessage}" style="color:RED"></span></td>
+					</tr>
+					<tr>
+						<th>・部屋の数</th>
+						<td><input type="text" name="roomTotal" th:value="*{roomTotal}"><br>
+						<span th:text="${roomTotalMessage}" style="color:RED"></span></td>
+					</tr>
+					<tr>
+						<th>・部屋の最大人数</th>
+						<td><input type="text" name="roomMax" th:value="*{roomMax}"><br>
+						<span th:text="${roomMaxMessage}" style="color:RED"></span></td>
+					</tr>
+				</table>
+				<input type="hidden" name="innCode" th:value="*{innCode}">
+				<input type="hidden" name="roomCode" th:value="*{roomCode}">
+				<input type="submit" value="更新">
+			</form>
+		</div>
+	</body>
+</html>

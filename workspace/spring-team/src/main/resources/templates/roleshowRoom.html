@@ -12,12 +12,12 @@
 			</tr>
 			<tr th:each="rl:${roomList}">
 				<td th:text="${rl.roomName}"></td>
-				<td><a th:href="'/conRoomUpd/'+${rl.roomCode}">更新</a></td>
-				<td><a th:href="'/conRoomDel/'+${rl.roomCode}">削除</a></td>
+				<td><a th:href="'/updRoom/'+${rl.roomCode}">更新</a></td>
+				<td><a th:href="'/delRoom/'+${rl.roomCode}">削除</a></td>
 			</tr>
 		</table>
 		<form method="post" action="/addRoom">
-			<input type="hidden" name="innCode" th:value="${roomList[0].innCode}">
+			<input type="hidden" name="innCode" th:value="${innCode}">
 			<input type="submit" value="部屋追加">
 		</form>
 	</body>

@@ -5,14 +5,62 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		<h1>宿追加</h1>
-		<table>
-			<tr>
-				<th>・名前</th>
-				<td></td>
-			</tr>
+		<form method="post" action="/conRoomInfo" th:object="${bean}">
+			<h1>入力内容確認</h1>
+			以下の内容で正しければ登録ボタンを押してください。
+			<div th:if="${addFlg != null}">
+				<p>部屋追加</p>
+			</div>
+			<div th:if="${updFlg != null}">
+				<p>部屋更新</p>
+			</div>
+			<div th:if="${delFlg != null}">
+				<p>部屋削除</p>
+			</div>
+			<table>
+				<tr>
+					<th>部屋名</th>
+					<td th:text="*{roomName}"></td>
+				</tr>
+				<tr>
+					<th>部屋の詳細</th>
+					<td th:text="*{roomDetail}"></td>
+				</tr>
+				<tr>
+					<th>部屋の料金</th>
+					<td th:text="*{roomPrice}"></td>
+				</tr>
+				<tr>
+					<th>部屋の数</th>
+					<td th:text="*{roomTotal}"></td>
+				</tr>
+				<tr>
+					<th>部屋の最大人数</th>
+					<td th:text="*{roomMax}"></td>
+				</tr>
+			</table>
+			<input type="hidden" name="roomName" th:value="*{roomName}">
+			<input type="hidden" name="roomDetail" th:value="*{roomDetail}">
+			<input type="hidden" name="roomPrice" th:value="*{roomPrice}">
+			<input type="hidden" name="roomTotal" th:value="*{roomTotal}">
+			<input type="hidden" name="roomMax" th:value="*{roomMax}">	
 			
-		</table>
-		<input type="submit" value="登録">
+			<div th:if="${addFlg != null}">
+				<input type="hidden" name="innCode" th:value="${innCode}">	
+				<input type="hidden" name="flg" value="1">
+			</div>
+			<div th:if="${updFlg != null}">
+				<input type="hidden" name="roomCode" th:value="*{roomCode}">
+				<input type="hidden" name="innCode" th:value="*{innCode}">	
+				<input type="hidden" name="flg" value="2">
+			</div>
+			<div th:if="${delFlg != null}">
+				<input type="hidden" name="roomCode" th:value="*{roomCode}">
+				<input type="hidden" name="innCode" th:value="*{innCode}">	
+				<input type="hidden" name="flg" value="3">
+			</div>
+			
+			<input type="submit" value="登録">
+		</form>
 	</body>
 </html>

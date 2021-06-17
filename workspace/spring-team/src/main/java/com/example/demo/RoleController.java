@@ -233,17 +233,204 @@ public class RoleController {
 		List<Room> roomList = roomRepository.findByInnCode(innCode);
 		
 		mv.addObject("roomList", roomList);
+		mv.addObject("innCode",innCode);
 		mv.setViewName("roleShowRoom");
 		return mv;
 	}
 	
-	@RequestMapping(value="/addRoom/",method=RequestMethod.POST)
+	//部屋追加画面に遷移
+	@RequestMapping(value="/addRoom",method=RequestMethod.POST)
 	public ModelAndView addRoom(@RequestParam("innCode")String innCodeStr,ModelAndView mv) {	
-		int innCode = Integer.parseInt(innCodeStr);
-		List<Room> roomList = roomRepository.findByInnCode(innCode);
 		
-		mv.addObject("roomList", roomList);
-		mv.setViewName("roleShowRoom");
+		int innCode = Integer.parseInt(innCodeStr);
+		conRoomInfoForm bean = new conRoomInfoForm();
+		
+		mv.addObject("bean", bean);
+		mv.addObject("innCode", innCode);
+		mv.addObject("addFlg","1");
+		mv.setViewName("roomInfo");
+		return mv;
+	}
+	
+	//部屋更新画面に遷移
+	@RequestMapping(value="/updRoom/{roomCode}")
+	public ModelAndView updRoom(
+			@PathVariable(name = "roomCode") int roomCode,
+			ModelAndView mv
+	) {	
+		Room roomBean = roomRepository.findByRoomCode(roomCode);
+				
+		mv.addObject("bean", roomBean);
+		mv.addObject("updFlg","1");
+		mv.setViewName("roomInfo");
+		return mv;
+	}
+	
+	//管理者で部屋追加確認画面へ遷移
+	@RequestMapping(value="/roomAdd",method=RequestMethod.POST)
+	public ModelAndView roomAddComp(
+			@ModelAttribute("conRoomInfoForm")conRoomInfoForm conRoomInfoForm,
+			@RequestParam("innCode")int innCode,
+			ModelAndView mv) {
+		
+		int flg = 0;
+		//部屋名の未入力チェック
+		if(conRoomInfoForm.getRoomName().length()==0) {
+			mv.addObject("roomNameMessage", "部屋名を入力してください。");
+			flg = 1;
+		}
+		//部屋の詳細の未入力チェック
+		if(conRoomInfoForm.getRoomDetail().length()==0) {
+			mv.addObject("roomDetailMessage", "部屋の詳細を入力してください。");
+			flg = 1;
+		}
+		//部屋の料金の未入力チェック
+		if(conRoomInfoForm.getRoomPrice().length()==0) {
+			mv.addObject("roomPriceMessage", "宿の料金を入力してください。");
+			flg = 1;
+		}
+		//部屋の数の未入力チェック
+		if(conRoomInfoForm.getRoomTotal().length()==0) {
+			mv.addObject("roomTotalMessage", "部屋の数を入力してください。");
+			flg = 1;
+		}
+		//部屋の最大人数の未入力チェック
+		if(conRoomInfoForm.getRoomMax().length()==0) {
+			mv.addObject("roomMaxMessage", "部屋の最大人数を入力してください。");
+			flg = 1;
+		}
+		//料金、部屋の数、最大人数の数値チェック
+		if(numcheck(conRoomInfoForm.getRoomPrice()) == false) {
+			mv.addObject("roomPriceMessage", "部屋の料金料金は数値で入力してください。");
+			flg = 1;
+		}
+		if(numcheck(conRoomInfoForm.getRoomTotal()) == false) {
+			mv.addObject("roomTotalMessage", "部屋の数は数値で入力してください。");
+			flg = 1;
+		}
+		if(numcheck(conRoomInfoForm.getRoomMax()) == false) {
+			mv.addObject("roomMaxMessage", "部屋の最大人数は数値で入力してください。");
+			flg = 1;
+		}
+		//一つでもエラー項目があれば再度入力画面へ遷移
+		if(flg ==1) {
+			mv.addObject("addFlg", "1");
+			mv.addObject("bean", conRoomInfoForm);
+			mv.addObject("innCode", innCode);
+			mv.setViewName("roomInfo");
+			return mv;
+		}
+		mv.addObject("addFlg", "1");
+		mv.addObject("bean", conRoomInfoForm);
+		mv.addObject("innCode", innCode);
+		mv.setViewName("conRoomInfo");
+		return mv;
+	}
+	
+	//管理者で部屋更新確認画面へ遷移
+	@RequestMapping(value="/roomUpd",method=RequestMethod.POST)
+	public ModelAndView roomUpdComp(@ModelAttribute("conRoomInfoForm")conRoomInfoForm conRoomInfoForm,ModelAndView mv) {
+		
+		int flg = 0;
+		//部屋名の未入力チェック
+		if(conRoomInfoForm.getRoomName().length()==0) {
+			mv.addObject("roomNameMessage", "部屋名を入力してください。");
+			flg = 1;
+		}
+		//部屋の詳細の未入力チェック
+		if(conRoomInfoForm.getRoomDetail().length()==0) {
+			mv.addObject("roomDetailMessage", "部屋の詳細を入力してください。");
+			flg = 1;
+		}
+		//部屋の料金の未入力チェック
+		if(conRoomInfoForm.getRoomPrice().length()==0) {
+			mv.addObject("roomPriceMessage", "宿の料金を入力してください。");
+			flg = 1;
+		}
+		//部屋の数の未入力チェック
+		if(conRoomInfoForm.getRoomTotal().length()==0) {
+			mv.addObject("roomTotalMessage", "部屋の数を入力してください。");
+			flg = 1;
+		}
+		//部屋の最大人数の未入力チェック
+		if(conRoomInfoForm.getRoomMax().length()==0) {
+			mv.addObject("roomMaxMessage", "部屋の最大人数を入力してください。");
+			flg = 1;
+		}
+		//料金、部屋の数、最大人数の数値チェック
+		if(numcheck(conRoomInfoForm.getRoomPrice()) == false) {
+			mv.addObject("roomPriceMessage", "部屋の料金料金は数値で入力してください。");
+			flg = 1;
+		}
+		if(numcheck(conRoomInfoForm.getRoomTotal()) == false) {
+			mv.addObject("roomTotalMessage", "部屋の数は数値で入力してください。");
+			flg = 1;
+		}
+		if(numcheck(conRoomInfoForm.getRoomMax()) == false) {
+			mv.addObject("roomMaxMessage", "部屋の最大人数は数値で入力してください。");
+			flg = 1;
+		}
+		//一つでもエラー項目があれば再度入力画面へ遷移
+		if(flg ==1) {
+			mv.addObject("updFlg", "1");
+			mv.addObject("bean", conRoomInfoForm);
+			mv.setViewName("roomInfo");
+			return mv;
+		}
+		mv.addObject("updFlg", "1");
+		mv.addObject("bean", conRoomInfoForm);
+		mv.setViewName("conRoomInfo");
+		return mv;
+	}
+	
+	//管理者で部屋削除確認画面へ遷移
+	@RequestMapping(value="/delRoom/{roomCode}")
+	public ModelAndView roomDelComp(@PathVariable(name="roomCode") String roomCodeStr,ModelAndView mv) {
+		
+		int roomCode = Integer.parseInt(roomCodeStr);
+		
+		Room roomBean = roomRepository.findByRoomCode(roomCode);
+		String priceStr = String.valueOf(roomBean.getRoomPrice());
+		String totalStr = String.valueOf(roomBean.getRoomTotal());
+		String maxStr = String.valueOf(roomBean.getRoomMax());
+		
+		conRoomInfoForm bean = new conRoomInfoForm(roomBean.getRoomCode(),roomBean.getInnCode(),roomBean.getRoomName(),roomBean.getRoomDetail(),priceStr,totalStr,maxStr);
+		
+		mv.addObject("bean",bean);
+		mv.addObject("delFlg","1");
+		mv.setViewName("conRoomInfo");
+		return mv;
+	}
+
+	//部屋の追加・更新・削除処理と、TOP画面への遷移
+	@RequestMapping(value="/conRoomInfo",method=RequestMethod.POST)
+	public ModelAndView roomAddComplete(
+			@ModelAttribute("conRoomInfoForm")conRoomInfoForm conRoomInfoForm,
+			@RequestParam("innCode")String innCodeStr,
+			@RequestParam("flg")String flg,
+			ModelAndView mv) {
+			
+		int innCode = Integer.parseInt(innCodeStr);
+		
+		int price = Integer.parseInt(conRoomInfoForm.getRoomPrice());
+		int total = Integer.parseInt(conRoomInfoForm.getRoomTotal());
+		int max = Integer.parseInt(conRoomInfoForm.getRoomMax());
+		
+		if(flg.equals("1")) {
+			Room roomBean = new Room(innCode,conRoomInfoForm.getRoomName(),conRoomInfoForm.getRoomDetail(),price,total,max);
+			roomRepository.saveAndFlush(roomBean);
+			mv.addObject("message", "部屋が１件追加されました。");
+		}
+		if(flg.equals("2")) {
+			Room roomBean = new Room(conRoomInfoForm.getRoomCode(),innCode,conRoomInfoForm.getRoomName(),conRoomInfoForm.getRoomDetail(),price,total,max);
+			roomRepository.saveAndFlush(roomBean);
+			mv.addObject("message", "部屋が１件更新されました。");
+		}
+		if(flg.equals("3")) {
+			roomRepository.deleteById(conRoomInfoForm.getRoomCode());
+			mv.addObject("message", "部屋が１件削除されました。");
+		}
+		mv.setViewName("roleTop");
 		return mv;
 	}
 	
@@ -258,6 +445,12 @@ public class RoleController {
 			timeList.add(iStr);
 		}
 		return timeList;
+	}
+	
+	// 数値チェック
+	public boolean numcheck(String suu) {
+		boolean isNumeric = suu.matches("[+-]?\\d*(\\.\\d+)?");
+		return isNumeric;
 	}
 	
 	

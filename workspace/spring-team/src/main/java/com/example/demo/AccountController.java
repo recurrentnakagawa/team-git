@@ -73,9 +73,19 @@ public class AccountController {
 		}
 		session.setAttribute("loginUser", user);
 		session.setAttribute("login", 1);
-//		PointRepository point = pointRepository.findByPointCode(user.getPointCode());
-//		session.setAttribute("point", point);
+		Point point = pointRepository.findByPointCode(user.getPointCode());
+		session.setAttribute("point", point.getPointTotal());
 		mv.addObject("reloadFlg", 1);
+		//電話番号を3つに分ける
+		int index1 = user.getClientTel().indexOf("-");
+		String telStr1 = user.getClientTel().substring(0, index1);
+		int index2 = user.getClientTel().lastIndexOf("-");
+		String telStr2 = user.getClientTel().substring(index1+1, index2);
+		String telStr3 = user.getClientTel().substring(index2+1, user.getClientTel().length());
+		session.setAttribute("tel1", telStr1);
+		session.setAttribute("tel2", telStr2);
+		session.setAttribute("tel3", telStr3);
+		//管理者判断
 		if(user.getRoleCode()==1) {
 			session.setAttribute("kanri", "1");
 		}else {
@@ -94,7 +104,6 @@ public class AccountController {
 		}
 		return mv;
 	}
-	
 
 	@RequestMapping("/emailChecker")
 	public ModelAndView emailChecker(ModelAndView mv) {

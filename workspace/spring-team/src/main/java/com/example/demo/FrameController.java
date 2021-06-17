@@ -148,6 +148,8 @@ public class FrameController {
 	@RequestMapping("/mypageEdit")
 	public ModelAndView mypageEdit(ModelAndView mv) {
 		mv.setViewName("mypageEdit");
+		addUserForm bean = new addUserForm();
+		mv.addObject("addUserBean", bean);
 		return mv;
 	}
 	

@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>新規会員登録</title>
 </head>
 <body>
 <h1>アカウント編集</h1>
+<span th:text="${message}" style="color:red"></span>
+<form action="/registUserEdit" method="post" th:object="${addUserBean}">
+	<table border="1">
+		<tr>
+			<th>＊メールアドレス</th>
+			<th>
+			＜半角英数字＞<br>
+			既に登録されているメールアドレスの登録はできません<br>
+			<span th:text="${message_email}" style="color:red"></span><br>
+			<input type="text" name="email" th:value="${session.loginUser.clientEmail}" placeholder="メールアドレス"><br>
+			確認のためにもう一度入力してください<br>
+			<span th:text="${message_re_email}" style="color:red"></span><br>
+			<input type="text" name="re_email" th:value="${session.loginUser.clientEmail}" placeholder="メールアドレス再入力">
+			</th>
+		</tr>
+		<tr>
+			<th>＊名前</th>
+			<th>
+			氏名<br>
+			<span th:text="${message_name}" style="color:red"></span><br>
+			<input type="text" name="name" th:value="${session.loginUser.clientName}" placeholder="氏名"><br>
+			フリガナ（全角カタカナ）<br>
+			<span th:text="${message_kana}" style="color:red"></span><br>
+			<input type="text" name="kana" th:value="${session.loginUser.clientKana}" placeholder="フリガナ（全角カタカナ）">
+			</th>
+		</tr>
+		<tr>
+			<th>＊性別</th>
+			<th>
+			<input type="radio" name="sex" value="1" checked> 男性
+			<input type="radio" name="sex" value="2"> 女性
+			<input type="radio" name="sex" value="0"> 答えたくない
+			</th>
+		</tr>
+		<tr>
+			<th>＊住所</th>
+			<th>
+			住所<br>
+			<span th:text="${message_address}" style="color:red"></span><br>
+			<input type="text" name="address" th:value="${session.loginUser.clientAddress}" placeholder="都道府県"><br>
+		</tr>
+		<tr>
+			<th>＊電話番号</th>
+			<th>
+			＜半角英数字＞<br>
+			携帯電話・スマートフォンの電話番号も可<br>
+			<span th:text="${message_tel}" style="color:red"></span><br>
+ 			<input type="text" name="tel1" th:value="${session.tel1}" placeholder="123">-
+			<input type="text" name="tel2" th:value="${session.tel2}" placeholder="4567">-
+			<input type="text" name="tel3" th:value="${session.tel3}" placeholder="8901">
+			</th>
+		</tr>
+		</table>
+		<input type="submit" value="新規会員登録">
+	</form>
 </body>
 </html>

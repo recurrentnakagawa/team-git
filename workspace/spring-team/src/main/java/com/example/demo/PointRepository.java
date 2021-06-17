@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PointRepository extends JpaRepository<Point, Integer> {
 
-	PointRepository findByPointCode(Integer pointCode);
+	Point findByPointCode(Integer pointCode);
 	
 }

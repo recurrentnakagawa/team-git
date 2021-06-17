@@ -14,8 +14,10 @@ public class addUserForm {
 	private String tel1;
 	private String tel2;
 	private String tel3;
+	private String tel;
 	private Integer questionCode;
 	private String answer;
+	private String address;
 
 	public addUserForm() {
 		
@@ -124,6 +126,15 @@ public class addUserForm {
 	public void setTel3(String tel3) {
 		this.tel3 = tel3;
 	}
+	
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
 
 	public Integer getQuestionCode() {
 		return questionCode;
@@ -140,5 +151,14 @@ public class addUserForm {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
 	
 }

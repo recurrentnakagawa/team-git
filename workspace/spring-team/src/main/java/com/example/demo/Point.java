@@ -18,6 +18,9 @@ public class Point {
 	@Column(name="point_total")
 	private Integer pointTotal;
 	
+	public Point() {
+	}
+	
 	public Point(Integer pointCode,Integer pointTotal) {
 		this(pointTotal);
 		this.pointCode = pointCode;

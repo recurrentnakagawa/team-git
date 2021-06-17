@@ -72,17 +72,6 @@ public class RegistUserEditController {
 			mv.setViewName("mypageEdit");
 			return mv;
 		}
-		// 同じメールアドレスが登録されていないかチェック
-		Client client = (Client)session.getAttribute("loginUser");
-		Client user = clientRepository.findByClientEmail(client.getClientEmail());
-		if (user != null) {
-			//自分のメールアドレスならOK
-			if (client.getClientEmail().equals(bean.getEmail())) {
-				mv.addObject("message_email", "すでに存在しているメールアドレスです");
-				mv.setViewName("mypageEdit");
-				return mv;
-			} 
-		}
 		// メールアドレスフォーマットチェック
 		if (!bean.getEmail().contains("@")) {
 			mv.addObject("message_email", "メールアドレスのフォーマットが正しくありません");
@@ -127,12 +116,6 @@ public class RegistUserEditController {
 		buildTel.append("-");
 		buildTel.append(bean.getTel3());
 		String tel = buildTel.toString();
-		// 住所を結合する
-		StringBuilder buildAddress = new StringBuilder();
-		buildAddress.append(bean.getPrefectures());
-		buildAddress.append(bean.getCities());
-		buildAddress.append(bean.getHouse_number());
-		String address = buildAddress.toString();
 		// メールアドレスの文字数チェック
 		if (bean.getEmail().length() >= 50) {
 			mv.addObject("message_email", "メールアドレスの文字数が多すぎます(50文字まで)");
@@ -152,7 +135,7 @@ public class RegistUserEditController {
 			return mv;
 		}
 		// 住所の文字数チェック
-		if (address.length() >= 50) {
+		if (bean.getAddress().length() >= 50) {
 			mv.addObject("message_address", "住所の文字数が多すぎます（50文字まで）");
 			mv.setViewName("mypageEdit");
 			return mv;
@@ -163,17 +146,35 @@ public class RegistUserEditController {
 			mv.setViewName("mypageEdit");
 			return mv;
 		}
-		user.setClientEmail(bean.getEmail());
-		user.setClientName(bean.getName());
-		user.setClientKana(bean.getKana());
-		user.setClientSex(bean.getSex());
-		user.setClientAddress(address);
-		user.setClientTel(tel);
-		clientRepository.saveAndFlush(user);
-		session.setAttribute("loginUser", user);
+		// 同じメールアドレスが登録されていないかチェック
+		//ログインユーザー情報
+		Client client = (Client)session.getAttribute("loginUser");
+		//入力されたメールアドレスを一致するユーザー情報を取得
+		Client user = clientRepository.findByClientEmail(bean.getEmail());
+		//ログインを一致するユーザー情報を取得
+		Client login = clientRepository.findByClientCode(client.getClientCode());
+		//メールアドレスが登録されていないか
+		if (user != null) {
+			//自分のメールアドレスならOK
+			if (!client.getClientEmail().equals(bean.getEmail())) {
+				mv.addObject("message_email", "すでに存在しているメールアドレスです");
+				mv.setViewName("mypageEdit");
+				return mv;
+			}
+		}
+		login.setClientEmail(bean.getEmail());
+		login.setClientName(bean.getName());
+		login.setClientKana(bean.getKana());
+		login.setClientSex(bean.getSex());
+		login.setClientAddress(bean.getAddress());
+		login.setClientTel(tel);
+		clientRepository.saveAndFlush(login);
+		session.setAttribute("loginUser", login);
+		session.setAttribute("tel1", bean.getTel1());
+		session.setAttribute("tel2", bean.getTel2());
+		session.setAttribute("tel3", bean.getTel3());
 		mv.addObject("message", "アカウント情報を更新しました");
 		mv.setViewName("mypageEdit");
-		mv.addObject("tel", tel);
 		return mv;
 	}
 

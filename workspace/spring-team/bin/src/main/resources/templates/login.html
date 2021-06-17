@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ログイン</title>
+</head>
+<body>
+	<h1>ログイン</h1>
+	<span th:text="${message}" style="color: red"></span><br>
+	<form action="/login" method="post" th:object="${bean}">
+		<input type="text" name="email" th:value="*{email}" placeholder="メールアドレス"><br>
+		<span th:text="${message_email}" style="color: red"></span><br>
+		<input type="password" name="password" placeholder="パスワード"><br>
+		<span th:text="${message_password}" style="color: red"></span><br>
+		<a href="/emailChecker">パスワードを忘れてしまった時</a><br> 
+		<input type="submit" value="ログイン">
+	</form>
+	<form name="reloadForm" action="/loginFlg" target="_top">
+		<input type="hidden" name="reloadFlg" id="reloadFlg" th:value="${reloadFlg}">
+	</form>
+</body>
+<script>
+		function reloadMenu(){
+			//リロードフラグの取得
+			var reloadFlg = document.getElementById("reloadFlg");
+			//リロードフラグが1ならメニューを再読み込み
+			if(reloadFlg.value == "1"){
+			document.reloadForm.submit();
+			}
+			return;
+		}
+	
+		window.onload = reloadMenu();
+</script>
+</html>

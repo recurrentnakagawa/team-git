@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1 th:text="${innName} + 部屋一覧"></h1>
+<table border="1">
+	<tr th:each="rL:${roomList}">
+		<td><a th:href="'/roomDetail/' + ${innName} + '/' + ${rL.roomCode} + '/' + ${rL.roomName}" th:text="${rL.roomName}"></a></td>
+	</tr>
+</table>
+</body>
+</html>

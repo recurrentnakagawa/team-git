@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>メニュー</h1>
+	<hr>
+	<form method="" action="">
+		地域選択
+		<select name="pref_id">
+			<option th:each="pl:${prefecturesList}" th:text="${pl.prefecturesName}">
+		</select> 
+		<br> 
+		宿名
+		<input type="text" name="">
+		<br>
+		<input type="button" value="検索">
+	</form>
+	<br>
+	<hr>
+	<br>
+	<a href=""></a>
+</body>
+</html>

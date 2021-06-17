@@ -10,4 +10,5 @@ public interface InnRepository extends JpaRepository<Inn, Integer> {
 	Inn findByInnCode(int innCode);
 	List<Inn> findByPrefecturesCode(String ruralcode);
 	Inn findByInnName(String innName);
+	Inn findByInnNameAndInnAddress(String innName, String innAddress);
 }

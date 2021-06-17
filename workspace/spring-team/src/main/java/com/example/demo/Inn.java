@@ -45,6 +45,39 @@ public class Inn {
 	public Inn() {
 		
 	}
+	
+	public Inn(int innCode, String innName, String prefecture, String innAddress, String innAccess, String checkin, String checkout, 
+			String innAmenity, String innInvalid, String url) {
+		this.innCode = innCode;
+		this.innName = innName;
+		this.prefecturesCode = prefecture;
+		this.innAddress = innAddress;
+		this.innAccess = innAccess;
+		this.innCheckinTime = checkin;
+		this.innCheckoutTime = checkout;
+		this.innAmenity = innAmenity;
+		this.innInvalid = innInvalid;
+		this.innImageUrl = url;
+	}
+
+	public Inn(int innCode, String inn_name, String inn_address) {
+		this.innCode = innCode;
+		this.innName = inn_name;
+		this.innAddress = inn_address;
+	}
+
+	public Inn(String innName, String prefecture, String innAddress, String innAccess,String checkin, String checkout,
+			String innAmenity, String innInvalid, String url) {
+		this.innName = innName;
+		this.prefecturesCode = prefecture;
+		this.innAddress = innAddress;
+		this.innAccess = innAccess;
+		this.innCheckinTime = checkin;
+		this.innCheckoutTime = checkout;
+		this.innAmenity = innAmenity;
+		this.innInvalid = innInvalid;
+		this.innImageUrl = url;
+	}
 
 	public Integer getInnCode() {
 		return innCode;

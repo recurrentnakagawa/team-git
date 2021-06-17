@@ -19,12 +19,6 @@ public class RoleFrameController {
 	@Autowired
 	PrefecturesRepository prefecturesRepository;
 	
-	@RequestMapping("/aaa")
-	public ModelAndView test(ModelAndView mv) {
-		mv.setViewName("roleFrame");
-		return mv;
-	}
-	
 	@RequestMapping("/roleMenu")
 	public ModelAndView menu(ModelAndView mv) {
 		mv.setViewName("roleMenu");

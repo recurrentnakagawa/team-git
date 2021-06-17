@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.dao.DAOException;
+import com.example.dao.RecInnDAO;
 
 @Controller
 public class FrameController {
@@ -82,9 +84,10 @@ public class FrameController {
 	}
 	
 	@RequestMapping("/top")
-	public ModelAndView main(ModelAndView mv) {
-		List<Inn> innList=innRepository.findAll();
-		mv.addObject("innList", innList);
+	public ModelAndView main(ModelAndView mv) throws DAOException {
+		RecInnDAO dao = new RecInnDAO();
+		List<Inn> recInnList = dao.RecInn();
+		mv.addObject("recInnList", recInnList);
 		mv.addObject("rural_msg", "あなたへ");
 		mv.setViewName("top");
 		return mv;

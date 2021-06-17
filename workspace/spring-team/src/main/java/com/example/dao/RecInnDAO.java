@@ -11,14 +11,14 @@ import java.util.List;
 import com.example.demo.Prefectures;
 import com.example.demo.Inn;
 
-public class InnDAO {
+public class RecInnDAO {
 	private Connection con;
 
-	public InnDAO() throws DAOException {
+	public RecInnDAO() throws DAOException {
 		getConnection();
 	}
 
-	public List<Inn> findByInn(String inn_name, String pref_id)
+	public List<Inn> RecInn()
 			throws DAOException {
 		if (con == null)
 			getConnection();
@@ -27,24 +27,27 @@ public class InnDAO {
 		ResultSet rs = null;
 		try {
 			// SQL文の作成
-			String sql = "select * from inn join prefectures on inn.prefectures_code = prefectures.prefectures_code where inn_name like ? and inn.prefectures_code = ?";
+			String sql = "SELECT * FROM inn i JOIN review r ON i.inn_code = r.inn_code WHERE i.inn_invalid = '0' AND (select AVG(review_star) from review r) >= 4;";
 			// PreparedStatementオブジェクトの取得
 			st = con.prepareStatement(sql);
-			// カテゴリの設定
-			st.setString(1, "%" + inn_name + "%");
-			st.setString(2, pref_id);
 			// SQLの実行
 			rs = st.executeQuery();
 			// 結果の取得および表示
-			List<Inn> list = new ArrayList<Inn>();
+			List<Inn> recInnList = new ArrayList<Inn>();
 			while (rs.next()) {
 				int innCode = rs.getInt("inn_code");
 				String innName = rs.getString("inn_name");
+				String prefecturesCode = rs.getString("prefectures_code");
 				String innAddress = rs.getString("inn_address");
-				Inn innBean = new Inn(innCode, innName, innAddress);
-				list.add(innBean);
+				String innAccess = rs.getString("inn_access");
+				String innCheckinTime = rs.getString("inn_checkin_time");
+				String innCheckoutTime = rs.getString("inn_checkout_time");
+				String innAmenity = rs.getString("inn_amenity");
+				String innInvalid = rs.getString("inn_invalid");
+				Inn innBean = new Inn(innCode, innName, prefecturesCode, innAddress, innAccess, innCheckinTime, innCheckoutTime, innAmenity, innInvalid);
+				recInnList.add(innBean);
 			}
-			return list;
+			return recInnList;
 		}
 		catch (Exception e) {
 			e.printStackTrace();

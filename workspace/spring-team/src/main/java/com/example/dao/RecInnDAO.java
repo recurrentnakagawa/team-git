@@ -66,6 +66,57 @@ public class RecInnDAO {
 			}
 		}
 	}
+	
+	public List<Inn> RecRuralInn(String ruralCode)
+			throws DAOException {
+		if (con == null)
+			getConnection();
+
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			// SQL文の作成
+			String sql = "SELECT * FROM inn i JOIN review r ON i.inn_code = r.inn_code JOIN prefectures p ON i.prefectures_code = p.prefectures_code JOIN rural l ON p.rural_code = l.rural_code WHERE i.inn_invalid = '0' AND l.rural_code = ? AND (select AVG(review_star) from review r) >= 4;";
+			// PreparedStatementオブジェクトの取得
+			st = con.prepareStatement(sql);
+			// カテゴリの設定
+			st.setString(1, ruralCode);
+			// SQLの実行
+			rs = st.executeQuery();
+			// 結果の取得および表示
+			List<Inn> recRuralInnList = new ArrayList<Inn>();
+			while (rs.next()) {
+				int innCode = rs.getInt("inn_code");
+				String innName = rs.getString("inn_name");
+				String prefecturesCode = rs.getString("prefectures_code");
+				String innAddress = rs.getString("inn_address");
+				String innAccess = rs.getString("inn_access");
+				String innCheckinTime = rs.getString("inn_checkin_time");
+				String innCheckoutTime = rs.getString("inn_checkout_time");
+				String innAmenity = rs.getString("inn_amenity");
+				String innInvalid = rs.getString("inn_invalid");
+				Inn innBean = new Inn(innCode, innName, prefecturesCode, innAddress, innAccess, innCheckinTime, innCheckoutTime, innAmenity, innInvalid);
+				recRuralInnList.add(innBean);
+			}
+			return recRuralInnList;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+		finally {
+			try {
+				// リソースの開放
+				if (rs != null)
+					rs.close();
+				if (st != null)
+					st.close();
+				close();
+			} catch (Exception e) {
+				throw new DAOException("リソースの開放に失敗しました。");
+			}
+		}
+	}
 
 	private void getConnection() throws DAOException {
 		try {

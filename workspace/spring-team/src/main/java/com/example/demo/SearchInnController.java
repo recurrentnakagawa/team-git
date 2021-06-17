@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.dao.DAOException;
+import com.example.dao.RecInnDAO;
 
 @Controller
 public class SearchInnController {
@@ -26,10 +28,11 @@ public class SearchInnController {
 	public ModelAndView showRuralInn(
 			@PathVariable("ruralCode") String ruralCode,
 			@PathVariable("ruralName") String ruralName,
-			ModelAndView mv) {
-		List<Inn> innList=innRepository.findByPrefecturesCode(ruralCode);
+			ModelAndView mv) throws DAOException {
+		RecInnDAO dao = new RecInnDAO();
+		List<Inn> recRuralInnList = dao.RecRuralInn(ruralCode);
 		mv.addObject("rural_msg", ruralName);
-		mv.addObject("innList",innList);
+		mv.addObject("recInnList",recRuralInnList);
 		mv.setViewName("top");
 		return mv;
 	}

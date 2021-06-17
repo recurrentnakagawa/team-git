@@ -5,5 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ViewHistoryRepository extends JpaRepository<ViewHistory, Integer> {
+
+	ViewHistory findByClientCode(Integer clientCode);
 	
 }

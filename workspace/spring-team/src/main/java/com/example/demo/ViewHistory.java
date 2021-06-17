@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import java.security.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,10 +22,17 @@ public class ViewHistory {
 	private Integer innCode;
 
 	@Column(name="view_history_datetime")
-	private Timestamp viewHistoryDatetime;
+	private java.sql.Timestamp viewHistoryDatetime;
 	
 	public ViewHistory() {
 		
+	}
+	
+	public ViewHistory(Integer clientCode, Integer innCode, java.sql.Timestamp viewHistoryDatetime) {
+		super();
+		this.clientCode = clientCode;
+		this.innCode = innCode;
+		this.viewHistoryDatetime = viewHistoryDatetime;
 	}
 
 	public Integer getViewHistoryCode() {
@@ -54,11 +59,11 @@ public class ViewHistory {
 		this.innCode = innCode;
 	}
 
-	public Timestamp getViewHistoryDatetime() {
+	public java.sql.Timestamp getViewHistoryDatetime() {
 		return viewHistoryDatetime;
 	}
 
-	public void setViewHistoryDatetime(Timestamp viewHistoryDatetime) {
+	public void setViewHistoryDatetime(java.sql.Timestamp viewHistoryDatetime) {
 		this.viewHistoryDatetime = viewHistoryDatetime;
 	}
 	

@@ -1,6 +1,9 @@
 package com.example.demo;
 
+import java.sql.Timestamp;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,9 @@ import com.example.dao.RecInnDAO;
 public class SearchInnController {
 	
 	@Autowired
+	HttpSession session;
+	
+	@Autowired
 	InnRepository innRepository;
 	
 	@Autowired
@@ -22,6 +28,9 @@ public class SearchInnController {
 	
 	@Autowired
 	RoomRepository roomRepository;
+	
+	@Autowired
+	ViewHistoryRepository viewHistoryRepository;
 	
 	//地方選択後の宿一覧表示
 	@RequestMapping(value="/showRuralInn/{ruralCode}/{ruralName}")
@@ -37,18 +46,31 @@ public class SearchInnController {
 		return mv;
 	}
 	
-	//部屋詳細表示
-	@RequestMapping(value="/innDetail/{innCode}/{innName}")
-	public ModelAndView showInnDetail(
-			@PathVariable("innCode") int innCode,
-			ModelAndView mv) {
-		Inn innBean=innRepository.findByInnCode(innCode);
-		List<Review> reviewList=reviewRepository.findByInnCode(innCode);
-		mv.addObject("innBean", innBean);
-		mv.addObject("reviewList", reviewList);
-		mv.setViewName("innDetail");
-		return mv;
-	}
+	//宿詳細表示
+		@RequestMapping(value="/innDetail/{innCode}/{innName}")
+		public ModelAndView showInnDetail(
+				@PathVariable("innCode") int innCode,
+				ModelAndView mv) {
+			Inn innBean=innRepository.findByInnCode(innCode);
+			List<Review> reviewList=reviewRepository.findByInnCode(innCode);
+			mv.addObject("innBean", innBean);
+			mv.addObject("reviewList", reviewList);
+			//閲覧履歴を残す
+			//ログインされているかを判断する
+			int login = (int)session.getAttribute("login");
+			if(login==1) {
+				//ログインユーザー情報
+				Client client = (Client)session.getAttribute("loginUser");
+				//現在の日時と時刻を取得
+				Timestamp toDayTime = new Timestamp(System.currentTimeMillis());
+				//Beanにセット
+				ViewHistory view = new ViewHistory(client.getClientCode(),innCode,toDayTime);
+				//データベースに追加する
+				viewHistoryRepository.saveAndFlush(view);
+			}
+			mv.setViewName("innDetail");
+			return mv;
+		}
 	
 	//部屋一覧表示
 	@RequestMapping(value="/roomList/{innCode}/{innName}")

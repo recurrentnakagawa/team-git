@@ -5,6 +5,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>履歴一覧</h1>
+	<h1>履歴一覧</h1>
+	<table border="1">
+		<th:block th:each="list:${viewList}">
+			<tr>
+				<td><span th:text="${list.inn_name}+ホテル"></span></td>
+				<td><span th:text="${#dates.format(list.view_history_datetime, 'yyyy年MM月dd日HH時mm分　に閲覧')}"></td>
+				<td>
+					<form action="/deleteView">
+						<input type="submit" value="削除"> 
+						<input type="hidden" name="code" th:value="${list.view_history_code}"> 
+					</form>
+				</td>
+			</tr>
+		</th:block>
 </body>
 </html>

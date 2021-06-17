@@ -142,12 +142,6 @@ public class FrameController {
 		return mv;
 	}
 	
-	@RequestMapping("/mypageView")
-	public ModelAndView mypageView(ModelAndView mv) {
-		mv.setViewName("mypageView");
-		return mv;
-	}
-	
 	@RequestMapping("/mypageEdit")
 	public ModelAndView mypageEdit(ModelAndView mv) {
 		mv.setViewName("mypageEdit");

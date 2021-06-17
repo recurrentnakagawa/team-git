@@ -12,7 +12,7 @@
 		<select name="pref_id">
 			<option th:each="pl:${prefecturesList}" th:text="${pl.prefecturesName}" th:value="${pl.prefecturesCode}" th:selected="${pl.prefecturesCode}==13"></option>
 		</select> 
-		<br><br> 
+		<br><br>
 		宿名
 		<input type="text" name="inn_name" th:value="*{inn_name}">
 		<br>

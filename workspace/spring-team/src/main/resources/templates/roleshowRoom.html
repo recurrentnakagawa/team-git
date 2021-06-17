@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>部屋一覧</h1>
+		<table>
+			<tr>
+				<th>部屋名</th><th>更新</th><th>削除</th>
+			</tr>
+			<tr th:each="rl:${roomList}">
+				<td th:text="${rl.roomName}"></td>
+				<td><a th:href="'/conRoomUpd/'+${rl.roomCode}">更新</a></td>
+				<td><a th:href="'/conRoomDel/'+${rl.roomCode}">削除</a></td>
+			</tr>
+		</table>
+		<form method="post" action="/addRoom">
+			<input type="hidden" name="innCode" th:value="${roomList[0].innCode}">
+			<input type="submit" value="部屋追加">
+		</form>
+	</body>
+</html>

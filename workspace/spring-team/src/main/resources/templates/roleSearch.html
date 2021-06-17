@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -7,20 +7,20 @@
 <body>
 	<h1>メニュー</h1>
 	<hr>
-	<form method="" action="">
+	<form method="post" action="/roleSearch" th:object="${roleBean}" target="roletop">
 		地域選択
 		<select name="pref_id">
-			<option th:each="pl:${prefecturesList}" th:text="${pl.prefecturesName}">
+			<option th:each="pl:${prefecturesList}" th:text="${pl.prefecturesName}" th:value="${pl.prefecturesCode}" th:selected="${pl.prefecturesCode}==13"></option>
 		</select> 
-		<br> 
+		<br><br> 
 		宿名
-		<input type="text" name="">
+		<input type="text" name="inn_name" th:value="*{inn_name}">
 		<br>
-		<input type="button" value="検索">
+		<input type="submit" value="検索">
 	</form>
 	<br>
 	<hr>
 	<br>
-	<a href=""></a>
+	<a href="/innAdd" target="roletop">宿追加</a>
 </body>
 </html>

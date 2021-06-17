@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>検索結果</h1>
+		<table>
+			<tr>
+				<th>宿名</th><th>住所</th><th>更新</th><th>部屋一覧</th>
+			</tr>
+			<tr th:each="il:${innList}">
+				<td th:text="${il.innName}"></td>
+				<td th:text="${il.innAddress}"></td>
+				<td><a th:href="'/conInnUpd/'+${il.innCode}">更新</a></td>
+				<td><a th:href="'/conShowRoom/'+${il.innCode}">部屋一覧</a></td>
+			</tr>
+		</table>
+	</body>
+</html>

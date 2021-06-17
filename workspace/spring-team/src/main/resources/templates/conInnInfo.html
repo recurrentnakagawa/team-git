@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<form method="post" action="/conInnInfo" th:object="${bean}">
+			<h1>入力内容確認</h1>
+			以下の内容で正しければ登録ボタンを押してください。
+			<table>
+				<tr>
+					<th>宿名</th>
+					<td th:text="*{innName}"></td>
+				</tr>
+				<tr>
+					<th>宿の住所</th>
+					<td th:text="*{innAddress}"></td>
+				</tr>
+				<tr>
+					<th>都道府県</th>
+					<td th:text="*{prefectureCode}"></td>
+				</tr>
+				<tr>
+					<th>宿の最寄駅からのアクセス</th>
+					<td th:text="*{innAccess}"></td>
+				</tr>
+				<tr>
+					<th>宿のチェックイン時間</th>
+					<td th:text="*{checkinTime}"></td>
+				</tr>
+				<tr>
+					<th>宿のチェックアウト時間</th>
+					<td th:text="*{checkoutTime}"></td>
+				</tr>
+				<tr>
+					<th>宿のアメニティ詳細</th>
+					<td th:text="*{innAmenity}"></td>
+				</tr>
+				<tr>
+					<th>宿の表示設定</th>
+					<td>有効</td>
+				</tr>
+			</table>
+			<input type="hidden" name="innName" th:value="*{innName}">
+			<input type="hidden" name="innAddress" th:value="*{innAddress}">
+			<input type="hidden" name="prefectureCode" th:value="*{prefectureCode}">
+			<input type="hidden" name="innAccess" th:value="*{innAccess}">
+			<input type="hidden" name="checkinTime" th:value="*{checkinTime}">
+			<input type="hidden" name="checkoutTime" th:value="*{checkoutTime}">
+			<input type="hidden" name="innAmenity" th:value="*{innAmenity}">
+			<div th:if="${addFlg != null}">
+				<input type="hidden" name="flg" th:value="1">
+			</div>
+			<div th:if="${updFlg != null}">
+				<input type="hidden" name="innCode" th:value="*{innCode}">
+				<input type="hidden" name="flg" th:value="2">
+			</div>
+			<input type="submit" value="登録">
+		</form>
+	</body>
+</html>

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>管理者画面</title>
 </head>
 <body>
-<h1>管理者メニュー画面</h1>
+<a href="/loginFlg" target="_top">トップ</a>
+ようこそ<span th:text="${session.loginUser.clientName}"></span>
+さん(管理者)<br>
+<a href="/" target="_top">ログアウト</a><br>
 </body>
 </html>

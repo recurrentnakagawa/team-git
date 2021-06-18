@@ -7,45 +7,74 @@
 <body>
 <h1>検索フォーム</h1><hr>
 <span th:text="${err_msg}" style="color:red"></span>
-<form action="/search" method="post" th:object="${bean}">
-	チェックイン日
-	<input type="date" name="checkinDate" th:value="*{checkinDate}" required><br>
-	チェックアウト日
-	<input type="date" name="checkoutDate" th:value="*{checkoutDate}" required><br>
-	都道府県選択<br>
-	<select name="selPrefectures">
-		<option th:each="pl:${prefecturesList}"
-				th:text="${pl.prefecturesName}"
-				th:value="${pl.prefecturesCode}"
-				th:selected="${pl.prefecturesCode}==*{prefecturesCode}"></option>
-	</select><br>
-	一人当たりの料金<br>
-	<select name="selLowPrice" >
-		<option th:each="pL:${priceList}"
-				th:text="${pL}"
-				th:value="${pL}"></option>
-	</select>円から<br>
-	<select name="selHighPrice">
-		<option th:each="pL:${priceList}"
-				th:text="${pL}"
-				th:value="${pL}"
-				th:selected="${pL}==*{selPrice}"></option>
-	</select>円まで<br>
-	一部屋当たりの人数<br>
-	<select name="selPeople">
-		<option th:each="sL:${selectList}"
-				th:text="${sL}"
-				th:value="${sL}"
-				th:selected="${sL}==*{selPeople}"></option>
-	</select>人<br>
-	部屋数<br>
-	<select name="selRooms">
-		<option th:each="sL:${selectList}"
-				th:text="${sL}"
-				th:value="${sL}"
-				th:selected="${sL}==*{selRooms}"></option>
-	</select>部屋<br>
-	<input type="submit" value="検索">
-</form>
+	<form action="/search" method="post" th:object="${bean}" target="search">
+		チェックイン日
+		<input type="date" name="checkinDate" th:value="*{checkinDate}" required><br>
+		チェックアウト日
+		<input type="date" name="checkoutDate" th:value="*{checkoutDate}" required><br>
+		都道府県選択<br>
+		<select name="selPrefectures">
+			<option th:each="pl:${prefecturesList}"
+					th:text="${pl.prefecturesName}"
+					th:value="${pl.prefecturesCode}"
+					th:selected="${pl.prefecturesCode}==*{prefecturesCode}"></option>
+		</select><br>
+		一人当たりの料金<br>
+		<select name="selLowPrice" >
+			<option th:each="pL:${priceList}"
+					th:text="${pL}"
+					th:value="${pL}"
+					th:selected="${pL}==*{selLowPrice}"></option>
+		</select>円から<br>
+		<select name="selHighPrice">
+			<option th:each="pL:${priceList}"
+					th:text="${pL}"
+					th:value="${pL}"
+					th:selected="${pL}==*{selHighPrice}"></option>
+		</select>円まで<br>
+		一部屋当たりの人数<br>
+		<select name="selPeople">
+			<option th:each="sL:${selectList}"
+					th:text="${sL}"
+					th:value="${sL}"
+					th:selected="${sL}==*{selPeople}"></option>
+		</select>人<br>
+		部屋数<br>
+		<select name="selRooms">
+			<option th:each="sL:${selectList}"
+					th:text="${sL}"
+					th:value="${sL}"
+					th:selected="${sL}==*{selRooms}"></option>
+		</select>部屋<br>
+		<input type="submit" value="検索">
+		<input type="hidden" name="selPrefectures" th:value="*{prefecturesCode}">
+		<input type="hidden" name="selLowPrice" th:value="*{selLowPrice}">
+		<input type="hidden" name="selHighPrice" th:value="*{selHighPrice}">
+		<input type="hidden" name="selPeople" th:value="*{selPeople}">
+		<input type="hidden" name="selRooms" th:value="*{selRooms}">
+	</form>
+	<form name="reloadForm" action="/searchFlg" target="tops">
+		<input type="hidden" name="reloadFlg" id="reloadFlg" th:value="${reloadFlg}">
+		<input type="hidden" name="checkinDate" th:value="${bean.checkinDate}">
+		<input type="hidden" name="checkoutDate" th:value="${bean.checkoutDate}">
+		<input type="hidden" name="selPrefectures" th:value="${bean.prefecturesCode}">
+		<input type="hidden" name="selLowPrice" th:value="${bean.selLowPrice}">
+		<input type="hidden" name="selHighPrice" th:value="${bean.selHighPrice}">
+		<input type="hidden" name="selPeople" th:value="${bean.selPeople}">
+		<input type="hidden" name="selRooms" th:value="${bean.selRooms}"> 
+	</form>
 </body>
+<script>
+		function reloadMenu(){
+			//リロードフラグの取得
+			var reloadFlg = document.getElementById("reloadFlg");
+			//リロードフラグが1ならメニューを再読み込み
+			if(reloadFlg.value == "1"){
+			document.reloadForm.submit();
+			}
+			return;
+		}
+	
+		window.onload = reloadMenu();
+</script>
 </html>

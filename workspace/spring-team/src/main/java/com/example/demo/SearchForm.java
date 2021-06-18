@@ -4,7 +4,8 @@ public class SearchForm {
 	private String checkinDate;
 	private String checkoutDate;
 	private int prefecturesCode;
-	private int selPrice;
+	private int selLowPrice;
+	private int selHighPrice;
 	private int selPeople;
 	private int selRooms;
 	
@@ -36,12 +37,20 @@ public class SearchForm {
 		this.prefecturesCode = prefecturesCode;
 	}
 
-	public int getSelPrice() {
-		return selPrice;
+	public int getSelLowPrice() {
+		return selLowPrice;
 	}
 
-	public void setSelPrice(int selPrice) {
-		this.selPrice = selPrice;
+	public void setSelLowPrice(int selLowPrice) {
+		this.selLowPrice = selLowPrice;
+	}
+	
+	public int getSelHighPrice() {
+		return selHighPrice;
+	}
+
+	public void setSelHighPrice(int selHighPrice) {
+		this.selHighPrice = selHighPrice;
 	}
 
 	public int getSelPeople() {

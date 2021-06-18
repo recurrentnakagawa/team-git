@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>予約一覧</h1>
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>予約一覧</h1>
+		<table>
+			<tr>
+				<th>
+					現在の予約
+				</th>
+			</tr>
+			<tr th:each="prl:${futureReservationList}">
+				<td th:text="${prl.innName}"></td>
+				<td th:text="${prl.roomName}"></td>
+				<td><a href="/">予約詳細</a></td>
+				<td><a href="/">キャンセル</a></td>
+			</tr>
+		</table>
+		<br>
+		<table>
+			<tr>
+				<th>
+					過去の予約
+				</th>
+			</tr>
+			<tr th:each="prl:${pastReservationList}">
+				<td th:text="${prl.innName}"></td>
+				<td th:text="${prl.roomName}"></td>
+				<td><a href="/">レビュー</a></td>
+				<td><a href="/">削除</a></td>
+			</tr>
+		</table>
+	</body>
 </html>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.dao.DAOException;
+import com.example.dao.MyReservationDAO;
 import com.example.dao.RecInnDAO;
 
 @Controller
@@ -131,13 +132,21 @@ public class FrameController {
 		return "myMenu";
 	}
 	
-	@RequestMapping("/myRes")
-	public String myRes() {
-		return "mypageRes";
-	}
-	
 	@RequestMapping("/mypageRes")
-	public ModelAndView mypageRes(ModelAndView mv) {
+	public ModelAndView mypageRes(ModelAndView mv) throws DAOException {
+		Client client = (Client)session.getAttribute("loginUser");
+		
+		java.util.Date dates = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(dates.getTime());
+		
+		MyReservationDAO dao = new MyReservationDAO();
+		
+		List<MyReservationBean> futureReservationList =  dao.findByFutureReservation(client.getClientCode(),"0",date);
+		mv.addObject("futureReservationList", futureReservationList);
+		
+		List<MyReservationBean> pastReservationList =  dao.findByPastReservation(client.getClientCode(),"0",date);
+		mv.addObject("pastReservationList", pastReservationList);
+		
 		mv.setViewName("mypageRes");
 		return mv;
 	}

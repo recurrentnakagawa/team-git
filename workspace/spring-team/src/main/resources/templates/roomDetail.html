@@ -18,7 +18,7 @@
 	<input type="submit" value="予約する">
 </th:block>
 </form>
-<form th:action="'/reservation/' + ${innCode} + '/' + ${roomBean.roomCode}" method="post" target="_top">
+<form th:action="'/reservation/' + ${innCode} + '/' + ${roomBean.roomCode}" method="post">
 <th:block th:if="${session.login==1}">
 	<input type="submit" value="予約する">
 	<input type="hidden" name="innName" value="${innName}">
@@ -32,7 +32,7 @@
 	<input type="submit" value="予約する">
 </th:block>
 </form>
-<form th:action="'/conReservation/' + ${innCode} + '/' + ${roomBean.roomCode} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}" method="post" target="_top">
+<form th:action="'/conReservation/' + ${innCode} + '/' + ${roomBean.roomCode} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}" method="post">
 <th:block th:if="${session.login==1}">
 	<input type="submit" value="予約する">
 	<input type="hidden" name="innName" value="${innName}">

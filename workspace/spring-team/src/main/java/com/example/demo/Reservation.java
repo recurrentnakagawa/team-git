@@ -41,7 +41,10 @@ public class Reservation {
 	@Column(name="reservation_invalid")
 	private String reservationInvalid;
 	
-	public Reservation(int clientCode, int roomCode, Date checkinDate, Date checkoutDate, int selRooms, int resPrice, int selPeople, String resFlag) {
+	@Column(name="review_flag")
+	private String reviewFlag;
+	
+	public Reservation(int clientCode, int roomCode, Date checkinDate, Date checkoutDate, int selRooms, int resPrice, int selPeople, String resFlag, String reviewFlag) {
 		super();
 		this.clientCode = clientCode;
 		this.roomCode = roomCode;
@@ -51,6 +54,9 @@ public class Reservation {
 		this.reservationPrice = resPrice;
 		this.reservationUserTotal = selPeople;
 		this.reservationInvalid = resFlag;
+		this.reviewFlag = reviewFlag;
+	}
+	public Reservation() {
 	}
 
 	public Integer getReservationCode() {
@@ -115,6 +121,22 @@ public class Reservation {
 
 	public void setReservationUserTotal(Integer reservationUserTotal) {
 		this.reservationUserTotal = reservationUserTotal;
+	}
+
+	public String getReservationInvalid() {
+		return reservationInvalid;
+	}
+
+	public void setReservationInvalid(String reservationInvalid) {
+		this.reservationInvalid = reservationInvalid;
+	}
+
+	public String getReviewFlag() {
+		return reviewFlag;
+	}
+
+	public void setReviewFlag(String reviewFlag) {
+		this.reviewFlag = reviewFlag;
 	}
 	
 }

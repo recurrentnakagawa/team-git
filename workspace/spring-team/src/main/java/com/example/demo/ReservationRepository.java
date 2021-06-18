@@ -16,5 +16,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 
 	List<Reservation> findByClientCodeAndReservationInvalidAndReservationCheckinDateGreaterThan(Integer clientCode,
 			String string, Date date);
+
+	Reservation findByReservationCode(int reservationCode);
 	
 }

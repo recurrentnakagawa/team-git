@@ -154,7 +154,7 @@ public class RoleController {
 			@RequestParam("innCode") String innCodeStr,
 			ModelAndView mv) {
 		
-		Inn innBean = new Inn(conInInfoForm.getInnName(),conInInfoForm.getPrefectureCode(),conInInfoForm.getInnAddress(),conInInfoForm.getInnAccess(),conInInfoForm.getCheckinTime(),conInInfoForm.getCheckoutTime(),conInInfoForm.getInnAmenity(),"0",null);
+		Inn innBean = new Inn(conInInfoForm.getInnName(),conInInfoForm.getPrefectureCode(),conInInfoForm.getInnAddress(),conInInfoForm.getInnAccess(),conInInfoForm.getCheckinTime(),conInInfoForm.getCheckoutTime(),conInInfoForm.getInnAmenity(),conInInfoForm.getInnInvalid(),null);
 		int innCode = Integer.parseInt(innCodeStr);
 		innBean.setInnCode(innCode);
 		int flg = 0;
@@ -217,7 +217,7 @@ public class RoleController {
 		}
 		if(flg.equals("2")) {
 			int innCode = Integer.parseInt(innCodeStr);
-			Inn innBean = new Inn(innCode,conInInfoForm.getInnName(),conInInfoForm.getPrefectureCode(),conInInfoForm.getInnAddress(),conInInfoForm.getInnAccess(),conInInfoForm.getCheckinTime(),conInInfoForm.getCheckoutTime(),conInInfoForm.getInnAmenity(),"0",null);
+			Inn innBean = new Inn(innCode,conInInfoForm.getInnName(),conInInfoForm.getPrefectureCode(),conInInfoForm.getInnAddress(),conInInfoForm.getInnAccess(),conInInfoForm.getCheckinTime(),conInInfoForm.getCheckoutTime(),conInInfoForm.getInnAmenity(),conInInfoForm.getInnInvalid(),null);
 			innRepository.saveAndFlush(innBean);
 			mv.addObject("message", "宿が１件更新されました。");
 		}

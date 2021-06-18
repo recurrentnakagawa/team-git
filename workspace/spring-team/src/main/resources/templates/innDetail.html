@@ -25,7 +25,10 @@
 <table border="1">
 	<tr><th colspan="2">レビュー(口コミ)</th></tr>
 	<tr><th>投稿日</th><th>投稿内容</th></tr>
-	<tr th:each="rL:${reviewList}"><td th:text="${rL.reviewDatetime}"></td><td th:text=${rL.reviewDetail}></td></tr>
+	<tr th:each="rL:${reviewList}">
+	<td><span th:text="${#dates.format(rL.reviewDatetime, 'yyyy年MM月dd日HH時mm分')}"></td>
+	<td th:text=${rL.reviewDetail}></td>
+	</tr>
 </table>
 </body>
 </html>

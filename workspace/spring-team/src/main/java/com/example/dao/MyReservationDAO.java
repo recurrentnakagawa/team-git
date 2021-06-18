@@ -100,7 +100,9 @@ public class MyReservationDAO {
 				int reservationCode = rs.getInt("reservation_code");
 				String innName = rs.getString("inn_name");
 				String roomName = rs.getString("room_name");
-				MyReservationBean bean = new MyReservationBean(reservationCode, innName, roomName);
+				int innCode = rs.getInt("inn_code");
+				String reviewFlag = rs.getString("review_flag");
+				MyReservationBean bean = new MyReservationBean(reservationCode, innName, roomName,innCode,reviewFlag);
 				list.add(bean);
 			}
 			return list;

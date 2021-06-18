@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>レビュー画面</title>
+<link th:href="@{/review.css}" type="text/css" rel="stylesheet">
+</head>
+<body>
+	<form action="/reviewInn" method="post">
+	<table>
+		<tr>
+			<th>
+			レビュー（星）
+			</th>
+			<th>
+				<div class="stars">
+					<span> 
+					<input id="review01" type="radio" value="5" name="reviewStar">
+					<label for="review01">★</label> 
+					<input id="review02" type="radio" value="4" name="reviewStar">
+					<label for="review02">★</label> 
+					<input id="review03" type="radio" value="3" name="reviewStar">
+					<label for="review03">★</label> 
+					<input id="review04" type="radio" value="2" name="reviewStar">
+					<label for="review04">★</label> 
+					<input id="review05" type="radio" value="5" name="reviewStar" checked>
+					<label for="review05">★</label>
+					</span>
+				</div>
+			</th>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<th>
+			口コミ
+			</th>
+		</tr>
+		<tr>
+			<th>
+				<textarea name="content" rows="4" cols="40"></textarea>
+			</th>
+		</tr>
+	</table>
+	<input type="submit" th:value="登録">
+	</form>
+</body>
+</html>

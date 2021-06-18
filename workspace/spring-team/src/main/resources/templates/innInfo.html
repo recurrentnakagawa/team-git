@@ -110,6 +110,24 @@
 						<td><textarea name="innAmenity" th:field="*{innAmenity}"></textarea><br></td>
 						<span th:text="${innAmenityMessage}" style="color:RED"></span></td>
 					</tr>
+					<th:block th:if="*{innInvalid == '0'}">
+					<tr>
+						<th>・宿の有効化・無効化</th>
+						<td>
+						<input type="radio" name="innInvalid" value="0" checked> 有効
+						<input type="radio" name="innInvalid" value="1"> 無効
+						<br></td>
+					</tr>
+					</th:block>
+					<th:block th:if="*{innInvalid == '1'}">
+					<tr>
+						<th>・宿の有効化・無効化</th>
+						<td>
+						<input type="radio" name="innInvalid" value="0"> 有効
+						<input type="radio" name="innInvalid" value="1" checked> 無効
+						<br></td>
+					</tr>
+					</th:block>
 				</table>
 				<input type="hidden" name="innCode" th:value="*{innCode}">
 				<input type="submit" value="更新">

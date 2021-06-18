@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,8 +30,15 @@ public class Review {
 	@Column(name="review_datetime")
 	private Timestamp reviewDatetime;
 	
+	public Review(int innCode, int reviewStar, String reviewDetail, Timestamp reviewDatetime) {
+		super();
+		this.innCode = innCode;
+		this.reviewStar = reviewStar;
+		this.reviewDetail = reviewDetail;
+		this.reviewDatetime = reviewDatetime;
+	}
+	
 	public Review() {
-		
 	}
 
 	public Integer getReviewCode() {

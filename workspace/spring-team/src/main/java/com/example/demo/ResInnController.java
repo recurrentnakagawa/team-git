@@ -150,7 +150,7 @@ public class ResInnController {
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date checkindate = sdFormat.parse(checkinDate);
         Date checkoutdate = sdFormat.parse(checkoutDate);
-		Reservation reservation = new Reservation(clientCode,roomCode,checkindate,checkoutdate,selRooms,resPrice,selPeople,RESFlag);
+        Reservation reservation = new Reservation(clientCode,roomCode,checkindate,checkoutdate,selRooms,resPrice,selPeople,RESFlag,"0");
 		reservationRepository.saveAndFlush(reservation);
 		mv.setViewName("myFrame");
 		return mv;

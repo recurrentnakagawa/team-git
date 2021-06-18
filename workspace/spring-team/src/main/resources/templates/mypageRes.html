@@ -29,9 +29,17 @@
 			<tr th:each="prl:${pastReservationList}">
 				<td th:text="${prl.innName}"></td>
 				<td th:text="${prl.roomName}"></td>
-				<td><a href="/">レビュー</a></td>
-				<td><a href="/">削除</a></td>
+				<th:block th:if="${prl.reviewFlag=='0'}">
+				<td><a th:href="'/pastReservation/'+${prl.innCode}+'/'+${prl.reservationCode}">レビュー</a></td>
+				</th:block>
+				<th:block th:if="${prl.reviewFlag=='1'}">
+				<td>
+				レビュー済み
+				</td>
+				</th:block>
+				<td><a th:href="'/reviewDelet/'+${prl.reservationCode}">削除</a></td>
 			</tr>
 		</table>
+		<span th:text="${message}" style="color:red"></span>
 	</body>
 </html>

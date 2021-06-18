@@ -10,6 +10,7 @@ public class conInnInfoForm {
 	private String checkinTime;
 	private String checkoutTime;
 	private String innAmenity;
+	private String innInvalid;
 	
 	public conInnInfoForm() {
 	}
@@ -39,6 +40,14 @@ public class conInnInfoForm {
 	}
 
 	
+
+	public String getInnInvalid() {
+		return innInvalid;
+	}
+
+	public void setInnInvalid(String innInvalid) {
+		this.innInvalid = innInvalid;
+	}
 
 	public String getCheckinTime() {
 		return checkinTime;

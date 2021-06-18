@@ -37,10 +37,18 @@
 					<th>宿のアメニティ詳細</th>
 					<td th:text="*{innAmenity}"></td>
 				</tr>
+				<th:block th:if="*{innInvalid == '0'}">
 				<tr>
 					<th>宿の表示設定</th>
 					<td>有効</td>
 				</tr>
+				</th:block>
+				<th:block th:if="*{innInvalid == '1'}">
+				<tr>
+					<th>宿の表示設定</th>
+					<td>無効</td>
+				</tr>
+				</th:block>
 			</table>
 			<input type="hidden" name="innName" th:value="*{innName}">
 			<input type="hidden" name="innAddress" th:value="*{innAddress}">
@@ -49,6 +57,7 @@
 			<input type="hidden" name="checkinTime" th:value="*{checkinTime}">
 			<input type="hidden" name="checkoutTime" th:value="*{checkoutTime}">
 			<input type="hidden" name="innAmenity" th:value="*{innAmenity}">
+			<input type="hidden" name="innInvalid" th:value="*{innInvalid}">
 			<div th:if="${addFlg != null}">
 				<input type="hidden" name="flg" th:value="1">
 			</div>

@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,7 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.dao.DAOException;
@@ -81,6 +85,72 @@ public class FrameController {
 		mv.addObject("selectList", selectList);
 		mv.addObject("bean", bean);
 		mv.setViewName("search");
+		return mv;
+	}
+	
+	//検索結果を表示する
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ModelAndView doSearch(
+			@ModelAttribute("bean") SearchForm bean,
+			@RequestParam("checkinDate") String checkinDate,
+			@RequestParam("checkoutDate") String checkoutDate,
+			@RequestParam("selPrefectures") int selPrefectures,
+			@RequestParam("selLowPrice") int selLowPrice,
+			@RequestParam("selHighPrice") int selHighPrice,
+			@RequestParam("selPeople") int selPeople,
+			@RequestParam("selRooms") int selRooms,
+			ModelAndView mv) throws ParseException {
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date checkindate = sdFormat.parse(checkinDate);
+        Date checkoutdate = sdFormat.parse(checkoutDate);
+		//入力された日付をセットする
+		bean.setCheckinDate(checkinDate);
+		bean.setCheckoutDate(checkoutDate);
+		//都道府県リストの取得
+		List<Prefectures> prefecturesList = prefecturesRepository.findAll();
+		mv.addObject("prefecturesList",prefecturesList);
+		//入力された都道府県をセットする
+		bean.setPrefecturesCode(selPrefectures);
+		//価格リストの取得
+		List<Integer> priceList=selPrice();
+		mv.addObject("priceList", priceList);
+		//入力された価格をセットする
+		bean.setSelLowPrice(selLowPrice);
+		bean.setSelHighPrice(selHighPrice);
+		//人数・部屋数リストの取得
+		List<Integer> selectList=selectList();
+		mv.addObject("selectList", selectList);
+		//入力された人数・部屋数をセットする
+		bean.setSelPeople(selPeople);
+		bean.setSelRooms(selRooms);
+		mv.addObject("bean", bean);
+		//エラーチェック
+		if(checkindate.after(checkoutdate)) {
+			mv.addObject("err_msg", "チェックイン日よりもチェックアウト日が前になっています");
+			mv.setViewName("search");
+			return mv;
+		}
+		if(selLowPrice >= selHighPrice) {
+			mv.addObject("err_msg", "最低価格が最高価格と同じもしくは超えています");
+			mv.setViewName("search");
+			return mv;
+		}
+		mv.addObject("reloadFlg", "1");
+		mv.setViewName("search");
+		return mv;
+	}
+	
+	@RequestMapping("/searchFlg")
+	public ModelAndView searchFlg(
+			@RequestParam("checkinDate") String checkinDate,
+			@RequestParam("checkoutDate") String checkoutDate,
+			@RequestParam("selPrefectures") String selPrefectures,
+			@RequestParam("selLowPrice") String selLowPrice,
+			@RequestParam("selHighPrice") String selHighPrice,
+			@RequestParam("selPeople") String selPeople,
+			@RequestParam("selRooms") String selRooms,
+			ModelAndView mv) throws DAOException {
+		mv.setViewName("innSearch");
 		return mv;
 	}
 	

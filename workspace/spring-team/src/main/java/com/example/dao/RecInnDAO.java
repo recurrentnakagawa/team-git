@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.demo.Prefectures;
 import com.example.demo.Inn;
 
 public class RecInnDAO {

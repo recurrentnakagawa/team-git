@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="" method="post" target="tops">
-		<h1>hello World!</h1>
-	</form>
+	<h1>検索結果</h1>
+	<th:block th:if="${srcListFlg==1}">
+	<span th:text="${noInn_msg}"></span>
+	</th:block>
+	<th:block th:if="${srcListFlg==0}">
+	<table border="1" th:each="srcInnList:${srcInnMap}">
+		<tr><th><a th:href="'/innDetail/' + ${srcInnList.value[0].innCode} + '/' + ${srcInnList.value[0].innName} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}" th:text="${srcInnList.value[0].innName}"></a></th></tr>
+		<th:block th:each="sL:${srcInnList.value}">
+		<tr><th><a th:href="'/roomDetail/' + ${srcInnList.value[0].innCode} + '/' + ${srcInnList.value[0].innName} + '/' + ${sL.roomCode} + '/' + ${sL.roomName} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}" th:text="${sL.roomName}"></a></th></tr>
+		</th:block>
+	</table>
+	</th:block>
 </body>
 </html>

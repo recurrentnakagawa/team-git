@@ -106,6 +106,32 @@ public class ResInnController {
 	}
 	
 	/**
+	 * 宿予約内容確認画面を遷移する(検索)
+	 */	
+	@RequestMapping(value="/conReservation/{innCode}/{roomCode}/{selPeople}/{selRooms}/{checkinDate}/{checkoutDate}", method=RequestMethod.POST)
+	public ModelAndView conSrcReservation(
+			@PathVariable("innCode") int innCode,
+			@PathVariable("roomCode") int roomCode,
+			@PathVariable("selPeople") String selPeople,
+			@PathVariable("selRooms") String selRooms,
+			@PathVariable("checkinDate") String checkinDate,
+			@PathVariable("checkoutDate") String checkoutDate,
+			ModelAndView mv) {
+		Inn innBean = innRepository.findByInnCode(innCode);
+		Room roomBean = roomRepository.findByRoomCode(roomCode);
+		mv.addObject("innCode", innCode);
+		mv.addObject("roomCode", roomCode);
+		mv.addObject("innBean", innBean);
+		mv.addObject("roomBean", roomBean);
+		mv.addObject("checkinDate", checkinDate);
+		mv.addObject("checkoutDate", checkoutDate);
+		mv.addObject("selPeople", selPeople);
+		mv.addObject("selRooms", selRooms);
+		mv.setViewName("conResdetail");
+		return mv;
+	}
+	
+	/**
 	 * 宿予約を実行する
 	 * @throws ParseException 
 	 */	

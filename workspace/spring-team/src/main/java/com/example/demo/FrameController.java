@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.dao.DAOException;
 import com.example.dao.MyReservationDAO;
 import com.example.dao.RecInnDAO;
+import com.example.dao.SearchInnDAO;
 
 @Controller
 public class FrameController {
@@ -150,6 +153,32 @@ public class FrameController {
 			@RequestParam("selPeople") String selPeople,
 			@RequestParam("selRooms") String selRooms,
 			ModelAndView mv) throws DAOException {
+		int sellowprice = Integer.parseInt(selLowPrice);
+		int selhighprice = Integer.parseInt(selHighPrice);
+		int selpeople = Integer.parseInt(selPeople);
+		int selrooms = Integer.parseInt(selRooms);
+		SearchInnDAO dao = new SearchInnDAO();
+		List<SearchBean> srcInnList = dao.srcInn(selPrefectures, sellowprice, selhighprice, selpeople, selrooms);
+		//Mapに格納
+		Map<Integer,List<SearchBean>> srcInnMap = new HashMap<Integer,List<SearchBean>>();
+		for(SearchBean srcInn : srcInnList) {
+			List<SearchBean> beanList = srcInnMap.get(srcInn.getInnCode());
+			if(beanList==null || beanList.size()==0) {
+				beanList=new ArrayList<SearchBean>();
+			}
+			beanList.add(srcInn);
+			srcInnMap.put(srcInn.getInnCode(), beanList);
+		}
+		mv.addObject("srcInnMap", srcInnMap);
+		mv.addObject("selPeople", selPeople);
+		mv.addObject("selRooms", selRooms);
+		mv.addObject("checkinDate", checkinDate);
+		mv.addObject("checkoutDate", checkoutDate);
+		mv.addObject("srcListFlg", 0);
+		if(srcInnList.size()==0) {
+			mv.addObject("noInn_msg", "検索条件に当てはまる宿・ホテルが見つかりません");
+			mv.addObject("srcListFlg", 1);
+		}
 		mv.setViewName("innSearch");
 		return mv;
 	}

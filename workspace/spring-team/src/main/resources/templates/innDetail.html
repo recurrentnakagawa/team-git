@@ -14,7 +14,12 @@
 	<tr><th>チェックイン<br>時間</th><td th:text="${innBean.innCheckinTime}"></td></tr>
 	<tr><th>チェックアウト時間</th><td th:text="${innBean.innCheckoutTime}"></td></tr>
 	<tr><th>アメニティ詳細</th><td th:text="${innBean.innAmenity}"></td></tr>
+	<th:block th:if="${srcFlg==0}">
 	<tr><th colspan="2"><a th:href="'/roomList/' + ${innBean.innCode} + '/' + ${innBean.innName}">部屋一覧はこちら</a></th></tr>
+	</th:block>
+	<th:block th:if="${srcFlg==1}">
+	<tr><th colspan="2"><a th:href="'/roomList/' + ${innBean.innCode} + '/' + ${innBean.innName} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}">部屋一覧はこちら</a></th></tr>
+	</th:block>
 </table>
 
 <table border="1">

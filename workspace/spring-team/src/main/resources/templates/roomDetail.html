@@ -12,6 +12,7 @@
 	<tr><th>一人当たりの料金</th><td th:text="${roomBean.roomPrice}"></td></tr>
 	<tr><th>部屋の詳細</th><td th:text="${roomBean.roomDetail}"></td></tr>
 </table>
+<th:block th:if="${srcFlg==0}">
 <form action="/userLoginFrame" target="_top">
 <th:block th:if="${session.login==0}">
 	<input type="submit" value="予約する">
@@ -24,5 +25,20 @@
 	<input type="hidden" name="roomName" value="${roomBean.roomName}">
 </th:block>
 </form>
+</th:block>
+<th:block th:if="${srcFlg==1}">
+<form action="/userLoginFrame" target="_top">
+<th:block th:if="${session.login==0}">
+	<input type="submit" value="予約する">
+</th:block>
+</form>
+<form th:action="'/conReservation/' + ${innCode} + '/' + ${roomBean.roomCode} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}" method="post" target="_top">
+<th:block th:if="${session.login==1}">
+	<input type="submit" value="予約する">
+	<input type="hidden" name="innName" value="${innName}">
+	<input type="hidden" name="roomName" value="${roomBean.roomName}">
+</th:block>
+</form>
+</th:block>
 </body>
 </html>

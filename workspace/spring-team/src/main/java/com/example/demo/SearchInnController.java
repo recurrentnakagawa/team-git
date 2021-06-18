@@ -68,6 +68,42 @@ public class SearchInnController {
 				//データベースに追加する
 				viewHistoryRepository.saveAndFlush(view);
 			}
+			mv.addObject("srcFlg", 0);
+			mv.setViewName("innDetail");
+			return mv;
+		}
+		
+	//宿詳細表示(検索)
+		@RequestMapping(value="/innDetail/{innCode}/{innName}/{selPeople}/{selRooms}/{checkinDate}/{checkoutDate}")
+		public ModelAndView showSrcInnDetail(
+				@PathVariable("innCode") int innCode,
+				@PathVariable("selPeople") String selPeople,
+				@PathVariable("selRooms") String selRooms,
+				@PathVariable("checkinDate") String checkinDate,
+				@PathVariable("checkoutDate") String checkoutDate,
+				ModelAndView mv) {
+			Inn innBean=innRepository.findByInnCode(innCode);
+			List<Review> reviewList=reviewRepository.findByInnCode(innCode);
+			mv.addObject("innBean", innBean);
+			mv.addObject("reviewList", reviewList);
+			//閲覧履歴を残す
+			//ログインされているかを判断する
+			int login = (int)session.getAttribute("login");
+			if(login==1) {
+				//ログインユーザー情報
+				Client client = (Client)session.getAttribute("loginUser");
+				//現在の日時と時刻を取得
+				Timestamp toDayTime = new Timestamp(System.currentTimeMillis());
+				//Beanにセット
+				ViewHistory view = new ViewHistory(client.getClientCode(),innCode,toDayTime);
+				//データベースに追加する
+				viewHistoryRepository.saveAndFlush(view);
+			}
+			mv.addObject("srcFlg", 1);
+			mv.addObject("selPeople", selPeople);
+			mv.addObject("selRooms", selRooms);
+			mv.addObject("checkinDate", checkinDate);
+			mv.addObject("checkoutDate", checkoutDate);
 			mv.setViewName("innDetail");
 			return mv;
 		}
@@ -82,6 +118,30 @@ public class SearchInnController {
 		mv.addObject("innCode", innCode);
 		mv.addObject("innName", innName);
 		mv.addObject("roomList", roomList);
+		mv.addObject("srcFlg", 0);
+		mv.setViewName("showRoom");
+		return mv;
+	}
+	
+	//部屋一覧表示(検索)
+	@RequestMapping(value="/roomList/{innCode}/{innName}/{selPeople}/{selRooms}/{checkinDate}/{checkoutDate}")
+	public ModelAndView showSrcRoomList(
+			@PathVariable("innCode") int innCode,
+			@PathVariable("innName") String innName,
+			@PathVariable("selPeople") String selPeople,
+			@PathVariable("selRooms") String selRooms,
+			@PathVariable("checkinDate") String checkinDate,
+			@PathVariable("checkoutDate") String checkoutDate,
+			ModelAndView mv) {
+		List<Room> roomList=roomRepository.findByInnCode(innCode);
+		mv.addObject("innCode", innCode);
+		mv.addObject("innName", innName);
+		mv.addObject("selPeople", selPeople);
+		mv.addObject("selRooms", selRooms);
+		mv.addObject("checkinDate", checkinDate);
+		mv.addObject("checkoutDate", checkoutDate);
+		mv.addObject("roomList", roomList);
+		mv.addObject("srcFlg", 1);
 		mv.setViewName("showRoom");
 		return mv;
 	}
@@ -98,6 +158,32 @@ public class SearchInnController {
 		mv.addObject("innCode", innCode);
 		mv.addObject("innName", innName);
 		mv.addObject("roomBean", roomBean);
+		mv.addObject("srcFlg", 0);
+		mv.setViewName("roomDetail");
+		return mv;
+	}
+	
+	//部屋詳細表示(検索)
+	@RequestMapping(value="/roomDetail/{innCode}/{innName}/{roomCode}/{roomName}/{selPeople}/{selRooms}/{checkinDate}/{checkoutDate}")
+	public ModelAndView showSrcRoomDetail(
+			@PathVariable("innCode") int innCode,
+			@PathVariable("innName") String innName,
+			@PathVariable("roomCode") int roomCode,
+			@PathVariable("roomName") String roomName,
+			@PathVariable("selPeople") String selPeople,
+			@PathVariable("selRooms") String selRooms,
+			@PathVariable("checkinDate") String checkinDate,
+			@PathVariable("checkoutDate") String checkoutDate,
+			ModelAndView mv) {
+		Room roomBean=roomRepository.findByRoomCode(roomCode);
+		mv.addObject("innCode", innCode);
+		mv.addObject("innName", innName);
+		mv.addObject("roomBean", roomBean);
+		mv.addObject("selPeople", selPeople);
+		mv.addObject("selRooms", selRooms);
+		mv.addObject("checkinDate", checkinDate);
+		mv.addObject("checkoutDate", checkoutDate);
+		mv.addObject("srcFlg", 1);
 		mv.setViewName("roomDetail");
 		return mv;
 	}

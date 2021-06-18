@@ -6,15 +6,23 @@ public class SearchBean {
 	private String prefecturesCode;
 	private int roomCode;
 	private String roomName;
-	private String roomPrice;
+	private int roomPrice;
 	private String roomTotal;
+	private int roomMax;
 	private int resSum;
 	
 	public SearchBean() {
 		
 	}
 	
-	public SearchBean(int innCode, String innName, String prefecturesCode, int roomCode, String roomName, String roomPrice, String roomTotal, int resSum) {
+	public SearchBean(int innCode, String innName, int roomCode, String roomName) {
+		this.innCode = innCode;
+		this.innName = innName;
+		this.roomCode = roomCode;
+		this.roomName = roomName;
+	}
+	
+	public SearchBean(int innCode, String innName, String prefecturesCode, int roomCode, String roomName, int roomPrice, String roomTotal, int roomMax, int resSum) {
 		this.innCode = innCode;
 		this.innName = innName;
 		this.prefecturesCode = prefecturesCode;
@@ -22,6 +30,7 @@ public class SearchBean {
 		this.roomName = roomName;
 		this.roomPrice = roomPrice;
 		this.roomTotal = roomTotal;
+		this.roomMax = roomMax;
 		this.resSum = resSum;
 	}
 
@@ -65,11 +74,11 @@ public class SearchBean {
 		this.roomName = roomName;
 	}
 
-	public String getRoomPrice() {
+	public int getRoomPrice() {
 		return roomPrice;
 	}
 
-	public void setRoomPrice(String roomPrice) {
+	public void setRoomPrice(int roomPrice) {
 		this.roomPrice = roomPrice;
 	}
 
@@ -79,6 +88,14 @@ public class SearchBean {
 
 	public void setRoomTotal(String roomTotal) {
 		this.roomTotal = roomTotal;
+	}
+
+	public int getRoomMax() {
+		return roomMax;
+	}
+
+	public void setRoomMax(int roomMax) {
+		this.roomMax = roomMax;
 	}
 
 	public int getResSum() {

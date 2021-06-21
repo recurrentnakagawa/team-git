@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.dao.DAOException;
+import com.example.dao.SearchInnDAO;
+
 @Controller
 public class ResInnController {
 	private static final String DATEFORMAT = "yyyy-MM-dd";
@@ -64,23 +67,25 @@ public class ResInnController {
 		date = calendar.getTime();
 		String checkoutDate = sdFormat.format(date);
 		// 部屋の最大人数の取得
-		List<Integer> selPeople = selPeople(roomBean.getRoomMax());
+		List<Integer> selPeopleList = selPeople(roomBean.getRoomMax());
 		// 部屋数リストの取得
-		List<Integer> selRooms = selRooms(roomBean.getRoomTotal());
+		List<Integer> selRoomsList = selRooms(roomBean.getRoomTotal());
 		mv.addObject("innCode", innCode);
 		mv.addObject("roomCode", roomCode);
 		mv.addObject("innBean", innBean);
 		mv.addObject("roomBean", roomBean);
 		mv.addObject("checkinDate", checkinDate);
 		mv.addObject("checkoutDate", checkoutDate);
-		mv.addObject("selPeople", selPeople);
-		mv.addObject("selRooms", selRooms);
+		mv.addObject("selPeople", selPeopleList);
+		mv.addObject("selRooms", selRoomsList);
 		mv.setViewName("resInfoInput");
 		return mv;
 	}
 
 	/**
 	 * 宿予約内容確認画面を遷移する
+	 * @throws ParseException 
+	 * @throws DAOException 
 	 */	
 	@RequestMapping(value="/conReservation/{innCode}/{roomCode}", method=RequestMethod.POST)
 	public ModelAndView conReservation(
@@ -90,9 +95,56 @@ public class ResInnController {
 			@RequestParam(name="checkoutDate") String checkoutDate,
 			@RequestParam(name="selPeople") String selPeople,
 			@RequestParam(name="selRooms") String selRooms,
-			ModelAndView mv) {
+			ModelAndView mv) throws ParseException, DAOException {
 		Inn innBean = innRepository.findByInnCode(innCode);
 		Room roomBean = roomRepository.findByRoomCode(roomCode);
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date checkindate = sdFormat.parse(checkinDate);
+        Date checkoutdate = sdFormat.parse(checkoutDate);
+		//日付のエラーチェック
+		if(checkindate.after(checkoutdate)) {
+			mv.addObject("err_msg", "チェックイン日よりもチェックアウト日が前になっています");
+			// 部屋の最大人数の取得
+			List<Integer> selPeopleList = selPeople(roomBean.getRoomMax());
+			// 部屋数リストの取得
+			List<Integer> selRoomsList = selRooms(roomBean.getRoomTotal());
+			mv.addObject("innCode", innCode);
+			mv.addObject("roomCode", roomCode);
+			mv.addObject("innBean", innBean);
+			mv.addObject("roomBean", roomBean);
+			mv.addObject("checkinDate", checkinDate);
+			mv.addObject("checkoutDate", checkoutDate);
+			mv.addObject("selPeople", selPeopleList);
+			mv.addObject("selRooms", selRoomsList);
+			mv.setViewName("resInfoInput");
+			return mv;
+		}
+		//予約部屋数のエラーチェック
+		int selrooms = Integer.parseInt(selRooms);
+		SearchInnDAO dao = new SearchInnDAO();
+		java.sql.Date checkInDate = new java.sql.Date(checkindate.getTime());
+		java.sql.Date checkOutDate = new java.sql.Date(checkoutdate.getTime());
+		ResCheck resBean = dao.resInnRoom(checkInDate, checkOutDate, roomCode);
+		//予約のエラーチェック
+		if(!(resBean==null)) {
+			if(selrooms > roomBean.getRoomTotal() - resBean.getResSum()) {
+				mv.addObject("err_msg", "入力された部屋数が現在の残り部屋数を超えています");
+				// 部屋の最大人数の取得
+				List<Integer> selPeopleList = selPeople(roomBean.getRoomMax());
+				// 部屋数リストの取得
+				List<Integer> selRoomsList = selRooms(roomBean.getRoomTotal());
+				mv.addObject("innCode", innCode);
+				mv.addObject("roomCode", roomCode);
+				mv.addObject("innBean", innBean);
+				mv.addObject("roomBean", roomBean);
+				mv.addObject("checkinDate", checkinDate);
+				mv.addObject("checkoutDate", checkoutDate);
+				mv.addObject("selPeople", selPeopleList);
+				mv.addObject("selRooms", selRoomsList);
+				mv.setViewName("resInfoInput");
+				return mv;
+			}
+		}
 		mv.addObject("innCode", innCode);
 		mv.addObject("roomCode", roomCode);
 		mv.addObject("innBean", innBean);

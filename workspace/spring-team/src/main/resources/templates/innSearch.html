@@ -10,6 +10,7 @@
 	<span th:text="${noInn_msg}"></span>
 	</th:block>
 	<th:block th:if="${srcListFlg==0}">
+	<span th:text="${err_msg}"></span>
 	<table border="1" th:each="srcInnList:${srcInnMap}">
 		<tr><th><a th:href="'/innDetail/' + ${srcInnList.value[0].innCode} + '/' + ${srcInnList.value[0].innName} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}" th:text="${srcInnList.value[0].innName}"></a></th></tr>
 		<th:block th:each="sL:${srcInnList.value}">

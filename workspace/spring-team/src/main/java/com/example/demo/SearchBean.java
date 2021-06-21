@@ -15,6 +15,11 @@ public class SearchBean {
 		
 	}
 	
+	public SearchBean(int roomCode, int resSum) {
+		this.roomCode = roomCode;
+		this.resSum = resSum;		
+	}
+	
 	public SearchBean(int innCode, String innName, int roomCode, String roomName) {
 		this.innCode = innCode;
 		this.innName = innName;

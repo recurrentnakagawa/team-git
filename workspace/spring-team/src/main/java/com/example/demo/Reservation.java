@@ -56,7 +56,9 @@ public class Reservation {
 		this.reservationInvalid = resFlag;
 		this.reviewFlag = reviewFlag;
 	}
+	
 	public Reservation() {
+		
 	}
 
 	public Integer getReservationCode() {

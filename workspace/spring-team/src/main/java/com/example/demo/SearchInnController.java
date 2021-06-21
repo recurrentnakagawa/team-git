@@ -1,6 +1,9 @@
 package com.example.demo;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.dao.DAOException;
 import com.example.dao.RecInnDAO;
+import com.example.dao.SearchInnDAO;
 
 @Controller
 public class SearchInnController {
+	private static final String DATEFORMAT = "yyyy-MM-dd";
 	
 	@Autowired
 	HttpSession session;
@@ -174,8 +179,25 @@ public class SearchInnController {
 			@PathVariable("selRooms") String selRooms,
 			@PathVariable("checkinDate") String checkinDate,
 			@PathVariable("checkoutDate") String checkoutDate,
-			ModelAndView mv) {
+			ModelAndView mv) throws DAOException, ParseException {
 		Room roomBean=roomRepository.findByRoomCode(roomCode);
+		int selrooms = Integer.parseInt(selRooms);
+		SearchInnDAO dao = new SearchInnDAO();
+		SimpleDateFormat sdFormat = new SimpleDateFormat(DATEFORMAT); 
+		Date checkindate = sdFormat.parse(checkinDate);
+		Date checkoutdate = sdFormat.parse(checkoutDate);
+		java.sql.Date checkInDate = new java.sql.Date(checkindate.getTime());
+		java.sql.Date checkOutDate = new java.sql.Date(checkoutdate.getTime());
+		ResCheck resBean = dao.resInnRoom(checkInDate, checkOutDate, roomCode);
+		//予約のエラーチェック
+		if(!(resBean==null)) {
+			if(selrooms > roomBean.getRoomTotal() - resBean.getResSum()) {
+				mv.addObject("err_msg", "入力された部屋数が現在の残り部屋数を超えています");
+				mv.addObject("srcListFlg", 0);
+				mv.setViewName("innSearch");
+				return mv;
+			}
+		}
 		mv.addObject("innCode", innCode);
 		mv.addObject("innName", innName);
 		mv.addObject("roomBean", roomBean);

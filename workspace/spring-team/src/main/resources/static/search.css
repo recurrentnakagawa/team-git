@@ -1,4 +1,7 @@
 @charset "UTF-8";
+body{
+	background-color: #c0c0c0;
+}
 
 .search_title {
 	text-align: center;
@@ -6,5 +9,5 @@
 
 .search_form {
 	text-align: center;
-	background-color: white;
+	background-color: #808080;
 }

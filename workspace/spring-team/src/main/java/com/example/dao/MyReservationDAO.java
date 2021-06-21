@@ -35,7 +35,7 @@ public class MyReservationDAO {
 						+ "join inn on room.inn_code = inn.inn_code "
 						+ "where reservation.client_code = ? "
 						+ "and reservation.reservation_invalid = ? "
-						+ "and reservation.reservation_checkin_date > ?";
+						+ "and reservation.reservation_checkin_date >= ?";
 			// PreparedStatementオブジェクトの取得
 			st = con.prepareStatement(sql);
 			// カテゴリの設定
@@ -86,7 +86,7 @@ public class MyReservationDAO {
 						+ "join inn on room.inn_code = inn.inn_code "
 						+ "where reservation.client_code = ?"
 						+ "and reservation.reservation_invalid = ?"
-						+ "and reservation.reservation_checkin_date <= ?";
+						+ "and reservation.reservation_checkin_date < ?";
 			// PreparedStatementオブジェクトの取得
 			st = con.prepareStatement(sql);
 			// カテゴリの設定

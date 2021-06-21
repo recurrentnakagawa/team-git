@@ -16,7 +16,7 @@
 				<td th:text="${prl.innName}"></td>
 				<td th:text="${prl.roomName}"></td>
 				<td><a th:href="'/reservationDetail/'+${prl.reservationCode}">予約詳細</a></td>
-				<td><a th:href="'/reservationCancel/'+${prl.reservationCode}">キャンセル</a></td>
+				<td><a th:href="'/reservationCancel/'+${prl.reservationCode}" onclick="return confirm('予約をキャンセルします。よろしいですか？')">キャンセル</a></td>
 			</tr>
 		</table>
 		<br>

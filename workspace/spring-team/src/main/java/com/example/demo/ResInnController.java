@@ -95,45 +95,38 @@ public class ResInnController {
 			@RequestParam(name="checkoutDate") String checkoutDate,
 			@RequestParam(name="selPeople") String selPeople,
 			@RequestParam(name="selRooms") String selRooms,
-			ModelAndView mv) throws ParseException, DAOException {
+		ModelAndView mv) throws ParseException, DAOException {
+		//本日の日付の取得
 		Date date = new Date();
 		Inn innBean = innRepository.findByInnCode(innCode);
 		Room roomBean = roomRepository.findByRoomCode(roomCode);
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		//前日の日付の取得
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_MONTH, -1);
+		date = calendar.getTime();
         Date checkindate = sdFormat.parse(checkinDate);
         Date checkoutdate = sdFormat.parse(checkoutDate);
+		// 部屋の最大人数の取得
+		List<Integer> selPeopleList = selPeople(roomBean.getRoomMax());
+		// 部屋数リストの取得
+		List<Integer> selRoomsList = selRooms(roomBean.getRoomTotal());
+		mv.addObject("innCode", innCode);
+		mv.addObject("roomCode", roomCode);
+		mv.addObject("innBean", innBean);
+		mv.addObject("roomBean", roomBean);
+		mv.addObject("checkinDate", checkinDate);
+		mv.addObject("checkoutDate", checkoutDate);
+		mv.addObject("selPeople", selPeopleList);
+		mv.addObject("selRooms", selRoomsList);
 		//日付のエラーチェック
-        if(checkindate.after(date) || checkoutdate.after(date)) {
+        if(checkindate.before(date) || checkoutdate.before(date)) {
 			mv.addObject("err_msg", "現在の日付よりも前の日付は入力できません");
-			// 部屋の最大人数の取得
-			List<Integer> selPeopleList = selPeople(roomBean.getRoomMax());
-			// 部屋数リストの取得
-			List<Integer> selRoomsList = selRooms(roomBean.getRoomTotal());
-			mv.addObject("innCode", innCode);
-			mv.addObject("roomCode", roomCode);
-			mv.addObject("innBean", innBean);
-			mv.addObject("roomBean", roomBean);
-			mv.addObject("checkinDate", checkinDate);
-			mv.addObject("checkoutDate", checkoutDate);
-			mv.addObject("selPeople", selPeopleList);
-			mv.addObject("selRooms", selRoomsList);
 			mv.setViewName("resInfoInput");
 			return mv;
 		}
-		if(checkindate.after(checkoutdate)) {
+		if(checkoutdate.before(checkindate)) {
 			mv.addObject("err_msg", "チェックイン日よりもチェックアウト日が前になっています");
-			// 部屋の最大人数の取得
-			List<Integer> selPeopleList = selPeople(roomBean.getRoomMax());
-			// 部屋数リストの取得
-			List<Integer> selRoomsList = selRooms(roomBean.getRoomTotal());
-			mv.addObject("innCode", innCode);
-			mv.addObject("roomCode", roomCode);
-			mv.addObject("innBean", innBean);
-			mv.addObject("roomBean", roomBean);
-			mv.addObject("checkinDate", checkinDate);
-			mv.addObject("checkoutDate", checkoutDate);
-			mv.addObject("selPeople", selPeopleList);
-			mv.addObject("selRooms", selRoomsList);
 			mv.setViewName("resInfoInput");
 			return mv;
 		}
@@ -147,30 +140,10 @@ public class ResInnController {
 		if(!(resBean==null)) {
 			if(selrooms > roomBean.getRoomTotal() - resBean.getResSum()) {
 				mv.addObject("err_msg", "入力された部屋数が現在の残り部屋数を超えています");
-				// 部屋の最大人数の取得
-				List<Integer> selPeopleList = selPeople(roomBean.getRoomMax());
-				// 部屋数リストの取得
-				List<Integer> selRoomsList = selRooms(roomBean.getRoomTotal());
-				mv.addObject("innCode", innCode);
-				mv.addObject("roomCode", roomCode);
-				mv.addObject("innBean", innBean);
-				mv.addObject("roomBean", roomBean);
-				mv.addObject("checkinDate", checkinDate);
-				mv.addObject("checkoutDate", checkoutDate);
-				mv.addObject("selPeople", selPeopleList);
-				mv.addObject("selRooms", selRoomsList);
 				mv.setViewName("resInfoInput");
 				return mv;
 			}
 		}
-		mv.addObject("innCode", innCode);
-		mv.addObject("roomCode", roomCode);
-		mv.addObject("innBean", innBean);
-		mv.addObject("roomBean", roomBean);
-		mv.addObject("checkinDate", checkinDate);
-		mv.addObject("checkoutDate", checkoutDate);
-		mv.addObject("selPeople", selPeople);
-		mv.addObject("selRooms", selRooms);
 		mv.setViewName("conResdetail");
 		return mv;
 	}

@@ -109,6 +109,10 @@ public class FrameController {
 		//本日の日付の取得
 		Date date = new Date();
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		//前日の日付の取得
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_MONTH, -1);
+		date = calendar.getTime();
         Date checkindate = sdFormat.parse(checkinDate);
         Date checkoutdate = sdFormat.parse(checkoutDate);
 		//入力された日付をセットする
@@ -133,7 +137,7 @@ public class FrameController {
 		bean.setSelRooms(selRooms);
 		mv.addObject("bean", bean);
 		//エラーチェック
-		if(checkindate.after(date) || checkoutdate.after(date)) {
+		if(checkindate.before(date) || checkoutdate.before(date)) {
 			mv.addObject("err_msg", "現在の日付よりも前の日付は入力できません");
 			mv.setViewName("search");
 			return mv;

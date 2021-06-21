@@ -93,7 +93,7 @@ public class RoleController {
 	
 	//管理者で宿追加確認画面へ遷移
 	@RequestMapping(value="/innAdd",method=RequestMethod.POST)
-	public ModelAndView innAddComp(@ModelAttribute("conInnInfoForm")conInnInfoForm conInInfoForm,ModelAndView mv) {
+	public ModelAndView innAddComp(@ModelAttribute("conInnInfoForm")conInnInfoForm conInInfoForm,ModelAndView mv) throws DAOException {
 		Inn innBean = new Inn(conInInfoForm.getInnName(),conInInfoForm.getPrefectureCode(),conInInfoForm.getInnAddress(),conInInfoForm.getInnAccess(),conInInfoForm.getCheckinTime(),conInInfoForm.getCheckoutTime(),conInInfoForm.getInnAmenity(),"0",null);
 		
 		conInnInfoForm bean = new conInnInfoForm();
@@ -102,7 +102,11 @@ public class RoleController {
 		List<Prefectures> prefecturesList = prefecturesRepository.findAll();
 		List<String> timeList = time();
 		
-		mv.addObject(prefecturesList);
+		InnDAO dao = new InnDAO();
+		String pref = dao.findPrefectureName(conInInfoForm.getPrefectureCode());
+		
+		mv.addObject("pref",pref);
+		mv.addObject("prefecturesList",prefecturesList);
 		mv.addObject("timeList",timeList);
 		
 		int flg = 0;
@@ -152,7 +156,7 @@ public class RoleController {
 	public ModelAndView innUpdComp(
 			@ModelAttribute("conInnInfoForm")conInnInfoForm conInInfoForm,
 			@RequestParam("innCode") String innCodeStr,
-			ModelAndView mv) {
+			ModelAndView mv) throws DAOException {
 		
 		Inn innBean = new Inn(conInInfoForm.getInnName(),conInInfoForm.getPrefectureCode(),conInInfoForm.getInnAddress(),conInInfoForm.getInnAccess(),conInInfoForm.getCheckinTime(),conInInfoForm.getCheckoutTime(),conInInfoForm.getInnAmenity(),conInInfoForm.getInnInvalid(),null);
 		int innCode = Integer.parseInt(innCodeStr);
@@ -194,6 +198,10 @@ public class RoleController {
 				return mv;
 			}
 		}
+		InnDAO dao = new InnDAO();
+		String pref = dao.findPrefectureName(conInInfoForm.getPrefectureCode());
+		mv.addObject("pref",pref);
+		
 		conInInfoForm.setInnCode(innCode);
 		mv.addObject("bean", conInInfoForm);
 		mv.addObject("updFlg","2");

@@ -63,6 +63,47 @@ public class InnDAO {
 			}
 		}
 	}
+	
+	public String findPrefectureName(String prefCode)
+			throws DAOException {
+		if (con == null)
+			getConnection();
+
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			// SQL文の作成
+			String sql = "select prefectures_name from prefectures where prefectures_code = ?";
+			// PreparedStatementオブジェクトの取得
+			st = con.prepareStatement(sql);
+			// カテゴリの設定
+			st.setString(1,prefCode);
+			// SQLの実行
+			rs = st.executeQuery();
+			// 結果の取得および表示
+			String pref = null;
+			while (rs.next()) {
+				pref = rs.getString("prefectures_name");
+			}
+			return pref;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+		finally {
+			try {
+				// リソースの開放
+				if (rs != null)
+					rs.close();
+				if (st != null)
+					st.close();
+				close();
+			} catch (Exception e) {
+				throw new DAOException("リソースの開放に失敗しました。");
+			}
+		}
+	}
 
 	private void getConnection() throws DAOException {
 		try {

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/menu.css}" type="text/css" rel="stylesheet">
 <head>
 <meta charset="UTF-8">
 <title>管理者画面</title>
 </head>
 <body>
-<a href="/loginFlg" target="_top">トップ</a>
-ようこそ<span th:text="${session.loginUser.clientName}"></span>
-さん(管理者)<br>
-<a href="/" target="_top">ログアウト</a><br>
+	<div class="cp_navi">
+		<ul>
+			<li><a href="/loginFlg" target="_top">トップ</a>
+			 <li><a href="/" target="_top">ログアウト</a></li>
+			 ようこそ<span th:text="${session.loginUser.clientName}"></span> さん(管理者)<br>
 </body>
 </html>

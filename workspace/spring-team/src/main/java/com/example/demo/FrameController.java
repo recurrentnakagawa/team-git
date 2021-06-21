@@ -245,7 +245,16 @@ public class FrameController {
 		
 		List<MyReservationBean> pastReservationList =  dao.findByPastReservation(client.getClientCode(),"0",date);
 		mv.addObject("pastReservationList", pastReservationList);
-		
+		if (futureReservationList.size() == 0) {
+			mv.addObject("message_future", "現在予約中の宿はありません");
+		}else {
+			mv.addObject("message_future", "現在の予約");
+		}
+		if (pastReservationList.size() == 0) {
+			mv.addObject("message_past", "過去に予約した宿がありません");
+		}else {
+			mv.addObject("message_past", "過去の予約");
+		}
 		mv.setViewName("mypageRes");
 		return mv;
 	}

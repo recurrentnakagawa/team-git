@@ -61,6 +61,19 @@ public class PastReservationController {
 		java.sql.Date date = new java.sql.Date(dates.getTime());
 		MyReservationDAO dao = new MyReservationDAO();
 		List<MyReservationBean> pastReservationList =  dao.findByPastReservation(client.getClientCode(),"0",date);
+		List<MyReservationBean> futureReservationList =  dao.findByFutureReservation(client.getClientCode(),"0",date);
+		mv.addObject("futureReservationList", futureReservationList);
+		mv.addObject("pastReservationList", pastReservationList);
+		if (futureReservationList.size() == 0) {
+			mv.addObject("message_future", "現在予約中の宿はありません");
+		}else {
+			mv.addObject("message_future", "現在の予約");
+		}
+		if (pastReservationList.size() == 0) {
+			mv.addObject("message_past", "過去に予約した宿がありません");
+		}else {
+			mv.addObject("message_past", "過去の予約");
+		}
 		//リストの受け渡し
 		mv.addObject("pastReservationList", pastReservationList);
 		mv.setViewName("mypageRes");
@@ -78,10 +91,20 @@ public class PastReservationController {
 		java.sql.Date date = new java.sql.Date(dates.getTime());
 		MyReservationDAO dao = new MyReservationDAO();
 		List<MyReservationBean> pastReservationList =  dao.findByPastReservation(client.getClientCode(),"0",date);
+		if (pastReservationList.size() == 0) {
+			mv.addObject("message_past", "過去に予約した宿がありません");
+		}else {
+			mv.addObject("message_past", "過去の予約");
+		}
 		//一覧を表示（現在）
 		List<MyReservationBean> futureReservationList =  dao.findByFutureReservation(client.getClientCode(),"0",date);
 		mv.addObject("futureReservationList", futureReservationList);
 		mv.addObject("pastReservationList", pastReservationList);
+		if (futureReservationList.size() == 0) {
+			mv.addObject("message_future", "現在予約中の宿はありません");
+		}else {
+			mv.addObject("message_future", "現在の予約");
+		}
 		mv.setViewName("mypageRes");
 		return mv;
 	}

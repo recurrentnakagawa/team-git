@@ -9,7 +9,7 @@
 		<table>
 			<tr>
 				<th>
-					現在の予約
+					<span th:text="${message_future}"></span>
 				</th>
 			</tr>
 			<tr th:each="prl:${futureReservationList}">
@@ -23,7 +23,7 @@
 		<table>
 			<tr>
 				<th>
-					過去の予約
+					<span th:text="${message_past}"></span>
 				</th>
 			</tr>
 			<tr th:each="prl:${pastReservationList}">

@@ -18,7 +18,9 @@
 <a href="/userLoginFrame" target="_top">ログイン</a><br>
 <a href="/frame" target="_top">トップへ</a><br>
 <span th:each="rL:${ruralList}">
-<a th:text="${rL.ruralName}" +$nbsp; th:href="'/showRuralInn/' + ${rL.ruralCode} + '/' + ${rL.ruralName}" target="tops"></a>
+<a th:text="${rL.ruralName}" +$nbsp; 
+   th:href="'/showRuralInn/' + ${rL.ruralCode} + '/' + ${rL.ruralName}" 
+   target="tops"></a>
 </span>
 </body>
 </html>

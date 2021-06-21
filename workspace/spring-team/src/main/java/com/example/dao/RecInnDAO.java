@@ -26,7 +26,7 @@ public class RecInnDAO {
 		ResultSet rs = null;
 		try {
 			// SQL文の作成
-			String sql = "SELECT * FROM inn i JOIN review r ON i.inn_code = r.inn_code WHERE i.inn_invalid = '0' AND (select AVG(review_star) from review r) >= 4;";
+			String sql = "SELECT i.inn_code, i.inn_name, i.prefectures_code, i.inn_address, i.inn_access, i.inn_checkin_time, i.inn_checkout_time, i.inn_amenity, i.inn_invalid FROM inn i JOIN review r ON i.inn_code = r.inn_code WHERE i.inn_invalid = '0' AND (select AVG(review_star) from review r) >= 4 GROUP BY i.inn_code;";
 			// PreparedStatementオブジェクトの取得
 			st = con.prepareStatement(sql);
 			// SQLの実行
@@ -75,7 +75,7 @@ public class RecInnDAO {
 		ResultSet rs = null;
 		try {
 			// SQL文の作成
-			String sql = "SELECT * FROM inn i JOIN review r ON i.inn_code = r.inn_code JOIN prefectures p ON i.prefectures_code = p.prefectures_code JOIN rural l ON p.rural_code = l.rural_code WHERE i.inn_invalid = '0' AND l.rural_code = ? AND (select AVG(review_star) from review r) >= 4;";
+			String sql = "SELECT i.inn_code, i.inn_name, i.prefectures_code, i.inn_address, i.inn_access, i.inn_checkin_time, i.inn_checkout_time, i.inn_amenity, i.inn_invalid FROM inn i JOIN review r ON i.inn_code = r.inn_code JOIN prefectures p ON i.prefectures_code = p.prefectures_code JOIN rural l ON p.rural_code = l.rural_code WHERE i.inn_invalid = '0' AND l.rural_code = ? AND (select AVG(review_star) from review r) >= 4 GROUP BY i.inn_code;";
 			// PreparedStatementオブジェクトの取得
 			st = con.prepareStatement(sql);
 			// カテゴリの設定

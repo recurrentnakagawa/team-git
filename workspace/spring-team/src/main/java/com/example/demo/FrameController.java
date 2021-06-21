@@ -28,6 +28,8 @@ import com.example.dao.SearchInnDAO;
 public class FrameController {
 	private static final String DATEFORMAT = "yyyy-MM-dd";
 	private static final int PREFECTURESCODE = 13;
+	private static final int SELHIGHPRICE = 10000;
+	
 	@Autowired
 	HttpSession session;
 	
@@ -83,6 +85,7 @@ public class FrameController {
 		//価格リストの取得
 		List<Integer> priceList=selPrice();
 		mv.addObject("priceList", priceList);
+		bean.setSelHighPrice(SELHIGHPRICE);
 		//人数・部屋数リストの取得
 		List<Integer> selectList=selectList();
 		mv.addObject("selectList", selectList);
@@ -103,6 +106,8 @@ public class FrameController {
 			@RequestParam("selPeople") int selPeople,
 			@RequestParam("selRooms") int selRooms,
 			ModelAndView mv) throws ParseException {
+		//本日の日付の取得
+		Date date = new Date();
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date checkindate = sdFormat.parse(checkinDate);
         Date checkoutdate = sdFormat.parse(checkoutDate);
@@ -128,6 +133,11 @@ public class FrameController {
 		bean.setSelRooms(selRooms);
 		mv.addObject("bean", bean);
 		//エラーチェック
+		if(checkindate.after(date) || checkoutdate.after(date)) {
+			mv.addObject("err_msg", "現在の日付よりも前の日付は入力できません");
+			mv.setViewName("search");
+			return mv;
+		}
 		if(checkindate.after(checkoutdate)) {
 			mv.addObject("err_msg", "チェックイン日よりもチェックアウト日が前になっています");
 			mv.setViewName("search");

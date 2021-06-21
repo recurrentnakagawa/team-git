@@ -6,6 +6,7 @@
 <link th:href="@{/top.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
+<div class="b-radius">
 <h1><span th:text="${rural_msg}"></span>のおすすめ宿</h1>
 <table border="1">
 	<tr th:each="iL:${recInnList}">
@@ -13,5 +14,6 @@
 		       th:text="${iL.innName}" class="cp_link"></a></td>
 	</tr>
 </table>
+</div>
 </body>
 </html>

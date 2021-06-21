@@ -12,6 +12,12 @@
 					<span th:text="${message_future}"></span>
 				</th>
 			</tr>
+			<tr>
+				<th>宿名</th>
+				<th>部屋名</th>
+				<th>予約詳細</th>
+				<th>キャンセル</th>
+			</tr>
 			<tr th:each="prl:${futureReservationList}">
 				<td th:text="${prl.innName}"></td>
 				<td th:text="${prl.roomName}"></td>
@@ -25,6 +31,12 @@
 				<th>
 					<span th:text="${message_past}"></span>
 				</th>
+			</tr>
+			<tr>
+				<th>宿名</th>
+				<th>部屋名</th>
+				<th>レビュー</th>
+				<th>削除</th>
 			</tr>
 			<tr th:each="prl:${pastReservationList}">
 				<td th:text="${prl.innName}"></td>

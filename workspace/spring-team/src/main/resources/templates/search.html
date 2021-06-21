@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link th:href="@{search.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
-<h1>検索フォーム</h1><hr>
+<div class="search_title"><h1>検索フォーム</h1></div><hr>
 <span th:text="${err_msg}" style="color:red"></span>
-	<form action="/search" method="post" th:object="${bean}" target="search">
+	<form action="/search" method="post" th:object="${bean}" target="search" class="search_form">
 		チェックイン日
 		<input type="date" name="checkinDate" th:value="*{checkinDate}" required><br>
 		チェックアウト日

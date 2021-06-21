@@ -15,8 +15,8 @@
 			<tr th:each="prl:${futureReservationList}">
 				<td th:text="${prl.innName}"></td>
 				<td th:text="${prl.roomName}"></td>
-				<td><a href="/">予約詳細</a></td>
-				<td><a href="/">キャンセル</a></td>
+				<td><a th:href="'/reservationDetail/'+${prl.reservationCode}">予約詳細</a></td>
+				<td><a th:href="'/reservationCancel/'+${prl.reservationCode}">キャンセル</a></td>
 			</tr>
 		</table>
 		<br>

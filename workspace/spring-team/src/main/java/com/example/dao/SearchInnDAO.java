@@ -80,7 +80,7 @@ public class SearchInnDAO {
 		ResCheck resBean = new ResCheck();
 		try {
 			// SQL文の作成
-			String sql = "SELECT room_code, SUM(reservation_room_total) FROM reservation WHERE ? <= reservation_checkin_date AND ? >= reservation_checkout_date AND room_code = ? GROUP BY room_code;";
+			String sql = "SELECT room_code, SUM(reservation_room_total) FROM reservation WHERE ? <= reservation_checkin_date AND ? >= reservation_checkout_date AND room_code = ? AND reservation_invalid = '0' GROUP BY room_code;";
 			// PreparedStatementオブジェクトの取得
 			st = con.prepareStatement(sql);
 			// カテゴリの設定

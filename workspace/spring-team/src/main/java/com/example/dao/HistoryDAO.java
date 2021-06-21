@@ -27,7 +27,7 @@ public class HistoryDAO {
 		ResultSet rs = null;
 		try {
 			// SQL文の作成
-			String sql = "select * from view_history join inn on view_history.inn_code = inn.inn_code where view_history.client_code = ?";
+			String sql = "select * from view_history join inn on view_history.inn_code = inn.inn_code where view_history.client_code = ? order by view_history_datetime desc";
 			st = con.prepareStatement(sql);
 			// カテゴリの設定
 			st.setInt(1,client_codes);

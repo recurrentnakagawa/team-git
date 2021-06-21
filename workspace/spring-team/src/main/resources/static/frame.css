@@ -1,0 +1,23 @@
+@charset "UTF-8";
+body{
+background-attachment: fixed;
+  background-image: url(nangoku1.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+/*中に入るもの（テキスト）を縦横中央に配置*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*テキストを大きく、白い太文字に*/
+body .text-zone{
+  position:absolute;
+  font-size:2.8rem;
+  color:#fff;
+  font-weight:bold;
+}

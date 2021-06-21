@@ -3,13 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>宿予約サイト</title>
+<link th:href="@{/frame.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
+<div class="contents-frame">
 <iframe th:src="@{/menu}" marginheight="0px" marginwidth="0px" align="left" width="1328px" height="150px"　name="menu">
 </iframe>
 <iframe th:src="@{/search}" align="left" width="230px" height="480px" name="search">
 </iframe>
 <iframe th:src="@{/top}" align="left" width="1095px" height="480px" name="tops">
 </iframe>
+</div>
 </body>
 </html>

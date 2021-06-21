@@ -1,7 +1,5 @@
 @charset "UTF-8";
-body{
-  background-color: #fff;
-}
+
 
 .div-body{
 	width: 200px; /* ボックスの横幅を指定 */
@@ -18,7 +16,7 @@ body{
 h1{
   font-family:arial;
   margin-top:100px;
-  color:#FF8F00;
+  color:#ffffff;
   font-size:50px;
   text-align:center;
   text-transform:uppercase;

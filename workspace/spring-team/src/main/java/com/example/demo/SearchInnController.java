@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.dao.DAOException;
 import com.example.dao.RecInnDAO;
+import com.example.dao.ReviewDAO;
 import com.example.dao.SearchInnDAO;
 
 @Controller
@@ -55,9 +56,18 @@ public class SearchInnController {
 		@RequestMapping(value="/innDetail/{innCode}/{innName}")
 		public ModelAndView showInnDetail(
 				@PathVariable("innCode") int innCode,
-				ModelAndView mv) {
+				ModelAndView mv) throws DAOException {
 			Inn innBean=innRepository.findByInnCode(innCode);
 			List<Review> reviewList=reviewRepository.findByInnCode(innCode);
+			
+			ReviewDAO dao = new ReviewDAO();
+			double reviewAvg = dao.reviewAvg(innCode);
+			if(reviewAvg == 0) {
+				mv.addObject("reviewZero","レビュー0件");
+			}
+			if(reviewAvg != 0) {
+				mv.addObject("reviewAvg",reviewAvg);
+			}
 			mv.addObject("innBean", innBean);
 			mv.addObject("reviewList", reviewList);
 			//閲覧履歴を残す

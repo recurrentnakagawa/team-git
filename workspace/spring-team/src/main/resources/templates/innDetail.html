@@ -8,7 +8,14 @@
 <body>
 <h1 th:text="${innBean.innName}"></h1>
 <table border="1">
-	<tr><th colspan="2">レビュー(星)</th><td>☆ ☆ ☆ ☆ ☆</td></tr>
+	<tr><th colspan="2">レビュー(星)</th>
+	<div th:if="${reviewZero!=null}">
+		<td><span th:text="${reviewZero}"></span></td>
+	</div>
+	<div th:if="${reviewAvg!=null}">
+		<td th:text="${reviewAvg}"></td>
+	</div>
+	</tr>
 	<tr><th colspan="10">ホテル詳細</th></tr>
 	<tr><th colspan="2">住所</th><td th:text="${innBean.innAddress}"></td></tr>
 	<tr><th colspan="2">最寄駅からのアクセス</th><td th:text="${innBean.innAccess}"></td></tr>

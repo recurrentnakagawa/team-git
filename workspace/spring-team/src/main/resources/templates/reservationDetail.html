@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>予約詳細</h1>
+		<table>
+			<tr>
+				<th>ホテル名</th>
+				<td th:text="${innName}"></td>
+			</tr>
+			<tr>
+				<th>部屋名</th>
+				<td th:text="${roomName}"></td>
+			</tr>
+			<tr>
+				<th>チェックイン日</th>
+				<td th:text="${checkinDate}"></td>
+			</tr>
+			<tr>
+				<th>チェックアウト日</th>
+				<td th:text="${checkoutDate}"></td>
+			</tr>
+			<tr>
+				<th>ご利用人数</th>
+				<td th:text="${reservationUserTotal}"></td>
+			</tr>
+			<tr>
+				<th>ご利用部屋数</th>
+				<td th:text="${reservationRoomTotal}"></td>
+			</tr>
+			<tr>
+				<th>ご利用料金/1人</th>
+				<td th:text="${reservationPrice}"></td>
+			</tr>
+			<tr>
+				<th>代表者名</th>
+				<td th:text="${clientName}"></td>
+			</tr>
+			<tr>
+				<th>連絡先</th>
+				<td th:text="${clientTel}"></td>
+			</tr>
+		</table>
+		<button onclick="history.back()">戻る</button>
+	</body>
+</html>

@@ -3,25 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link th:href="@{/search.css}" type="text/css" rel="stylesheet">
+<link th:href="@{roleSearch.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
+	<form method="post" action="/roleSearch" th:object="${roleBean}" target="roletop"  class="search_form">
 	<h1>メニュー</h1>
 	<hr>
-	<form method="post" action="/roleSearch" th:object="${roleBean}" target="roletop">
 		地域選択
 		<select name="pref_id">
-			<option th:each="pl:${prefecturesList}" th:text="${pl.prefecturesName}" th:value="${pl.prefecturesCode}" th:selected="${pl.prefecturesCode}==13"></option>
+			<option th:each="pl:${prefecturesList}" th:text="${pl.prefecturesName}" th:value="${pl.prefecturesCode}" th:selected="${pl.prefecturesCode}==13" class="search_form1"></option>
 		</select> 
 		<br><br>
 		宿名
-		<input type="text" name="inn_name" th:value="*{inn_name}">
+		<input type="text" name="inn_name" th:value="*{inn_name}" class="search_form1">
+		<br>
 		<br>
 		<input type="submit" value="検索">
-	</form>
-	<br>
+		<br>
 	<hr>
 	<br>
 	<a href="/innAdd" target="roletop">宿追加</a>
+	</form>
 </body>
 </html>

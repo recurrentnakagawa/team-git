@@ -66,13 +66,17 @@ public class PastReservationController {
 		mv.addObject("pastReservationList", pastReservationList);
 		if (futureReservationList.size() == 0) {
 			mv.addObject("message_future", "現在予約中の宿はありません");
+			mv.addObject("futureFlg", 0);
 		}else {
 			mv.addObject("message_future", "現在の予約");
+			mv.addObject("futureFlg", 1);
 		}
 		if (pastReservationList.size() == 0) {
 			mv.addObject("message_past", "過去に予約した宿がありません");
+			mv.addObject("pastFlg", 1);
 		}else {
 			mv.addObject("message_past", "過去の予約");
+			mv.addObject("pastFlg", 0);
 		}
 		//リストの受け渡し
 		mv.addObject("pastReservationList", pastReservationList);
@@ -93,8 +97,10 @@ public class PastReservationController {
 		List<MyReservationBean> pastReservationList =  dao.findByPastReservation(client.getClientCode(),"0",date);
 		if (pastReservationList.size() == 0) {
 			mv.addObject("message_past", "過去に予約した宿がありません");
+			mv.addObject("pastFlg", 1);
 		}else {
 			mv.addObject("message_past", "過去の予約");
+			mv.addObject("pastFlg", 0);
 		}
 		//一覧を表示（現在）
 		List<MyReservationBean> futureReservationList =  dao.findByFutureReservation(client.getClientCode(),"0",date);
@@ -102,8 +108,10 @@ public class PastReservationController {
 		mv.addObject("pastReservationList", pastReservationList);
 		if (futureReservationList.size() == 0) {
 			mv.addObject("message_future", "現在予約中の宿はありません");
+			mv.addObject("futureFlg", 0);
 		}else {
 			mv.addObject("message_future", "現在の予約");
+			mv.addObject("futureFlg", 1);
 		}
 		mv.setViewName("mypageRes");
 		return mv;

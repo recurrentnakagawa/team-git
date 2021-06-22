@@ -19,8 +19,8 @@
 	<tr><th colspan="10">ホテル詳細</th></tr>
 	<tr><th colspan="2">住所</th><td th:text="${innBean.innAddress}"></td></tr>
 	<tr><th colspan="2">最寄駅からのアクセス</th><td th:text="${innBean.innAccess}"></td></tr>
-	<tr><th colspan="2">チェック<br>イン時間</th><td th:text="${innBean.innCheckinTime}"></td></tr>
-	<tr><th colspan="2">チェック<br>アウト時間</th><td th:text="${innBean.innCheckoutTime}"></td></tr>
+	<tr><th colspan="2">チェック<br>イン時間</th><td th:text="${checkinTime}"></td></tr>
+	<tr><th colspan="2">チェック<br>アウト時間</th><td th:text="${checkoutTime}"></td></tr>
 	<tr><th colspan="2">アメニティ<br>詳細</th><td th:text="${innBean.innAmenity}"></td></tr>
 	<th:block th:if="${srcFlg==0}">
 	<tr><th colspan="10"><a th:href="'/roomList/' + ${innBean.innCode} + '/' + ${innBean.innName}">部屋一覧はこちら</a></th></tr>

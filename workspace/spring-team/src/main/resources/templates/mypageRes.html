@@ -13,12 +13,14 @@
 					<span th:text="${message_future}"></span>
 				</th>
 			</tr>
+			<th:block th:if="${futureFlg==1}">
 			<tr>
 				<th>宿名</th>
 				<th>部屋名</th>
 				<th>予約詳細</th>
 				<th>キャンセル</th>
 			</tr>
+			</th:block>
 			<tr th:each="prl:${futureReservationList}">
 				<td th:text="${prl.innName}"></td>
 				<td th:text="${prl.roomName}"></td>
@@ -27,12 +29,14 @@
 			</tr>
 		</table>
 		<br>
+		<span th:text="${message}" style="color:red"></span>
 		<table>
 			<tr>
 				<th>
 					<span th:text="${message_past}"></span>
 				</th>
 			</tr>
+			<th:block th:if="${pastFlg==0}">
 			<tr>
 				<th>宿名</th>
 				<th>部屋名</th>
@@ -52,7 +56,7 @@
 				</th:block>
 				<td><a th:href="'/reviewDelet/'+${prl.reservationCode}">削除</a></td>
 			</tr>
+			</th:block>
 		</table>
-		<span th:text="${message}" style="color:red"></span>
 	</body>
 </html>

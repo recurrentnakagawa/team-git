@@ -261,12 +261,15 @@ public class FrameController {
 		mv.addObject("pastReservationList", pastReservationList);
 		if (futureReservationList.size() == 0) {
 			mv.addObject("message_future", "現在予約中の宿はありません");
+			mv.addObject("futureFlg", 0);
 		}else {
 			mv.addObject("message_future", "現在の予約");
 		}
 		if (pastReservationList.size() == 0) {
 			mv.addObject("message_past", "過去に予約した宿がありません");
+			mv.addObject("pastFlg", 1);
 		}else {
+			mv.addObject("pastFlg", 0);
 			mv.addObject("message_past", "過去の予約");
 		}
 		mv.setViewName("mypageRes");

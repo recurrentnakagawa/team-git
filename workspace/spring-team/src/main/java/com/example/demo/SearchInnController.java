@@ -68,6 +68,18 @@ public class SearchInnController {
 			if(reviewAvg != 0) {
 				mv.addObject("reviewAvg",reviewAvg);
 			}
+			String scheckinTimestr = innBean.getInnCheckinTime();
+			String scheckinTime = scheckinTimestr.substring(0,2);
+			String bcheckinTimestr = innBean.getInnCheckinTime();
+			String bcheckinTime = bcheckinTimestr.substring(bcheckinTimestr.length() - 2);
+			String checkinTime = scheckinTime + ":" + bcheckinTime;
+			String scheckoutTimestr = innBean.getInnCheckoutTime();
+			String scheckoutTime = scheckoutTimestr.substring(0,2);
+			String bcheckoutTimestr = innBean.getInnCheckoutTime();
+			String bcheckoutTime = bcheckoutTimestr.substring(bcheckoutTimestr.length() - 2);
+			String checkoutTime = scheckoutTime + ":" + bcheckoutTime;
+			mv.addObject("checkinTime", checkinTime);
+			mv.addObject("checkoutTime", checkoutTime);
 			mv.addObject("innBean", innBean);
 			mv.addObject("reviewList", reviewList);
 			//閲覧履歴を残す
@@ -108,6 +120,18 @@ public class SearchInnController {
 			if(reviewAvg != 0) {
 				mv.addObject("reviewAvg",reviewAvg);
 			}
+			String scheckinTimestr = innBean.getInnCheckinTime();
+			String scheckinTime = scheckinTimestr.substring(0,2);
+			String bcheckinTimestr = innBean.getInnCheckinTime();
+			String bcheckinTime = bcheckinTimestr.substring(bcheckinTimestr.length() - 2);
+			String checkinTime = scheckinTime + ":" + bcheckinTime;
+			String scheckoutTimestr = innBean.getInnCheckoutTime();
+			String scheckoutTime = scheckoutTimestr.substring(0,2);
+			String bcheckoutTimestr = innBean.getInnCheckoutTime();
+			String bcheckoutTime = bcheckoutTimestr.substring(bcheckoutTimestr.length() - 2);
+			String checkoutTime = scheckoutTime + ":" + bcheckoutTime;
+			mv.addObject("checkinTime", checkinTime);
+			mv.addObject("checkoutTime", checkoutTime);
 			mv.addObject("innBean", innBean);
 			mv.addObject("reviewList", reviewList);
 			//閲覧履歴を残す

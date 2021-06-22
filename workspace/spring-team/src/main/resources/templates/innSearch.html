@@ -6,6 +6,7 @@
 <link th:href="@{/top.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
+<div class="contents">
 	<h1>検索結果</h1>
 	<th:block th:if="${srcListFlg==1}">
 	<span th:text="${noInn_msg}"></span>
@@ -19,5 +20,6 @@
 		</th:block>
 	</table>
 	</th:block>
+	</div>
 </body>
 </html>

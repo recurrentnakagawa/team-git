@@ -6,6 +6,7 @@
 <link th:href="@{/top.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
+<div class="contents">
 <h1 th:text="${innBean.innName}"></h1>
 <table>
 	<tr><th colspan="2">レビュー(星)</th>
@@ -38,5 +39,6 @@
 	<td colspan="7" th:text=${rL.reviewDetail}></td>
 	</tr>
 </table>
+</div>
 </body>
 </html>

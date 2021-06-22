@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>予約内容確認</h1>
+<div class="contents">
 <form th:action="'/regReservation/' + ${innCode} + '/' + ${roomCode}" method="post" target="_top">
 	<table>
 		<tr><th>ホテル名</th><td th:text="${innBean.innName}"></td></tr>
@@ -19,12 +20,13 @@
 		<tr><th>利用者</th><td th:text="${session.loginUser.clientName} + 様"></td></tr>
 		<tr><th>連絡先</th><td th:text="${session.loginUser.clientTel}"></td></tr>
 	</table>
-	<input type="submit" value="予約">
+	<input type="submit" value="予約" class="button">
 	<input type="hidden" name="checkinDate" th:value="${checkinDate}">
 	<input type="hidden" name="checkoutDate" th:value="${checkoutDate}">
 	<input type="hidden" name="selPeople" th:value="${selPeople}">
 	<input type="hidden" name="selRooms" th:value="${selRooms}">
 	<input type="hidden" name="resPrice" th:value="${roomBean.roomPrice}">
 </form>
+</div>
 </body>
 </html>

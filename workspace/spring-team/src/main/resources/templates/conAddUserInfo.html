@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>新規会員登録</h1>
+<div class="contents">
 <form action="/regists" method="post" th:object="${addUserBean}" target="_top">
 	<table>
 		<tr>
@@ -46,7 +47,7 @@
 			<th>セキュリティ保護のため隠しています</th>
 		</tr>
 		</table>
-		<input type="submit" value="登録">
+		<input type="submit" value="登録" class="button">
 		<input type="hidden" name="email" th:value="*{email}">
 		<input type="hidden" name="re_email" th:value="*{re_email}">
 		<input type="hidden" name="password" th:value="*{password}">
@@ -66,5 +67,6 @@
 	<form name="reloadForm" action="/loginFlg" target="_top">
 		<input type="hidden" name="reloadFlg" id="reloadFlg" th:value="${reloadFlg}">
 	</form>
+	<div class="contents">
 </body>
 </html>

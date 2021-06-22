@@ -6,6 +6,7 @@
 		<link th:href="@{/top.css}" type="text/css" rel="stylesheet">
 	</head>
 	<body>
+	<div class="contents">
 		<form method="post" action="/conRoomInfo" th:object="${bean}">
 			<h1>入力内容確認</h1>
 			以下の内容で正しければ登録ボタンを押してください。
@@ -61,7 +62,8 @@
 				<input type="hidden" name="flg" value="3">
 			</div>
 			
-			<input type="submit" value="登録">
+			<input type="submit" value="登録" class="button">
 		</form>
+		<div>
 	</body>
 </html>

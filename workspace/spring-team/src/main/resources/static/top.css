@@ -14,6 +14,7 @@ h1{
 }
 
 table{
+  margin:auto;
   border-collapse:separate;
   border-spacing: 5px;
   width: 60%;

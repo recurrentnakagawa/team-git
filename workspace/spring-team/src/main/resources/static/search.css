@@ -4,14 +4,19 @@ body{
 
 .search_title {
 	text-align: center;
-	background-color: lime;
-	color: white;
+	color: black;
 }
 
 .search_form {
-	text-align: center;
-	font-family:cursive,serif;
-	color: white;
+	padding: 0.5em 1em;
+    margin: 50% 50% 50% 50%;
+    font-weight: bold;
+    color: #696969;/*文字色*/
+    text-align: center;
+    background-color: #c0c0c0;
+    border: solid 3px #696969;/*線*/
+    border-radius: 10px;/*角の丸み*/
+	margin : auto;
 }
 
 .search_form1 {

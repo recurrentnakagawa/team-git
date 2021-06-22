@@ -6,9 +6,9 @@
 <link th:href="@{search.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
-<div class="search_title"><h1>検索フォーム</h1></div>
 <span th:text="${err_msg}" style="color:red"></span>
 	<form action="/search" method="post" th:object="${bean}" target="search" class="search_form">
+		<h3 class="search_title">検索フォーム</h3><hr>
 		チェックイン日
 		<input type="date" name="checkinDate" th:value="*{checkinDate}" required class="search_form1"><br>
 		チェックアウト日

@@ -107,18 +107,14 @@ public class ResInnController {
 		date = calendar.getTime();
         Date checkindate = sdFormat.parse(checkinDate);
         Date checkoutdate = sdFormat.parse(checkoutDate);
-		// 部屋の最大人数の取得
-		List<Integer> selPeopleList = selPeople(roomBean.getRoomMax());
-		// 部屋数リストの取得
-		List<Integer> selRoomsList = selRooms(roomBean.getRoomTotal());
 		mv.addObject("innCode", innCode);
 		mv.addObject("roomCode", roomCode);
 		mv.addObject("innBean", innBean);
 		mv.addObject("roomBean", roomBean);
 		mv.addObject("checkinDate", checkinDate);
 		mv.addObject("checkoutDate", checkoutDate);
-		mv.addObject("selPeople", selPeopleList);
-		mv.addObject("selRooms", selRoomsList);
+		mv.addObject("selPeople", selPeople);
+		mv.addObject("selRooms", selRooms);
 		//日付のエラーチェック
         if(checkindate.before(date) || checkoutdate.before(date)) {
 			mv.addObject("err_msg", "現在の日付よりも前の日付は入力できません");

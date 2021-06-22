@@ -8,6 +8,7 @@
 <body>
 <h1>新規会員登録</h1>
 <form action="/registUser" method="post" th:object="${addUserBean}">
+<div class="contents">
 	<table>
 		<tr>
 			<th>＊メールアドレス</th>
@@ -91,7 +92,8 @@
 			</th>
 		</tr>
 		</table>
-		<input type="submit" value="新規会員登録">
+		<input type="submit" value="新規会員登録" class="button">
 	</form>
+	</div>
 </body>
 </html>

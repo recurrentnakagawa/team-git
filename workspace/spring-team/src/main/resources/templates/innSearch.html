@@ -16,7 +16,7 @@
 	<table th:each="srcInnList:${srcInnMap}">
 		<tr><th><a th:href="'/innDetail/' + ${srcInnList.value[0].innCode} + '/' + ${srcInnList.value[0].innName} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}" th:text="${srcInnList.value[0].innName}"></a></th></tr>
 		<th:block th:each="sL:${srcInnList.value}">
-		<tr><th><a th:href="'/roomDetail/' + ${srcInnList.value[0].innCode} + '/' + ${srcInnList.value[0].innName} + '/' + ${sL.roomCode} + '/' + ${sL.roomName} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}" th:text="${sL.roomName}"></a></th></tr>
+		<tr><td><a th:href="'/roomDetail/' + ${srcInnList.value[0].innCode} + '/' + ${srcInnList.value[0].innName} + '/' + ${sL.roomCode} + '/' + ${sL.roomName} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}" th:text="${sL.roomName}"></a></td></tr>
 		</th:block>
 	</table>
 	</th:block>

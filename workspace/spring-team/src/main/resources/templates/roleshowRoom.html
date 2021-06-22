@@ -6,6 +6,7 @@
 		<link th:href="@{/top.css}" type="text/css" rel="stylesheet">
 	</head>
 	<body>
+		<div class="contents">
 		<h1>部屋一覧</h1>
 		<table>
 			<tr>
@@ -19,7 +20,8 @@
 		</table>
 		<form method="post" action="/addRoom">
 			<input type="hidden" name="innCode" th:value="${innCode}">
-			<input type="submit" value="部屋追加">
+			<input type="submit" value="部屋追加"  class="button">
 		</form>
+		</div>
 	</body>
 </html>

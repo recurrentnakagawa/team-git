@@ -6,6 +6,7 @@
 		<link th:href="@{/top.css}" type="text/css" rel="stylesheet">
 	</head>
 	<body>
+		<div class="contents">
 		<h1>予約詳細</h1>
 		<table>
 			<tr>
@@ -45,6 +46,7 @@
 				<td th:text="${clientTel}"></td>
 			</tr>
 		</table>
-		<button onclick="history.back()">戻る</button>
+		<button onclick="history.back()"  class="button">戻る</button>
+		</div>
 	</body>
 </html>

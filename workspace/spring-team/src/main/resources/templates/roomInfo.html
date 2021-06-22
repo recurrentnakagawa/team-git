@@ -6,6 +6,7 @@
 		<link th:href="@{/top.css}" type="text/css" rel="stylesheet">
 	</head>
 	<body>
+		<div class="contents">
 		<div th:if="${addFlg != null}">
 			<h1>部屋追加</h1>
 			<form method="post" action="/roomAdd" th:object="${bean}">
@@ -37,10 +38,11 @@
 					</tr>
 				</table>
 				<input type="hidden" name="innCode" th:value="${innCode}">
-				<input type="submit" value="追加">
+				<input type="submit" value="追加"  class="button">
 			</form>
 		</div>
-		
+		</div>
+		<div class="contents">
 		<div th:if="${updFlg != null}">
 			<h1>部屋更新</h1>
 			<form method="post" action="/roomUpd" th:object="${bean}">
@@ -73,8 +75,9 @@
 				</table>
 				<input type="hidden" name="innCode" th:value="*{innCode}">
 				<input type="hidden" name="roomCode" th:value="*{roomCode}">
-				<input type="submit" value="更新">
+				<input type="submit" value="更新"  class="button">
 			</form>
+		</div>
 		</div>
 	</body>
 </html>

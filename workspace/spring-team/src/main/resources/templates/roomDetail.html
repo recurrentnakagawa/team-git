@@ -6,6 +6,7 @@
 <link th:href="@{/top.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
+<div class="contents">
 <h1 th:text="${innName}"></h1>
 <table>
 	<tr><th colspan="2" th:text="${roomBean.roomName}"></th></tr>
@@ -16,12 +17,12 @@
 <th:block th:if="${srcFlg==0}">
 <form action="/userLoginFrame" target="_top">
 <th:block th:if="${session.login==0}">
-	<input type="submit" value="予約する">
+	<input type="submit" value="予約する"  class="button">
 </th:block>
 </form>
 <form th:action="'/reservation/' + ${innCode} + '/' + ${roomBean.roomCode}" method="post">
 <th:block th:if="${session.login==1}">
-	<input type="submit" value="予約する">
+	<input type="submit" value="予約する"  class="button">
 	<input type="hidden" name="innName" value="${innName}">
 	<input type="hidden" name="roomName" value="${roomBean.roomName}">
 </th:block>
@@ -30,16 +31,17 @@
 <th:block th:if="${srcFlg==1}">
 <form action="/userLoginFrame" target="_top">
 <th:block th:if="${session.login==0}">
-	<input type="submit" value="予約する">
+	<input type="submit" value="予約する"  class="button">
 </th:block>
 </form>
 <form th:action="'/conReservation/' + ${innCode} + '/' + ${roomBean.roomCode} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}" method="post">
 <th:block th:if="${session.login==1}">
-	<input type="submit" value="予約する">
+	<input type="submit" value="予約する"  class="button">
 	<input type="hidden" name="innName" value="${innName}">
 	<input type="hidden" name="roomName" value="${roomBean.roomName}">
 </th:block>
 </form>
 </th:block>
+</div>
 </body>
 </html>

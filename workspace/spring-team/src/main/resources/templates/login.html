@@ -6,6 +6,7 @@
 <title>ログイン</title>
 </head>
 <body>
+	<div class="contents">
 	<div class="loginBody">
 	<h1>ログイン</h1>
 	<span th:text="${message}" style="color: red"></span><br>
@@ -15,11 +16,12 @@
 		<input type="password" name="password" placeholder="パスワード"><br>
 		<span th:text="${message_password}" style="color: red"></span><br>
 		<a href="/emailChecker">パスワードを忘れてしまった時</a><br> 
-		<input type="submit" value="ログイン">
+		<input type="submit" value="ログイン"  class="button">
 	</form>
 	<form name="reloadForm" action="/loginFlg" target="_top">
 		<input type="hidden" name="reloadFlg" id="reloadFlg" th:value="${reloadFlg}">
 	</form>
+	</div>
 	</div>
 </body>
 <script>

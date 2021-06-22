@@ -14,8 +14,10 @@
 				<td><span th:text="${#dates.format(list.view_history_datetime, 'yyyy年MM月dd日HH時mm分　に閲覧')}"></td>
 				<td>
 					<form action="/deleteView">
-						<input type="submit" value="削除"> 
-						<input type="hidden" name="code" th:value="${list.view_history_code}"> 
+						<div class="contents">
+						<input type="submit" value="削除"  class="button"> 
+						<input type="hidden" name="code" th:value="${list.view_history_code}">
+						</div>
 					</form>
 				</td>
 			</tr>

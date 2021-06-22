@@ -6,16 +6,18 @@
 <link th:href="@{/top.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
-<h1 th:text="${innName} + 部屋一覧"></h1>
-<table>
-	<tr th:each="rL:${roomList}">
-		<th:block th:if="${srcFlg==0}">
-		<td><a th:href="'/roomDetail/' + ${innCode} + '/' + ${innName} + '/' + ${rL.roomCode} + '/' + ${rL.roomName}" th:text="${rL.roomName}"></a></td>
-		</th:block>
-		<th:block th:if="${srcFlg==1}">
-		<td><a th:href="'/roomDetail/' + ${innCode} + '/' + ${innName} + '/' + ${rL.roomCode} + '/' + ${rL.roomName} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}" th:text="${rL.roomName}"></a></td>
-		</th:block>
-	</tr>
-</table>
+<div class="contents">
+	<h1 th:text="${innName} + 部屋一覧"></h1>
+	<table>
+		<tr th:each="rL:${roomList}">
+			<th:block th:if="${srcFlg==0}">
+			<td><a th:href="'/roomDetail/' + ${innCode} + '/' + ${innName} + '/' + ${rL.roomCode} + '/' + ${rL.roomName}" th:text="${rL.roomName}"></a></td>
+			</th:block>
+			<th:block th:if="${srcFlg==1}">
+			<td><a th:href="'/roomDetail/' + ${innCode} + '/' + ${innName} + '/' + ${rL.roomCode} + '/' + ${rL.roomName} + '/' + ${selPeople} + '/' + ${selRooms} + '/' + ${checkinDate} + '/' + ${checkoutDate}" th:text="${rL.roomName}"></a></td>
+			</th:block>
+		</tr>
+	</table>
+</div>
 </body>
 </html>

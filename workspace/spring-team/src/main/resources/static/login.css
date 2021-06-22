@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 .loginBody{
 	left:20%;
 	top:10%;
@@ -9,7 +8,7 @@
     font-weight: bold;
     color: #696969;/*文字色*/
     text-align: center;
-    background: #FFF;
+    background-color: #c0c0c0;
     border: solid 3px #696969;/*線*/
     border-radius: 10px;/*角の丸み*/
 	margin : auto;

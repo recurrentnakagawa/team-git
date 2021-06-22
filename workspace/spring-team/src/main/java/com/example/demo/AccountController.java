@@ -195,6 +195,7 @@ public class AccountController {
 		mv.addObject("bean", bean);
 		return mv;
 	}
+	
 	@RequestMapping("/changePassFlg")
 	public ModelAndView changePassFlg(ModelAndView mv) {
 		mv.setViewName("userLoginFrame");

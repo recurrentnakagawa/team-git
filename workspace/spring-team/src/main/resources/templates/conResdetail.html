@@ -8,7 +8,7 @@
 <body>
 <h1>予約内容確認</h1>
 <form th:action="'/regReservation/' + ${innCode} + '/' + ${roomCode}" method="post" target="_top">
-	<table border="1">
+	<table>
 		<tr><th>ホテル名</th><td th:text="${innBean.innName}"></td></tr>
 		<tr><th>部屋名</th><td th:text="${roomBean.roomName}"></td></tr>
 		<tr><th>チェックイン日</th><td th:text="${checkinDate}"></td></tr>

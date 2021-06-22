@@ -8,7 +8,7 @@
 <body>
 <div class="b-radius">
 <h1><span th:text="${rural_msg}"></span>のおすすめ宿</h1>
-<table border="1">
+<table>
 	<tr th:each="iL:${recInnList}">
 		<td><a th:href="'/innDetail/' + ${iL.innCode} + '/' + ${iL.innName}" 
 		       th:text="${iL.innName}" class="cp_link"></a></td>

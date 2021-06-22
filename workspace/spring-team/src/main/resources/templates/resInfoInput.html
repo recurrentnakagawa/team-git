@@ -10,7 +10,7 @@
 <h5>＊は必須項目</h5>
 <span th:text="${err_msg}"></span>
 <form th:action="'/conReservation/' + ${innCode} + '/' + ${roomCode}" method="post">
-	<table border="1">
+	<table>
 		<tr><th>ホテル名</th><td th:text="${innBean.innName}"></td></tr>
 		<tr><th>部屋の名前</th><td th:text="${roomBean.roomName}"></td></tr>
 		<tr><th>＊チェックイン日</th><td><input type="date" name="checkinDate" th:value="${checkinDate}" required></td></tr>

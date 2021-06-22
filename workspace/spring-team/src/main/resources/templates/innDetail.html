@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1 th:text="${innBean.innName}"></h1>
-<table border="1">
+<table>
 	<tr><th colspan="2">レビュー(星)</th>
 	<div th:if="${reviewZero!=null}">
 		<td><span th:text="${reviewZero}"></span></td>
@@ -30,7 +30,7 @@
 	</th:block>
 </table>
 
-<table border="1">
+<table>
 	<tr><th colspan="10">レビュー(口コミ)</th></tr>
 	<tr><th colspan="2">投稿日</th><th colspan="8">投稿内容</th></tr>
 	<tr th:each="rL:${reviewList}">

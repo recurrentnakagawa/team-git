@@ -8,7 +8,7 @@
 <body>
 	<div class="cp_navi">
 		<ul>
-			<a href="/frame" target="_top"><img src="/logo.jpg" alt="ロゴ" width=200 height=90 style="vertical-align:-25%;"></a>
+			<a href="/frame" target="_top"><img src="/logo.jpg" alt="ロゴ" width=200 height=90 style="margin-bottom:0"></a>
 			<li><a href="/frame" target="_top">トップ</a></li>
 			<li th:each="rL:${ruralList}"><a th:text="${rL.ruralName}"+$nbsp; th:href="'/showRuralInn/' + ${rL.ruralCode} + '/' + ${rL.ruralName}"target="tops"></a></li>
 			<span>　　　　　　　</span>

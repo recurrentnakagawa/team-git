@@ -6,23 +6,30 @@
 </head>
 <body>
 	<div class="cp_navi">
-		<ul>
-			<a href="/frame" target="_top"><img src="/logo.png" alt="ロゴ"
-				width=200 height=90 style="vertical-align: -25%;"></a>
-			<li><a href="/frame" target="_top">トップ</a></li>
-			Myページ ようこそ
-			<li><a href="/myFrame" target="_top"><span th:text="${session.loginUser.clientName}"></span></a></li>さん
-			<span th:text="${session.point}"></span>ポイント
-			<li><a href="/userRegistFrame" target="_top">新規会員登録</a></li>
-			<li><a href="/userLoginFrame" target="_top">ログイン</a></li>
-			<li><a href="/" target="_top">ログアウト</a></li>
-			<br>
-			<hr>
-			<span>　　　　　　　　　　　　　　　　　　　　　　　　　　</span>
-			<li><a href="/mypageRes" target="myTop">予約一覧はこちら</a></li>
-			<li><a href="/mypageView" target="myTop">閲覧履歴はこちら</a></li>
-			<li><a href="/mypageEdit" target="myTop">アカウント編集</a></li>
-		</ul>
+		<table>
+			<tr>
+				<td><a href="/frame" target="_top"><img src="/logo.png"
+						alt="ロゴ" width=150 height=90 style="vertical-align: -25%;"></a>
+				</td>
+				<td>
+					<ul>
+						<li><a href="/frame" target="_top">トップ</a></li> Myページ ようこそ
+						<li><a href="/myFrame" target="_top">
+						<span th:text="${session.loginUser.clientName}"></span></a></li>さん
+						<span th:text="${session.point}"></span>ポイント
+						<li><a href="/userRegistFrame" target="_top">新規会員登録</a></li>
+						<li><a href="/userLoginFrame" target="_top">ログイン</a></li>
+						<li><a href="/" target="_top">ログアウト</a></li>
+						<br>
+						<hr>
+						<span> </span>
+						<li><a href="/mypageRes" target="myTop">予約一覧はこちら</a></li>
+						<li><a href="/mypageView" target="myTop">閲覧履歴はこちら</a></li>
+						<li><a href="/mypageEdit" target="myTop">アカウント編集</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>

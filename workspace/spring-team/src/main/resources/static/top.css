@@ -1,18 +1,5 @@
 @charset "UTF-8";
 
-
-.div-body{
-	width: 200px; /* ボックスの横幅を指定 */
-	height: 100px; /* ボックスの高さを指定 */
-	border: 2px solid #b20000; /* 境界線を実線で指定 */
-	text-align: center; /* テキストを中央寄せに指定 */
-}
-
-.b-radius {
-	border-radius: 10px; /* ボックスの四つ角を丸くする */
-}
-
-
 h1{
   font-family:arial;
   margin-top:100px;

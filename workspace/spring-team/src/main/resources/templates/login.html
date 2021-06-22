@@ -2,9 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link th:href="@{/login.css}" type="text/css" rel="stylesheet">
 <title>ログイン</title>
 </head>
 <body>
+	<div class="loginBody">
 	<h1>ログイン</h1>
 	<span th:text="${message}" style="color: red"></span><br>
 	<form action="/login" method="post" th:object="${bean}">
@@ -18,6 +20,7 @@
 	<form name="reloadForm" action="/loginFlg" target="_top">
 		<input type="hidden" name="reloadFlg" id="reloadFlg" th:value="${reloadFlg}">
 	</form>
+	</div>
 </body>
 <script>
 		function reloadMenu(){

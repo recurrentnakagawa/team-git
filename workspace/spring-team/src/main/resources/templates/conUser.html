@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン</title>
-<link th:href="@{/top.css}" type="text/css" rel="stylesheet">
+<link th:href="@{/login.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
-<h1>メールアドレス</h1>
+<div class="loginBody">
+<h2>本人確認</h2>
+<h4>本人確認のためメールアドレスを入力してください</h4>
 <form action="/emailChecker" method="post" th:object="${conUserBean}">
 	<input type="text" name="email" th:value="*{email}" placeholder="メールアドレス"><br>
 	<span th:text="${message_email}" style="color:red"></span><br>
@@ -14,5 +16,6 @@
 	</form>
 	<br>
 	<span>　</span>
+</div>
 </body>
 </html>

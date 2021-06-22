@@ -1,13 +1,14 @@
 @charset "UTF-8";
 body{
-	background-color: #c0c0c0;
+	background-color:white;
 }
 
 .search_title {
 	text-align: center;
+	background-color: lime;
 }
 
 .search_form {
 	text-align: center;
-	background-color: #808080;
+	font-family:cursive,serif;
 }

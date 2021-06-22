@@ -63,5 +63,8 @@
 		<input type="hidden" name="questionCode" th:value="*{questionCode}">
 		<input type="hidden" name="answer" th:value="*{answer}">
 	</form>
+	<form name="reloadForm" action="/loginFlg" target="_top">
+		<input type="hidden" name="reloadFlg" id="reloadFlg" th:value="${reloadFlg}">
+	</form>
 </body>
 </html>

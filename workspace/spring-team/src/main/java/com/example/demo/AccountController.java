@@ -186,11 +186,18 @@ public class AccountController {
 			mv.addObject("ansSecretBean", ansSecretBean);
 			return mv;
 		}
+		mv.addObject("ansSecretBean", ansSecretBean);
+		mv.addObject("reloadFlg", 1);
 		user.setClientPassword(bean.getPassword());
 		clientRepository.saveAndFlush(user);
-		mv.setViewName("userLoginFrame");
+		mv.setViewName("ansSecret");
 		mv.addObject("message", "パスワードを変更しました");
 		mv.addObject("bean", bean);
+		return mv;
+	}
+	@RequestMapping("/changePassFlg")
+	public ModelAndView changePassFlg(ModelAndView mv) {
+		mv.setViewName("userLoginFrame");
 		return mv;
 	}
 

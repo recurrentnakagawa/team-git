@@ -261,6 +261,7 @@ public class RegistController {
 	// パスワードフォーマットチェック
 	public static boolean passcheck(String pass) {
 		boolean result = true;
+		//正規表現で数値と半角英字のみ許可。文字数は8～20文字
 		String check = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z\\-]{8,20}$";
 		Pattern pattern = Pattern.compile(check);
 		Matcher m1 = pattern.matcher(pass); // パターンと検査対象文字列の照合

@@ -63,7 +63,7 @@ public class SearchInnController {
 			ReviewDAO dao = new ReviewDAO();
 			double reviewAvg = dao.reviewAvg(innCode);
 			if(reviewAvg == 0) {
-				mv.addObject("reviewZero","レビュー0件");
+				mv.addObject("reviewZero","レビューがありません");
 			}
 			if(reviewAvg != 0) {
 				mv.addObject("reviewAvg",reviewAvg);
@@ -96,9 +96,18 @@ public class SearchInnController {
 				@PathVariable("selRooms") String selRooms,
 				@PathVariable("checkinDate") String checkinDate,
 				@PathVariable("checkoutDate") String checkoutDate,
-				ModelAndView mv) {
+				ModelAndView mv) throws DAOException {
 			Inn innBean=innRepository.findByInnCode(innCode);
 			List<Review> reviewList=reviewRepository.findByInnCode(innCode);
+			
+			ReviewDAO dao = new ReviewDAO();
+			double reviewAvg = dao.reviewAvg(innCode);
+			if(reviewAvg == 0) {
+				mv.addObject("reviewZero","レビューがありません");
+			}
+			if(reviewAvg != 0) {
+				mv.addObject("reviewAvg",reviewAvg);
+			}
 			mv.addObject("innBean", innBean);
 			mv.addObject("reviewList", reviewList);
 			//閲覧履歴を残す

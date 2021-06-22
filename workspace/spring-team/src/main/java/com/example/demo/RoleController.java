@@ -185,7 +185,7 @@ public class RoleController {
 		//一つでも未入力項目があれば再度入力画面へ遷移
 		if(flg ==1) {
 			mv.addObject("bean", conInInfoForm);
-			mv.setViewName("conInnInfo");
+			mv.setViewName("innInfo");
 			return mv;
 		}
 		//宿名と住所の重複チェック
@@ -309,7 +309,7 @@ public class RoleController {
 		}
 		//料金、部屋の数、最大人数の数値チェック
 		if(numcheck(conRoomInfoForm.getRoomPrice()) == false) {
-			mv.addObject("roomPriceMessage", "部屋の料金料金は数値で入力してください。");
+			mv.addObject("roomPriceMessage", "部屋の料金は数値で入力してください。");
 			flg = 1;
 		}
 		if(numcheck(conRoomInfoForm.getRoomTotal()) == false) {
@@ -318,6 +318,18 @@ public class RoleController {
 		}
 		if(numcheck(conRoomInfoForm.getRoomMax()) == false) {
 			mv.addObject("roomMaxMessage", "部屋の最大人数は数値で入力してください。");
+			flg = 1;
+		}
+		if(conRoomInfoForm.getRoomPrice().length()>=8) {
+			mv.addObject("roomPriceMessage", "部屋の料金は8桁までの数値で入力してください");
+			flg = 1;
+		}
+		if(conRoomInfoForm.getRoomTotal().length()>=4) {
+			mv.addObject("roomTotalMessage", "部屋の数は4桁までの数値で入力してください");
+			flg = 1;
+		}
+		if(conRoomInfoForm.getRoomMax().length()>=3) {
+			mv.addObject("roomMaxMessage", "部屋の最大人数は3桁までの数値で入力してください");
 			flg = 1;
 		}
 		//一つでもエラー項目があれば再度入力画面へ遷移
@@ -376,6 +388,18 @@ public class RoleController {
 		}
 		if(numcheck(conRoomInfoForm.getRoomMax()) == false) {
 			mv.addObject("roomMaxMessage", "部屋の最大人数は数値で入力してください。");
+			flg = 1;
+		}
+		if(conRoomInfoForm.getRoomPrice().length()>=8) {
+			mv.addObject("roomPriceMessage", "部屋の料金は8桁までの数値で入力してください");
+			flg = 1;
+		}
+		if(conRoomInfoForm.getRoomTotal().length()>=4) {
+			mv.addObject("roomTotalMessage", "部屋の数は4桁までの数値で入力してください");
+			flg = 1;
+		}
+		if(conRoomInfoForm.getRoomMax().length()>=3) {
+			mv.addObject("roomMaxMessage", "部屋の最大人数は3桁までの数値で入力してください");
 			flg = 1;
 		}
 		//一つでもエラー項目があれば再度入力画面へ遷移

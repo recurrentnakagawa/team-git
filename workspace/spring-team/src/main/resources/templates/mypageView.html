@@ -6,21 +6,21 @@
 <link th:href="@{/top.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
+<div class="contents">
 	<h1>履歴一覧</h1>
 	<table>
 		<th:block th:each="list:${viewList}">
 			<tr>
-				<td><span th:text="${list.inn_name}+ホテル"></span></td>
+				<th><span th:text="${list.inn_name}+ホテル"></span></th>
 				<td><span th:text="${#dates.format(list.view_history_datetime, 'yyyy年MM月dd日HH時mm分　に閲覧')}"></td>
-				<td>
+				<td class="del">
 					<form action="/deleteView">
-						<div class="contents">
-						<input type="submit" value="削除"  class="button"> 
-						<input type="hidden" name="code" th:value="${list.view_history_code}">
-						</div>
+						<input type="submit" value="削除" class="button"> 
+						<input type="hidden" name="code" th:value="${list.view_history_code}"> 
 					</form>
 				</td>
 			</tr>
 		</th:block>
+	</div>
 </body>
 </html>

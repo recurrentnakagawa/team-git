@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+body{
+	font-weight :bold
+}
+
 h1{
   margin-top:100px;
   color:#ffffff;
@@ -12,33 +16,34 @@ h1{
 table{
   border-collapse:separate;
   border-spacing: 5px;
-  width: 100%;
+  width: 60%;
 }
 
 table th,table td{
   border-radius: 5px;
   text-align: center;
-  font-family: cursive,serif;
+  font-family:cursive,serif;
   padding: 10px 0;
 }
 
 table th{
-  background-color: #c79852;
+  background-color: #696969;
   color: white;
-  border:solid 1px #927141;
+  border:solid 1px #787878;
 }
 
 table td{
-  background-color: #e4d4bc;
-  border:solid 1px #af9d85;
+  background-color: #aaa;
+  border:solid 1px #bcbcbc;
 }
+
 
 .cp_link {
 	padding: 0.1em 0.3em;
 	position: relative;
 	display: inline-block;
 	transition: .3s;
-	color: #FF8F00;
+	color: #fff;
 }
 .cp_link::after {
 	position: absolute;
@@ -47,13 +52,39 @@ table td{
 	content: '';
 	width: 100%;
 	height: 1px;
-	background-color: #FF8F00;
+	background-color: #fff;
 	opacity: 0;
 	transition: .3s;
 }
 .cp_link:hover::after {
 	bottom: 0;
 	opacity: 1;
+}
+
+a{
+	color:#fff;
+	text-decoration: none;
+}
+
+a:hover{
+	color:#fff;
+	text-decoration: underline;
+}
+
+.room{
+	background-color: #aaa;
+}
+
+.room:hover{
+	background-color: #bbb;
+}
+
+.inn{
+	background-color: #696969;
+}
+
+.inn:hover{
+	background-color: #565656;
 }
 .button {
   display       : inline-block;
@@ -78,4 +109,10 @@ table td{
 	  margin-left: auto;
       margin-right: auto;
       text-align: center;
+}
+
+.del{
+	background-color:transparent;
+	border:none;
+	text-align: left;
 }

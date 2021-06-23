@@ -48,21 +48,22 @@
 			<input type="hidden" name="roomMax" th:value="*{roomMax}">	
 			
 			<div th:if="${addFlg != null}">
+				<input type="submit" value="登録" class="button">
 				<input type="hidden" name="innCode" th:value="${innCode}">	
 				<input type="hidden" name="flg" value="1">
 			</div>
 			<div th:if="${updFlg != null}">
+				<input type="submit" value="更新" class="button">
 				<input type="hidden" name="roomCode" th:value="*{roomCode}">
 				<input type="hidden" name="innCode" th:value="*{innCode}">	
 				<input type="hidden" name="flg" value="2">
 			</div>
 			<div th:if="${delFlg != null}">
+				<input type="submit" value="削除" class="button">
 				<input type="hidden" name="roomCode" th:value="*{roomCode}">
 				<input type="hidden" name="innCode" th:value="*{innCode}">	
 				<input type="hidden" name="flg" value="3">
-			</div>
-			
-			<input type="submit" value="登録" class="button">
+			</div>	
 		</form>
 		<div>
 	</body>

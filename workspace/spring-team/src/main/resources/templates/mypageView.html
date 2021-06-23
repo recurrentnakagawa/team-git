@@ -11,7 +11,7 @@
 	<table>
 		<th:block th:each="list:${viewList}">
 			<tr>
-				<th><span th:text="${list.inn_name}+ホテル"></span></th>
+				<th><span th:text="${list.inn_name}"></span></th>
 				<td><span th:text="${#dates.format(list.view_history_datetime, 'yyyy年MM月dd日HH時mm分　に閲覧')}"></td>
 				<td class="del">
 					<form action="/deleteView">

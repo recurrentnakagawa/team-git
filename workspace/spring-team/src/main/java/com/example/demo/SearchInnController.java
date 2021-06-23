@@ -120,11 +120,13 @@ public class SearchInnController {
 			
 			ReviewDAO dao = new ReviewDAO();
 			double reviewAvg = dao.reviewAvg(innCode);
+			int reviewCount = dao.reviewCount(innCode);
 			if(reviewAvg == 0) {
 				mv.addObject("reviewZero","レビューがありません");
 			}
 			if(reviewAvg != 0) {
-				mv.addObject("reviewAvg",reviewAvg);
+				BigDecimal bd = new BigDecimal(reviewAvg);
+				mv.addObject("reviewAvg",bd.setScale(1, RoundingMode.HALF_UP) + " / 5.0　(" + reviewCount + "件)");
 			}
 			String scheckinTimestr = innBean.getInnCheckinTime();
 			String scheckinTime = scheckinTimestr.substring(0,2);

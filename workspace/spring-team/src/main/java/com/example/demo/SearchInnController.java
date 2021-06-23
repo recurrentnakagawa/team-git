@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,6 +47,7 @@ public class SearchInnController {
 			@PathVariable("ruralName") String ruralName,
 			ModelAndView mv) throws DAOException {
 		RecInnDAO dao = new RecInnDAO();
+		
 		List<Inn> recRuralInnList = dao.RecRuralInn(ruralCode);
 		mv.addObject("rural_msg", ruralName);
 		mv.addObject("recInnList",recRuralInnList);
@@ -62,11 +65,14 @@ public class SearchInnController {
 			
 			ReviewDAO dao = new ReviewDAO();
 			double reviewAvg = dao.reviewAvg(innCode);
+			int reviewCount = dao.reviewCount(innCode);
+			
 			if(reviewAvg == 0) {
 				mv.addObject("reviewZero","レビューがありません");
 			}
 			if(reviewAvg != 0) {
-				mv.addObject("reviewAvg",reviewAvg);
+				BigDecimal bd = new BigDecimal(reviewAvg);
+				mv.addObject("reviewAvg",bd.setScale(1, RoundingMode.HALF_UP) + " / 5.0　(" + reviewCount + "件)");
 			}
 			String scheckinTimestr = innBean.getInnCheckinTime();
 			String scheckinTime = scheckinTimestr.substring(0,2);

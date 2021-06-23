@@ -37,7 +37,7 @@ public class ReviewDAO {
 			// 結果の取得および表示
 			double reviewAve = 0;
 			while (rs.next()) {
-				reviewAve = rs.getInt("reviewAvg");
+				reviewAve = rs.getDouble("reviewAvg");
 			}
 			return reviewAve;
 		}
@@ -58,6 +58,48 @@ public class ReviewDAO {
 			}
 		}
 	}
+	
+	public int reviewCount(int innCode)
+			throws DAOException {
+		if (con == null)
+			getConnection();
+
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			// SQL文の作成
+			String sql = "select count(inn_code) as reviewCount from review where inn_code = ?";
+			// PreparedStatementオブジェクトの取得
+			st = con.prepareStatement(sql);
+			// カテゴリの設定
+			st.setInt(1,innCode);
+			// SQLの実行
+			rs = st.executeQuery();
+			// 結果の取得および表示
+			int reviewCount = 0;
+			while (rs.next()) {
+				reviewCount = rs.getInt("reviewCount");
+			}
+			return reviewCount;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+		finally {
+			try {
+				// リソースの開放
+				if (rs != null)
+					rs.close();
+				if (st != null)
+					st.close();
+				close();
+			} catch (Exception e) {
+				throw new DAOException("リソースの開放に失敗しました。");
+			}
+		}
+	}
+	
 	
 	public String findPrefectureName(String prefCode)
 			throws DAOException {
